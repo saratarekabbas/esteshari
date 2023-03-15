@@ -45,4 +45,29 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
     }
+
+//    Defining Routes
+    public function map()
+    {
+        $this->mapAdministratorRoutes();
+
+        $this->mapPatientRoutes();
+
+        $this->mapPhysicianRoutes();
+    }
+
+    protected function mapAdministratorRoutes()
+    {
+        Route::namespace($this->namespace)->group(base_path('routes/administrator.php'));
+    }
+
+    protected function mapPatientRoutes()
+    {
+        Route::namespace($this->namespace)->group(base_path('routes/patient.php'));
+    }
+
+    protected function mapPhysicianRoutes()
+    {
+        Route::namespace($this->namespace)->group(base_path('routes/physician.php'));
+    }
 }
