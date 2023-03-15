@@ -7,6 +7,6 @@ use App\Http\Controllers\Controller;
 class GeneralController extends Controller
 {
     public function getIndex(){
-        return view('general/homepage');
+        return view('general/landing');
     }
 }
