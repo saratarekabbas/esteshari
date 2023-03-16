@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SocialController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -34,3 +36,17 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
 
 Auth::routes();
+
+Route::get('/dashboard', function (){
+    return 'You are on user dashboard';
+});
+
+//Route::get('/redirect/facebook', 'SocialController@redirect');
+
+//This is for redirecting to services (e.g., facebook)
+Route::get('/redirect/{service}', [SocialController::class, 'redirect']);
+
+Route::get('/callback/{service}', [SocialController::class, 'callback']);
+
+
+
