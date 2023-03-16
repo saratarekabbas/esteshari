@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
+    const HOME = '/dashboard';
+
     protected $namespace = 'App\Http\Controllers';
 
     public function boot()
@@ -14,7 +16,9 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
     }
 
-    public function map()
+
+
+public function map()
     {
         $this->mapWebRoutes();
         $this->mapAdminRoutes();
