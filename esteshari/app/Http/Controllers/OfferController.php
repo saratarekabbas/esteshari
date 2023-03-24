@@ -33,7 +33,7 @@ class OfferController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return $validator->errors();
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
         };
 //        insert
         Offer::create([
@@ -41,9 +41,7 @@ class OfferController extends Controller
             'price' => $request->price,
             'details' => $request->details,
         ]);
-
-        return 'saved successfully';
-
+        return redirect()->back()->with(['success' => 'Offer have been saved successfully']);
     }
 
 
