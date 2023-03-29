@@ -1,5 +1,5 @@
 <?php
-
+//ARABIC
 return [
     "esteshari" => "استشاري",
     "services" => "الخدمات",

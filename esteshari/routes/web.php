@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Api\Http\Controllers\HomeController;
-use App\Http\Api\Http\Controllers\OfferController;
-use App\Http\Api\Http\Controllers\SocialController;
-use App\Http\Api\Http\Controllers\ConferenceController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OfferController;
+use App\Http\Controllers\SocialController;
+use App\Http\Controllers\ConferenceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Api\ZoomApi;
