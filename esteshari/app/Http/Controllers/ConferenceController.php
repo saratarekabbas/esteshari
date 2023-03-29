@@ -11,4 +11,10 @@ class ConferenceController extends Controller
         $agoraAppId = env('AGORA_APP_ID');
         return view('conference', ['room' => $room, 'agoraAppId' => $agoraAppId]);
     }
+
+    public function testRoom(Request $request)
+    {
+        $roomName = 'test_room';
+        return view('test_room', ['room' => $roomName]);
+    }
 }

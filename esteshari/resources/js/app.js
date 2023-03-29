@@ -1,39 +1,32 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+import "./bootstrap";
+import { createApp } from "vue";
 
-import './bootstrap';
-import { createApp } from 'vue';
-
-/**
- * Next, we will create a fresh Vue application instance. You may then begin
- * registering components with the application instance so they are ready
- * to use in your application's views. An example is included for you.
- */
+// Import the joinChannel function
+import { joinChannel } from "./agora-conference";
 
 const app = createApp({});
 
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
+import ExampleComponent from "./components/ExampleComponent.vue";
+app.component("example-component", ExampleComponent);
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+app.mount("#app");
 
-// Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
-//     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
-// });
+// Add event listener for DOMContentLoaded
+window.addEventListener("DOMContentLoaded", () => {
+    const joinConferenceButton = document.getElementById("join-conference-button");
 
-/**
- * Finally, we will attach the application instance to a HTML element with
- * an "id" attribute of "app". This element is included with the "auth"
- * scaffolding. Otherwise, you will need to add an element yourself.
- */
+    if (joinConferenceButton) {
+        joinConferenceButton.addEventListener("click", async () => {
+            const appId = joinConferenceButton.dataset.appId;
+            const roomName = joinConferenceButton.dataset.roomName;
+            const localVideo = document.getElementById("local-video");
+            const remoteVideo = document.getElementById("remote-video");
 
-app.mount('#app');
+            try {
+                await joinChannel(appId, roomName, localVideo, remoteVideo);
+            } catch (error) {
+                console.error("Failed to join channel:", error);
+            }
+        });
+    }
+});

@@ -70,3 +70,4 @@ Route::group(['prefix'=>'offers'],function(){
 
 
 Route::get('/conference/{room}', [ConferenceController::class, 'index'])->name('conference');
+Route::get('/test_room', [ConferenceController::class, 'testRoom'])->name('test_room');
