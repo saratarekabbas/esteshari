@@ -36,5 +36,8 @@ return [
       'client_secret' => env('FB_CLIENT_SECRET'),
       'redirect' => env('FB_REDIRECT'),
     ],
-
+    'zoom' => [
+        'key' => env('ZOOM_API_KEY'),
+        'secret' => env('ZOOM_API_SECRET'),
+    ],
 ];
