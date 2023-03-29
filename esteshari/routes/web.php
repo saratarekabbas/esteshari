@@ -3,10 +3,10 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\SocialController;
-use App\Http\Controllers\ConferenceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Api\ZoomApi;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 Route::get('/', function () {
@@ -14,7 +14,6 @@ Route::get('/', function () {
 });
 
 Route::get('index', 'General\GeneralController@getIndex');
-
 
 
 //All routes will only access methods/controllers in folder name 'General'
@@ -41,7 +40,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
 
 Auth::routes();
 
-Route::get('/dashboard', function (){
+Route::get('/dashboard', function () {
     return 'You are on user dashboard';
 });
 
@@ -53,12 +52,16 @@ Route::get('/redirect/{service}', [SocialController::class, 'redirect']);
 Route::get('/callback/{service}', [SocialController::class, 'callback']);
 
 //Offer
-Route::get('fillable',[OfferController::class,'getOffers']);
+Route::get('fillable', [OfferController::class, 'getOffers']);
 
+Route::group([    'prefix' => LaravelLocalization::setLocale(),    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function () {
+    Route::group(['prefix' => 'offers'], function () {
+//offer/ar/create, etc
 
-Route::group(['prefix'=>'offers'],function(){
-    Route::get('create', [OfferController::class, 'create']);
-    Route::post('store', [OfferController::class, 'store'])->name('offers.store');
+        Route::get('create', [OfferController::class, 'create']);
+        Route::post('store', [OfferController::class, 'store'])->name('offers.store');
+    });
+
 });
 
 

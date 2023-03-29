@@ -1,5 +1,19 @@
 @extends('layouts.app')
+<ul>
+    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+        <li>
+            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                {{ $properties['native'] }}
+            </a>
+        </li>
+    @endforeach
+</ul>
+
+
+
 Add your offer
+
+
 
 @if(Session::has('success'))
 <div class="alert alert-success" role="alert">
