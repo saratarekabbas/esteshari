@@ -78,8 +78,7 @@ Route::group(['prefix'=>'offers'],function(){
 
 Route::get('/create-meeting', function () {
     $zoomApi = new ZoomApi(env('ZOOM_API_KEY'), env('ZOOM_API_SECRET'));
-
-    $response = $zoomApi->createMeeting([
+    $meetingUrl = $zoomApi->createMeeting([
         'topic' => 'New Meeting',
         'type' => 2,
         'start_time' => now()->addMinutes(10)->toIso8601String(),
@@ -90,18 +89,10 @@ Route::get('/create-meeting', function () {
         'settings' => [
             'join_before_host' => true,
             'mute_upon_entry' => false,
-            'watermark' => true,
-            'use_pmi' => false,
-            'approval_type' => 2,
-            'registration_type' => 1,
-            'audio' => 'voip',
             'auto_recording' => 'none',
-            'enforce_login' => false,
             'registrants_email_notification' => true,
-            'waiting_room' => false,
         ],
     ]);
-
-    return $response;
+    return redirect($meetingUrl);
 });
 

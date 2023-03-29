@@ -29,23 +29,28 @@ class ZoomApi
         // Set up the request body with the meeting details
         $body = [
             'topic' => $data['topic'],
+            'type' => $data['type'] ?? 2,
             'start_time' => $data['start_time'],
             'duration' => $data['duration'],
-            'agenda' => $data['agenda'],
-            'settings' => [
-                'join_before_host' => true,
-                'mute_upon_entry' => false,
-                'auto_recording' => 'none',
-                'registrants_email_notification' => true,
-            ]
+            'timezone' => $data['timezone'] ?? 'UTC',
+            'password' => $data['password'] ?? '',
+            'agenda' => $data['agenda'] ?? '',
+            'settings' => $data['settings'] ?? [
+                    'join_before_host' => true,
+                    'mute_upon_entry' => false,
+                    'auto_recording' => 'none',
+                    'registrants_email_notification' => true,
+                ],
         ];
 
         // Make the HTTP POST request to the Zoom API
         $response = Http::withHeaders($headers)->post($url, $body);
 
-        // Return the response from the Zoom API as an array
-        return $response->json();
+        // Return the start_url or join_url property of the response, depending on your use case
+        return $response->json()['start_url'] ?? $response->json()['join_url'];
     }
+
+
 
     private function generateZoomJWT()
     {
