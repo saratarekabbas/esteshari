@@ -61,20 +61,6 @@ Route::group(['prefix'=>'offers'],function(){
     Route::post('store', [OfferController::class, 'store'])->name('offers.store');
 });
 
-//Route::group(['prefix'=>'VCR'], function (){
-////    Route::get('create', [OfferController::class, 'create']);
-//    Route::get('main', function (){
-//        return view('VideoConferenceRoom');
-//    });
-//});
-//
-
-
-
-//Route::get('/conference/{room}', [ConferenceController::class, 'index'])->name('conference');
-//Route::get('/test_room', [ConferenceController::class, 'testRoom'])->name('test_room');
-
-
 
 Route::get('/create-meeting', function () {
     $zoomApi = new ZoomApi(env('ZOOM_API_KEY'), env('ZOOM_API_SECRET'));

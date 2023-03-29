@@ -1,9 +1,6 @@
 import "./bootstrap";
 import { createApp } from "vue";
 
-// Import the joinChannel function
-import { joinChannel } from "./agora-conference";
-
 const app = createApp({});
 
 import ExampleComponent from "./components/ExampleComponent.vue";

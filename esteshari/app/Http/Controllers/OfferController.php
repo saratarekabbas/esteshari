@@ -49,9 +49,11 @@ class OfferController extends Controller
     {
 
         return $messages = [
-            'name.required' => "اسم العرض مطلوب",
-            'name.unique' => "اسم العرض موجود",
-            'price.numeric' => "سعر العرض يجب ان يكون ارقام"
+            'name.required' => __('messages.offer name required'),
+            'name.unique' => __('messages.offer name unique'),
+            'price.numeric' => __('messages.offer price numeric'),
+            "price.required" => __("messages.offer price required"),
+            "details.required" => __("messages.offer details required"),
         ];
     }
 
