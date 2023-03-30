@@ -64,3 +64,7 @@ Route::get('/create-meeting', function () {
     return redirect($meetingUrl);
 });
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

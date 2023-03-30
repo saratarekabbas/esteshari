@@ -13,8 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth'); //user must be authenticated (aka, logged in seccessfully with UN, PWD)
-//        $this->middleware('verified');
+        $this->middleware('auth');
     }
 
     /**
