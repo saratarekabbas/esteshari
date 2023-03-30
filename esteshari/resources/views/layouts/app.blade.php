@@ -23,11 +23,11 @@
 </head>
 <body>
 <div id="app">
-       <section class="background-radial-gradient overflow-hidden">
+    <section class="background-radial-gradient overflow-hidden">
         <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-            <div class="row gx-lg-5 align-items-center mb-5">
+            <div class="row gx-lg-5 align-items-start mb-5">
                 <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-                    <div style="display: inline-block;">
+                    <div style="display: inline-block; margin-top: 40px;">
                         <div class="logo">
                             <img src="{{ asset('assets/favicon.ico') }}" alt="Esteshari Logo">
                         </div>
@@ -47,21 +47,23 @@
                     </p>
                 </div>
 
+
                 <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
                     <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
                     <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
-
 
                     <div class="card bg-glass">
                         <div class="card-body px-4 py-5 px-md-5">
                             <!-- Pills navs -->
                             <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="tab-login" data-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Login</a>
+                                    <a class="nav-link active" id="tab-login" data-toggle="pill" href="#pills-login"
+                                       role="tab" aria-controls="pills-login" aria-selected="true">Login</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
 
-                                    <a class="nav-link" id="tab-register" data-toggle="pill" href="#pills-register" role="tab" aria-controls="pills-register" aria-selected="false">Register</a
+                                    <a class="nav-link" id="tab-register" data-toggle="pill" href="#pills-register"
+                                       role="tab" aria-controls="pills-register" aria-selected="false">Register</a>
                                 </li>
                             </ul>
                             <!-- Pills navs -->
@@ -182,20 +184,9 @@
                                         <!-- Repeat Password input -->
                                         <div class="form-outline mb-4">
                                             <input type="password" id="registerRepeatPassword" class="form-control"/>
-                                            <label class="form-label" for="registerRepeatPassword">Repeat
+                                            <label class="form-label" for="registerRepeatPassword">Confirm
                                                 password</label>
                                         </div>
-
-                                        <!-- Checkbox -->
-                                        <div class="form-check d-flex justify-content-center mb-4">
-                                            <input class="form-check-input me-2" type="checkbox" value=""
-                                                   id="registerCheck" checked
-                                                   aria-describedby="registerCheckHelpText"/>
-                                            <label class="form-check-label" for="registerCheck">
-                                                I have read and agree to the terms
-                                            </label>
-                                        </div>
-
                                         <!-- Submit button -->
                                         <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
                                     </form>
@@ -209,32 +200,32 @@
         </div>
     </section>
 </div>
-    <!-- Section: Design Block -->
+<!-- Section: Design Block -->
 
-    <!-- Footer-->
-    <footer class="bg-light py-5">
-        <div class="container px-4 px-lg-5">
-            <div class="small text-center text-muted">{{__('homepage.copyrights')}}</div>
-        </div>
-    </footer>
+<!-- Footer-->
+<footer class="bg-light py-5">
+    <div class="container px-4 px-lg-5">
+        <div class="small text-center text-muted">{{__('homepage.copyrights')}}</div>
+    </div>
+</footer>
 
-    <!-- MDB JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
-            integrity="sha512-+ckxRJf5W5rj+XNszgIhDXEEvF1Jz/1QVvkjGWZxP7VavB/PLSExhTbTZeTzLZXj+xHDCrl6h4AioIX0J6km4w=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- MDB JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
+        integrity="sha512-+ckxRJf5W5rj+XNszgIhDXEEvF1Jz/1QVvkjGWZxP7VavB/PLSExhTbTZeTzLZXj+xHDCrl6h4AioIX0J6km4w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
 
-    {{--    <!-- MDBootstrap JS -->--}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+{{--    <!-- MDBootstrap JS -->--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 
-    <script src="{{ asset('js/scripts.js') }}"></script>
+<script src="{{ asset('js/scripts.js') }}"></script>
 </body>
 
 </html>
