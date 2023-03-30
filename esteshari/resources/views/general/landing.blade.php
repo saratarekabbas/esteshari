@@ -75,7 +75,7 @@
     <section class="page-section bg-dark text-white" id="contact">
         <div class="container px-4 px-lg-5 text-center">
             <h2 class="mb-4">{{__('homepage.register headline')}}</h2>
-            <a class="btn btn-light btn-xl" href="/register">{{__('homepage.register button')}}</a>
+            <a class="btn btn-light btn-xl" href="/home">{{__('homepage.register button')}}</a>
         </div>
     </section>
 
