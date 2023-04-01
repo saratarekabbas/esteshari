@@ -13,17 +13,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
 
 Auth::routes();
 
-Route::get('/dashboard', function () {
-    return 'You are on user dashboard';
-});
+//Route::get('/dashboard', function () {
+//    return 'You are on user dashboard';
+//});
 
 //This is for redirecting to services (e.g., facebook)
 Route::get('/redirect/{service}', [SocialController::class, 'redirect']);
@@ -65,6 +63,27 @@ Route::get('/create-meeting', function () {
 });
 
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//MIDDLEWARE ROUTES
+// Routes for the system admin
+Route::group(['middleware' => ['auth', 'role:system_admin']], function () {
+    Route::get('/admin/dashboard', function () {
+        return view('administrator.dashboard');
+    })->name('admin.dashboard');
+});
+
+// Routes for the physician
+Route::group(['middleware' => ['auth', 'role:physician']], function () {
+    Route::get('/physician/dashboard', function () {
+        return view('physician.dashboard');
+    })->name('physician.dashboard');
+});
+
+// Routes for the patient
+Route::group(['middleware' => ['auth', 'role:patient']], function () {
+    Route::get('/patient/dashboard', function () {
+        return view('patient.dashboard');
+    })->name('patient.dashboard');
+});
