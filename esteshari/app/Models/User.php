@@ -25,6 +25,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'role'
     ];
 
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
