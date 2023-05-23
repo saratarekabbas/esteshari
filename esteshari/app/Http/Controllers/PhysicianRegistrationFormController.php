@@ -10,6 +10,13 @@ class PhysicianRegistrationFormController extends Controller
 {
     public function create()
     {
+        $user = auth()->user();
+
+        if ($user->status == 'pending') {
+            // User is already registered, redirect them to the pending page
+            return redirect()->route('physician.pending');
+        }
+
         return view('physician.physician_registration_form');
     }
 
@@ -18,6 +25,9 @@ class PhysicianRegistrationFormController extends Controller
 //         Check if the user is authenticated
         $user = $request->user();
         if ($user) {
+            if ($user->status == 'pending') {
+                return redirect()->back()->with('error', 'You have already submitted an application.');
+            }
 
             // Validate the form data
             $validatedData = $request->validate([
