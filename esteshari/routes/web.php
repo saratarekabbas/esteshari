@@ -73,7 +73,10 @@ Route::group(['middleware' => ['auth', 'role:patient']], function () {
 });
 
 // Routes for the physician registration process
-Route::group(['middleware' => ['auth', 'role:physician', 'App\Http\Middleware\PhysicianStatusMiddleware']], function () {
+Route::group(['middleware' => ['auth', 'role:physician'
+//    , 'App\Http\Middleware\PhysicianStatusMiddleware'
+]
+], function () {
     Route::get('/physician/registration', [PhysicianRegistrationFormController::class, 'create'])
         ->name('physician.registration.create');
     Route::post('/physician/registration', [PhysicianRegistrationFormController::class, 'store'])
@@ -87,7 +90,9 @@ Route::group(['middleware' => ['auth', 'role:physician', 'App\Http\Middleware\Ph
 });
 
 // Routes for the approved physicians
-Route::group(['middleware' => ['auth', 'role:physician', 'App\Http\Middleware\PhysicianStatusMiddleware']], function () {
+Route::group(['middleware' => ['auth', 'role:physician'
+//    , 'App\Http\Middleware\PhysicianStatusMiddleware'
+]], function () {
     Route::get('/physician/dashboard', function () {
         return view('physician.dashboard');
     })->name('physician.dashboard');

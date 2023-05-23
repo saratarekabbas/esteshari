@@ -48,4 +48,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function physicianRegistration()
+    {
+        return $this->hasOne(PhysicianRegistration::class, 'user_id');
+    }
+
+
+//    protected $primaryKey = 'user_id';
+
 }
