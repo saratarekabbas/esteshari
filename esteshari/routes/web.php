@@ -3,6 +3,7 @@
 use App\Http\Controllers\General\GeneralController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\PhysicianRegistrationFormController;
 use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,22 +18,14 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
 
-Auth::routes();
-
-//Route::get('/dashboard', function () {
-//    return 'You are on user dashboard';
-//});
-
 //This is for redirecting to services (e.g., facebook)
 Route::get('/redirect/{service}', [SocialController::class, 'redirect']);
-
 Route::get('/callback/{service}', [SocialController::class, 'callback']);
 
 //Offer
 Route::get('fillable', [OfferController::class, 'getOffers']);
 
-Route::group([    'prefix' => LaravelLocalization::setLocale(),    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function () {
-
+Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
     Route::get('index', [GeneralController::class, 'getIndex']);
 
     Route::group(['prefix' => 'offers'], function () {
@@ -40,7 +33,6 @@ Route::group([    'prefix' => LaravelLocalization::setLocale(),    'middleware' 
         Route::post('store', [OfferController::class, 'store'])->name('offers.store');
     });
 });
-
 
 Route::get('/create-meeting', function () {
     $zoomApi = new ZoomApi(env('ZOOM_API_KEY'), env('ZOOM_API_SECRET'));
@@ -63,8 +55,7 @@ Route::get('/create-meeting', function () {
 });
 
 
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//----------------
 
 //MIDDLEWARE ROUTES
 // Routes for the system admin
@@ -74,16 +65,30 @@ Route::group(['middleware' => ['auth', 'role:system_admin']], function () {
     })->name('admin.dashboard');
 });
 
-// Routes for the physician
-Route::group(['middleware' => ['auth', 'role:physician']], function () {
-    Route::get('/physician/dashboard', function () {
-        return view('physician.dashboard');
-    })->name('physician.dashboard');
-});
-
 // Routes for the patient
 Route::group(['middleware' => ['auth', 'role:patient']], function () {
     Route::get('/patient/dashboard', function () {
         return view('patient.dashboard');
     })->name('patient.dashboard');
+});
+
+// Routes for the physician registration process
+Route::group(['middleware' => ['auth', 'role:physician', 'App\Http\Middleware\PhysicianStatusMiddleware']], function () {
+    Route::get('/physician/registration', [PhysicianRegistrationFormController::class, 'create'])
+        ->name('physician.registration.create');
+    Route::post('/physician/registration', [PhysicianRegistrationFormController::class, 'store'])
+        ->name('physician.registration.store');
+    Route::get('/physician/pending', function () {
+        return view('physician.pending');
+    })->name('physician.pending');
+    Route::get('/physician/denied', function () {
+        return view('physician.denied');
+    })->name('physician.denied');
+});
+
+// Routes for the approved physicians
+Route::group(['middleware' => ['auth', 'role:physician', 'App\Http\Middleware\PhysicianStatusMiddleware']], function () {
+    Route::get('/physician/dashboard', function () {
+        return view('physician.dashboard');
+    })->name('physician.dashboard');
 });
