@@ -11,14 +11,6 @@ class PhysicianRegistrationFormController extends Controller
 {
     public function create()
     {
-//        This will be handled in the middleware instead, so I am going to comment it out
-//        $user = auth()->user();
-//
-//        if ($user->status == 'pending') {
-//            // User is already registered, redirect them to the pending page
-//            return redirect()->route('physician.pending');
-//        }
-
         return view('physician.physician_registration_form');
     }
 
@@ -35,9 +27,32 @@ class PhysicianRegistrationFormController extends Controller
         $physicianRegistration = new PhysicianRegistration();
 
         // Set the values from the form
+        $physicianRegistration->title = $request->input('title');
+
         $physicianRegistration->full_name = $request->input('full_name');
         $physicianRegistration->phone_number = $request->input('phone_number');
         $physicianRegistration->job_title = $request->input('job_title');
+
+//        SINGLE FILE
+        if ($request->hasFile('passport')) {
+            $passportFile = $request->file('passport');
+            $passportFilePath = $passportFile->store('files'); // Store the passport file in the 'files' directory
+            // Save the passport file path to the database
+            $physicianRegistration->passport_file = $passportFilePath;
+        }
+//        MULTIPLE FILES
+        if ($request->hasFile('insurance')) {
+            $insuranceFiles = [];
+            foreach ($request->file('insurance') as $insuranceFile) {
+                $insuranceFilePath = $insuranceFile->store('files'); // Store each insurance file in the 'files' directory
+                $insuranceFiles[] = $insuranceFilePath;
+            }
+            // Save the insurance files' paths to the database as a JSON array
+            $physicianRegistration->insurance_files = json_encode($insuranceFiles);
+        }
+
+
+
         $user = Auth::user();
         $physicianRegistration->user()->associate($user);
 

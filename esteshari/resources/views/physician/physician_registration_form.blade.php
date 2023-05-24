@@ -15,9 +15,13 @@
         {{ Session::get('success') }}
     </div>
 @endif
-<form action="{{ route('physician.registration.store') }}" method="POST">
+<form action="{{ route('physician.registration.store') }}" method="POST" enctype="multipart/form-data">
 
     @csrf
+    <div>
+        <label for="title"> Title:</label>
+        <input type="text" id="title" name="title" required>
+    </div>
     <div>
         <label for="full_name">Full Name:</label>
         <input type="text" id="full_name" name="full_name" required>
@@ -30,6 +34,14 @@
         <label for="job_title">Job Title:</label>
         <input type="text" id="job_title" name="job_title" required>
     </div>
+
+    <!-- Passport file -->
+    <input type="file" name="passport">
+
+    <!-- Insurance files -->
+    <input type="file" name="insurance[]" multiple>
+
+
     <div>
         <button type="submit">Submit</button>
     </div>
