@@ -23,22 +23,12 @@ class CreatePhysicianRegistrationsTable extends Migration
             $table->string('mobile_number');
             $table->string('telephone_number')->nullable();
             $table->string('street_address');
+            $table->string('street_address2');
             $table->string('city');
             $table->string('state_province');
             $table->int('postal_code');
             $table->string('country');
             $table->json('identity_verification_files');
-
-
-
-
-
-
-
-
-
-
-
 
 
             $table->string('passport_file')->nullable(); // Column to store the file path

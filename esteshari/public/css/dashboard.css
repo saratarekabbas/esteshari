@@ -93,29 +93,6 @@ li button {
     display: block;
 }
 
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
-
-
-/*.dropdown-button {*/
-/*    font-size: 1rem;*/
-/*    display: block;*/
-/*    color: #333;*/
-/*    text-align: center;*/
-/*    padding-bottom: 0.3125rem;*/
-/*    padding-top: 0.3125rem;*/
-/*    !*padding-right: 3rem;*!*/
-/*    padding-left: 1rem;*/
-/*    text-decoration: none;*/
-/*    border: none;*/
-/*    background-color: white;*/
-/*}*/
-
-/*.dropdown-item{*/
-/*    color: #0a53be;*/
-/*}*/
-
 .dropdown-button {
     font-size: 1rem;
     display: block;
@@ -138,8 +115,6 @@ li button {
     transform: translateY(-50%);
 }
 
-
-
 .dropdown-content {
     display: none;
     position: absolute;
@@ -155,16 +130,41 @@ li button {
     display: block;
 }
 
-
 .content {
-    /*text-align: center;*/
     min-height: 85vh;
     margin-right: 10%;
     margin-left: 10%;
     background-color: rgba(255, 255, 255, 0.75);
+    padding:10px;
 }
 
-/*.footer{*/
-/*    background-color: #0a53be;*/
-/*    margin: 0;*/
-/*}*/
+/*This is Physician Registration Form*/
+.form-title{
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    color: #2f2f2f;
+}
+
+.form-subtitle{
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    color: #3d3d3d;
+
+}
+
+.form-content{
+    margin:5px;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+
+
+/*End of Physician Registration Form*/
+

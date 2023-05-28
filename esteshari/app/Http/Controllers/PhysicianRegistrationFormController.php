@@ -11,7 +11,7 @@ class PhysicianRegistrationFormController extends Controller
 {
     public function create()
     {
-        return view('physician.physician_registration_form');
+        return view('physician.physician_registration_form.physician_registration_form');
     }
 
     public function store(Request $request)
@@ -48,6 +48,7 @@ class PhysicianRegistrationFormController extends Controller
         $physicianRegistration->mobile_number = $request->input('mobile_number');
         $physicianRegistration->telephone_number = $request->input('telephone_number');
         $physicianRegistration->street_address = $request->input('street_address');
+        $physicianRegistration->street_address2 = $request->input('street_address2');
         $physicianRegistration->city = $request->input('city');
         $physicianRegistration->state_province = $request->input('state_province');
         $physicianRegistration->postal_code = $request->input('postal_code');
