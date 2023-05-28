@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.physician_layout')
 
 @section('content')
     <!-- Content of the Physician Registration Form -->

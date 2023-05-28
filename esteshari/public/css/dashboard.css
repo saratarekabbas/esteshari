@@ -53,10 +53,11 @@ li button {
 /*    color: #00b9fe;*/
 /*}*/
 
-.active {
+.item-active {
     min-width: 10rem;
 }
-.active:hover {
+
+.item-active:hover {
     color: #00b9fe;
 }
 
@@ -94,6 +95,64 @@ li button {
 
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
+}
+
+
+/*.dropdown-button {*/
+/*    font-size: 1rem;*/
+/*    display: block;*/
+/*    color: #333;*/
+/*    text-align: center;*/
+/*    padding-bottom: 0.3125rem;*/
+/*    padding-top: 0.3125rem;*/
+/*    !*padding-right: 3rem;*!*/
+/*    padding-left: 1rem;*/
+/*    text-decoration: none;*/
+/*    border: none;*/
+/*    background-color: white;*/
+/*}*/
+
+/*.dropdown-item{*/
+/*    color: #0a53be;*/
+/*}*/
+
+.dropdown-button {
+    font-size: 1rem;
+    display: block;
+    color: #333;
+    text-align: center;
+    padding-bottom: 0.3125rem;
+    padding-top: 0.3125rem;
+    padding-right: 4rem;
+    padding-left: 1rem;
+    text-decoration: none;
+    border: none;
+    background-color: white;
+    position: relative; /* Position relative for arrow icon */
+}
+
+.dropdown-button i.fa-angle-down {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 200px;
+    white-space: nowrap;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-top: 0.5rem; /* Adjust the margin-top as needed */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 
