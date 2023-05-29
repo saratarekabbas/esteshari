@@ -1,6 +1,4 @@
 @yield('section1')
-{{--<form class="form-content row g-3" action="{{ route('physician.registration.store_section1') }}" method="POST"--}}
-{{--      enctype="multipart/form-data">--}}
 <form class="form-content row g-3" action="{{ route('physician.registration.store')  }}" method="POST"
       enctype="multipart/form-data">
     <input type="hidden" name="section" value="1">
@@ -1049,7 +1047,27 @@
         @endif
     </div>
 
-    <button type="submit" class="btn btn-lg btn-primary">Next</button>
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Next
+    </button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Submit Section 1</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to submit Section 1? Once you submit, all data entered in Section 1 will be saved and cannot be edited or viewed.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </form>
 

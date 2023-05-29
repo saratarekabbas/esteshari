@@ -23,35 +23,42 @@ class PhysicianRegistrationFormController extends Controller
         switch ($section) {
             case 1:
                 $this->section1($request);
-                break;
+                return redirect()->route('physician.registration.create', ['section' => 2])
+                    ->with('success', 'Section 1 has been submitted successfully!');
 
             case 2:
                 $this->section2($request);
-                break;
+                return redirect()->route('physician.registration.create', ['section' => 3])
+                    ->with('success', 'Section 2 has been submitted successfully!');
 
             case 3:
                 $this->section3($request);
-                break;
+                return redirect()->route('physician.registration.create', ['section' => 4])
+                    ->with('success', 'Section 3 has been submitted successfully!');
 
             case 4:
                 $this->section4($request);
-                break;
+                return redirect()->route('physician.registration.create', ['section' => 5])
+                    ->with('success', 'Section 4 has been submitted successfully!');
 
             case 5:
                 $this->section5($request);
-                break;
+                return redirect()->route('physician.registration.create', ['section' => 6])
+                    ->with('success', 'Section 5 has been submitted successfully!');
 
             case 6:
                 $this->section6($request);
-                break;
+                return redirect()->route('physician.registration.create', ['section' => 7])
+                    ->with('success', 'Section 6 has been submitted successfully!');
 
             case 7:
                 $this->section7($request);
-                break;
+                return redirect()->route('physician.registration.create', ['section' => 8])
+                    ->with('success', 'Section 7 has been submitted successfully!');
 
             case 8:
                 $this->section8($request);
-                break;
+                return redirect()->route('physician.pending')->with('success', 'Your Physician Registration has been submitted successfully!');
 
             default:
                 return redirect()->route('physician.registration.create', ['section' => 1])
@@ -129,10 +136,6 @@ class PhysicianRegistrationFormController extends Controller
 
 
         $personalInformation->save();
-
-
-        return redirect()->route('physician.registration.create', ['section' => 2])
-            ->with('success', 'Section 1 has been submitted successfully!');
     }
 
 

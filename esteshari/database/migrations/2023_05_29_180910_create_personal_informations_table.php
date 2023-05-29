@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('alternative_email_address');
             $table->string('nationality');
             $table->integer('country_code');
-            $table->integer('mobile_number');
-            $table->integer('telephone_number');
+            $table->bigInteger('mobile_number');
+            $table->bigInteger('telephone_number');
             $table->string('address_line_1');
             $table->string('address_line_2');
             $table->string('city');

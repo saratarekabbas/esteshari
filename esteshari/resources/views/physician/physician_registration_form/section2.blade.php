@@ -1,4 +1,12 @@
 @yield('section2')
+<form class="form-content row g-3" action="{{ route('physician.registration.store')  }}" method="POST"
+      enctype="multipart/form-data">
+    <input type="hidden" name="section" value="2">
+    @csrf
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 14.3%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
 <h4 class="form-subtitle">Section 2: Educational Qualifications</h4>
 
 <div class="col-md-3 form-floating">
@@ -341,3 +349,29 @@
 {{--</div>--}}
 {{--- Title--}}
 {{--- Upload Awards and Honors: Give physicians the opportunity to list any notable awards, honors, or recognitions they have received in the medical field.--}}
+
+
+    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Next
+    </button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Submit Section 2</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to submit Section 2? Once you submit, all data entered in Section 2 will be saved and cannot be edited or viewed.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
