@@ -56,30 +56,11 @@ Route::group(['middleware' => ['auth', 'role:patient']], function () {
 
 // Routes for the physician process
 Route::middleware(['auth', 'role:physician'
-//    , 'physician.status'
+    , 'physician.status'
 ])->group(function () {
     Route::get('/physician/registration/{section?}', [PhysicianRegistrationFormController::class, 'index'])->name('physician.registration.create'); //the whole page; which displays section 1 by default
     Route::post('/physician/registration', [PhysicianRegistrationFormController::class, 'store'])->name('physician.registration.store');
 
-
-//    Route::post('/physician/registration/section1', [PhysicianRegistrationFormController::class, 'storeSection1'])->name('physician.registration.section1');
-//    Route::post('/physician/registration/section2', [PhysicianRegistrationFormController::class, 'storeSection2'])->name('physician.registration.section2');
-//    Route::post('/physician/registration/section3', [PhysicianRegistrationFormController::class, 'storeSection3'])->name('physician.registration.section3');
-//    Route::post('/physician/registration/section4', [PhysicianRegistrationFormController::class, 'storeSection4'])->name('physician.physician_registration_form.physician_registration_form.section4');
-//    Route::post('/physician/registration/section5', [PhysicianRegistrationFormController::class, 'storeSection5'])->name('physician.physician_registration_form.physician_registration_form.section5');
-//    Route::post('/physician/registration/section6', [PhysicianRegistrationFormController::class, 'storeSection6'])->name('physician.physician_registration_form.physician_registration_form.section6');
-//    Route::post('/physician/registration/section7', [PhysicianRegistrationFormController::class, 'storeSection7'])->name('physician.physician_registration_form.physician_registration_form.section7');
-//    Route::post('/physician/registration/section8', [PhysicianRegistrationFormController::class, 'storeSection8'])->name('physician.physician_registration_form.physician_registration_form.section8');
-
-    /* FOR THE MULTIPLE SECTIONS
-    // Form display and submission routes
-    Route::get('registration/form', [PhysicianRegistrationFormController::class, 'store'])->name('registration.form');
-    Route::post('registration/store', [PhysicianRegistrationFormController::class, 'store'])->name('registration.store');
-
-// Final submission route
-    Route::get('registration/final', [PhysicianRegistrationFormController::class, 'finalSubmission'])->name('registration.final');
-
-    */
 
     Route::get('/physician/pending', function () {
         return view('physician.pending');

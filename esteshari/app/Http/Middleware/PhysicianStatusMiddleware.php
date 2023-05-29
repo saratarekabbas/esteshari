@@ -23,11 +23,21 @@ class PhysicianStatusMiddleware
             // and they are not on the physician registration form route (physician.registration.create)
             // or the physician registration store route (physician.registration.store),
             // they are redirected to the physician registration form (physician.registration.create).
+//            elseif ($user->status == 'registered' && $user->email_verified_at != null &&
+//                $request->route()->getName() != 'physician.registration.create' &&
+//                $request->route()->getName() != 'physician.registration.store'
+//            ) {
+//                return redirect()->route('physician.registration.create');
+//            }
             elseif ($user->status == 'registered' && $user->email_verified_at != null &&
-                $request->route()->getName() != 'physician.registration.create' &&
-                $request->route()->getName() != 'physician.registration.store'
-            ) {
-                return redirect()->route('physician.registration.create');
+                !in_array($request->route()->getName(), [
+                    'physician.registration.create',
+                    'physician.registration.store',
+                    'physician.registration.create.section',
+                    'physician.registration.store.section'
+                ])) {
+                $section = $request->route('section', 1); // Default to section 1 if not provided
+                return redirect()->route('physician.registration.create', ['section' => $section]);
             }
             // If the user's status is "pending" and they are not on the pending page route (physician.pending),
             // they are redirected to the pending page (physician.pending).

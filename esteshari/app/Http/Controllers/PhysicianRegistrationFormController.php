@@ -171,7 +171,9 @@ class PhysicianRegistrationFormController extends Controller
 
     public function section8(Request $request)
     {
-
+        $user = Auth::user();
+        $user->status = 'pending';
+        $user->save();
     }
 
     /*  public function store(Request $request)
