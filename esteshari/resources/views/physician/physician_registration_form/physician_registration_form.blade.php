@@ -8,14 +8,16 @@
     @endif
     <div class="container">
         <h2 class="form-title">Physician Registration Form</h2>
-        <form class="form-content row g-3" action="{{ route('physician.registration.store') }}" method="POST"
-              enctype="multipart/form-data">
-            @csrf
 
-            @include('physician.physician_registration_form.section1')
+        @if ($section == 1)
+                @include('physician.physician_registration_form.section1')
+        @elseif ($section == 2)
 
-            {{--SECTION 1--}}
+                @include('physician.physician_registration_form.section2')
+        @elseif ($section == 3)
+                @include('physician.physician_registration_form.section3')
+        @endif
 
-        </form>
     </div>
 @endsection
+

@@ -54,7 +54,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(PhysicianRegistration::class, 'user_id');
     }
 
-
-//    protected $primaryKey = 'user_id';
+    public function personalInformation()
+    {
+        return $this->hasOne(PersonalInformation::class, 'user_id');
+    }
 
 }
