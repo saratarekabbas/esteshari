@@ -14,7 +14,6 @@ class PhysicianRegistrationFormController extends Controller
     public function index($section = 1)
     {
         return view('physician.physician_registration_form.physician_registration_form', compact('section'));
-        //        return view('physician.physician_registration_form.physician_registration_form');
     }
 
     public function store(Request $request)
@@ -23,97 +22,153 @@ class PhysicianRegistrationFormController extends Controller
 
         switch ($section) {
             case 1:
-                // Validate the form data
-                $validatedData = $request->validate([
-                    'designation' => 'required|string',
-                    'full_name' => 'required|string',
-                    'date_of_birth' => ['required', 'date', new MinimumAge],
-                    'gender' => 'required|string',
-                    'same_email' => 'nullable',
-                    'email_address' => 'required_if:same_email,0|email',
-                    'alternative_email_address' => 'required|email|different:email_address',
-                    'nationality' => 'required|string',
-                    'country_code' => ['required', 'numeric', 'digits_between:1,5'],
-                    'mobile_number' => ['required', 'numeric', 'digits_between:9,10'],
-                    'telephone_number' => ['required', 'numeric', 'digits_between:7,15'],
-                    'address_line_1' => 'required|string',
-                    'address_line_2' => 'required|string',
-                    'city' => 'required|string',
-                    'state' => 'required|string',
-                    'postal_code' => 'required|numeric|digits_between:5,10',
-                    'country' => 'required|string',
-                    'identity_verification_files' => ['required', 'array', 'max:10'],
-                    'identity_verification_files.*' => 'file',
-                ]);
-
-                $personalInformation = new PersonalInformation();
-                $user = Auth::user();
-                $personalInformation->user()->associate($user);
-
-                // Check if the selected title is "Other"
-                if ($request->input('designation') === 'Other') {
-                    // Save the value from the "Other Title" input field
-                    $personalInformation->designation = $request->input('otherTitle');
-                } else {
-                    // Save the selected title
-                    $personalInformation->designation = $request->input('designation');
-                }
-
-                $personalInformation->full_name = $request->input('full_name');
-                $personalInformation->date_of_birth = $request->input('date_of_birth');
-                $personalInformation->gender = $request->input('gender');
-
-                if ($request->has('same_email')) {
-                   $email = $user->email;
-                } else {
-                    $email = $request->input('email_address');
-                }
-                $personalInformation->email_address = $email;
-//                $personalInformation->user()->associate($user);
-
-                $personalInformation->alternative_email_address = $request->input('alternative_email_address');
-                $personalInformation->nationality = $request->input('nationality');
-                $personalInformation->country_code = $request->input('country_code');
-                $personalInformation->mobile_number = $request->input('mobile_number');
-                $personalInformation->telephone_number = $request->input('telephone_number');
-                $personalInformation->address_line_1 = $request->input('address_line_1');
-                $personalInformation->address_line_2 = $request->input('address_line_2');
-                $personalInformation->city = $request->input('city');
-                $personalInformation->state = $request->input('state');
-                $personalInformation->postal_code = $request->input('postal_code');
-                $personalInformation->country = $request->input('country');
-
-                $identityVerificationFiles = [];
-                foreach ($request->file('identity_verification_files') as $identityVerificationFile) {
-                    $insuranceFilePath = $identityVerificationFile->store('files');
-                    $identityVerificationFiles[] = $insuranceFilePath;
-                }
-                $personalInformation->identity_verification_files = json_encode($identityVerificationFiles);
-
-
-                $personalInformation->save();
-
-
-                return redirect()->route('physician.registration.create', ['section' => 2])
-                    ->with('success', 'Section 1 has been submitted successfully!');
+                $this->section1($request);
                 break;
 
             case 2:
-                // Validate the form data for section 2
-                $validatedData = $request->validate([
-                    // Validation rules for section 2 fields
-                ]);
-                return redirect()->route('physician.registration.create', ['section' => 3])
-                    ->with('success', 'Section 2 has been submitted successfully!');
+                $this->section2($request);
+                break;
 
-            // Add cases for other sections and their corresponding validation and processing logic
+            case 3:
+                $this->section3($request);
+                break;
 
+            case 4:
+                $this->section4($request);
+                break;
+
+            case 5:
+                $this->section5($request);
+                break;
+
+            case 6:
+                $this->section6($request);
+                break;
+
+            case 7:
+                $this->section7($request);
+                break;
+
+            case 8:
+                $this->section8($request);
                 break;
 
             default:
                 return redirect()->route('physician.registration.create', ['section' => 1])
                     ->with('error', 'Invalid section!');
         }
+    }
+
+    public function section1(Request $request)
+    {
+        $validatedData = $request->validate([
+            'designation' => 'required|string',
+            'full_name' => 'required|string',
+            'date_of_birth' => ['required', 'date', new MinimumAge],
+            'gender' => 'required|string',
+            'same_email' => 'nullable',
+            'email_address' => 'required_if:same_email,0|email',
+            'alternative_email_address' => 'required|email|different:email_address',
+            'nationality' => 'required|string',
+            'country_code' => ['required', 'numeric', 'digits_between:1,5'],
+            'mobile_number' => ['required', 'numeric', 'digits_between:9,10'],
+            'telephone_number' => ['required', 'numeric', 'digits_between:7,15'],
+            'address_line_1' => 'required|string',
+            'address_line_2' => 'required|string',
+            'city' => 'required|string',
+            'state' => 'required|string',
+            'postal_code' => 'required|numeric|digits_between:5,10',
+            'country' => 'required|string',
+            'identity_verification_files' => ['required', 'array', 'max:10'],
+            'identity_verification_files.*' => 'file',
+        ]);
+
+        $personalInformation = new PersonalInformation();
+        $user = Auth::user();
+        $personalInformation->user()->associate($user);
+
+        // Check if the selected title is "Other"
+        if ($request->input('designation') === 'Other') {
+            // Save the value from the "Other Title" input field
+            $personalInformation->designation = $request->input('otherTitle');
+        } else {
+            // Save the selected title
+            $personalInformation->designation = $request->input('designation');
+        }
+
+        $personalInformation->full_name = $request->input('full_name');
+        $personalInformation->date_of_birth = $request->input('date_of_birth');
+        $personalInformation->gender = $request->input('gender');
+
+        if ($request->has('same_email')) {
+            $email = $user->email;
+        } else {
+            $email = $request->input('email_address');
+        }
+        $personalInformation->email_address = $email;
+//                $personalInformation->user()->associate($user);
+
+        $personalInformation->alternative_email_address = $request->input('alternative_email_address');
+        $personalInformation->nationality = $request->input('nationality');
+        $personalInformation->country_code = $request->input('country_code');
+        $personalInformation->mobile_number = $request->input('mobile_number');
+        $personalInformation->telephone_number = $request->input('telephone_number');
+        $personalInformation->address_line_1 = $request->input('address_line_1');
+        $personalInformation->address_line_2 = $request->input('address_line_2');
+        $personalInformation->city = $request->input('city');
+        $personalInformation->state = $request->input('state');
+        $personalInformation->postal_code = $request->input('postal_code');
+        $personalInformation->country = $request->input('country');
+
+        $identityVerificationFiles = [];
+        foreach ($request->file('identity_verification_files') as $identityVerificationFile) {
+            $insuranceFilePath = $identityVerificationFile->store('files');
+            $identityVerificationFiles[] = $insuranceFilePath;
+        }
+        $personalInformation->identity_verification_files = json_encode($identityVerificationFiles);
+
+
+        $personalInformation->save();
+
+
+        return redirect()->route('physician.registration.create', ['section' => 2])
+            ->with('success', 'Section 1 has been submitted successfully!');
+    }
+
+
+    public function section2(Request $request)
+    {
+
+    }
+
+    public function section3(Request $request)
+    {
+
+    }
+
+    public function section4(Request $request)
+    {
+
+    }
+
+    public function section5(Request $request)
+    {
+
+    }
+
+    public function section6(Request $request)
+    {
+
+    }
+
+    public function section7(Request $request)
+    {
+
+    }
+
+    public function section8(Request $request)
+    {
+
     }
 
     /*  public function store(Request $request)

@@ -54,9 +54,44 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(PhysicianRegistration::class, 'user_id');
     }
 
-    public function personalInformation()
+    public function personalInformation() //section1
     {
         return $this->hasOne(PersonalInformation::class, 'user_id');
+    }
+
+    public function educationalQualification() //section2
+    {
+        return $this->hasOne(EducationalQualification::class, 'user_id');
+    }
+
+    public function workExperience() //section3
+    {
+        return $this->hasOne(WorkExperience::class, 'user_id');
+    }
+
+    public function boardCertification() //section4
+    {
+        return $this->hasOne(BoardCertification::class, 'user_id');
+    }
+
+    public function professionalRegistration() //section5
+    {
+        return $this->hasOne(ProfessionalRegistration::class, 'user_id');
+    }
+
+    public function physicianReference() //section6
+    {
+        return $this->hasOne(PhysicianReference::class, 'user_id');
+    }
+
+    public function langaugeQualification() //section7
+    {
+        return $this->hasOne(LanguageQualification::class, 'user_id');
+    }
+
+    public function insurance() //section8
+    {
+        return $this->hasOne(Insurance::class, 'user_id');
     }
 
 }

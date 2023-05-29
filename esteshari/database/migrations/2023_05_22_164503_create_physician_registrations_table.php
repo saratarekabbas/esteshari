@@ -10,10 +10,6 @@ class CreatePhysicianRegistrationsTable extends Migration
     {
         Schema::create('physician_registrations', function (Blueprint $table) {
             $table->id();
-
-
-
-
 //            $table->string('passport_file')->nullable(); // Column to store the file path
 //            $table->json('insurance_files')->nullable(); // Column to store the file path
             $table->timestamps();
