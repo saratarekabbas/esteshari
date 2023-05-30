@@ -68,6 +68,7 @@ class PhysicianRegistrationFormController extends Controller
 
     public function section1(Request $request)
     {
+//        Section 1 : Personal Information
         $validatedData = $request->validate([
             'designation' => 'required|string',
             'full_name' => 'required|string',
@@ -141,7 +142,7 @@ class PhysicianRegistrationFormController extends Controller
 
     public function section2(Request $request)
     {
-
+//Section 2: Educational Qualifications
     }
 
     public function section3(Request $request)
