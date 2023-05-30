@@ -1068,6 +1068,7 @@
 {{--            </div>--}}
 {{--        @endif--}}
 
+
         @if ($personalInformation)
             <div class="mt-2">
                 <strong>Previously uploaded files:</strong>
@@ -1085,18 +1086,6 @@
                 @endforeach
             </div>
         @endif
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

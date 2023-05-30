@@ -90,7 +90,7 @@ class PhysicianRegistrationFormController extends Controller
             'state' => 'required|string',
             'postal_code' => 'required|numeric|digits_between:5,10',
             'country' => 'required|string',
-            'identity_verification_files' => ['required', 'array', 'max:10'],
+            'identity_verification_files' => ['sometimes' ,'required', 'array', 'max:10'],
             'identity_verification_files.*' => 'file',
         ]);
 
@@ -137,21 +137,45 @@ class PhysicianRegistrationFormController extends Controller
         $personalInformation->postal_code = $request->input('postal_code');
         $personalInformation->country = $request->input('country');
 
-//        $identityVerificationFiles = [];
-//        foreach ($request->file('identity_verification_files') as $identityVerificationFile) {
-//            $insuranceFilePath = $identityVerificationFile->store('files');
-//            $identityVerificationFiles[] = $insuranceFilePath;
+
+//        $existingFiles = json_decode($personalInformation->identity_verification_files, true) ?? [];
+//        $identityVerificationFiles = $request->file('identity_verification_files');
+//
+//        if ($identityVerificationFiles) {
+//            foreach ($identityVerificationFiles as $identityVerificationFile) {
+//                $identityVerificationFilePath = $identityVerificationFile->store('files', 'public');
+//                if (!in_array($identityVerificationFilePath, $existingFiles)) {
+//                    $existingFiles[] = $identityVerificationFilePath;
+//                }
+//            }
+//        } else {
+//            $existingFiles = $existingFiles ?? [];
 //        }
-//        $personalInformation->identity_verification_files = json_encode($identityVerificationFiles);
+//
+//        $personalInformation->identity_verification_files = json_encode($existingFiles);
 
-        $identityVerificationFiles = [];
-        foreach ($request->file('identity_verification_files') as $identityVerificationFile) {
-            $insuranceFilePath = $identityVerificationFile->store('files', 'public');
-            $identityVerificationFiles[] = $insuranceFilePath;
+        $existingFiles = json_decode($personalInformation->identity_verification_files, true) ?? [];
+        $identityVerificationFiles = $request->file('identity_verification_files');
+
+// Check if no existing files and no old files exist
+        if (empty($existingFiles) && empty(old('identity_verification_files'))) {
+            $request->validate([
+                'identity_verification_files' => 'required',
+            ]);
         }
-        $personalInformation->identity_verification_files = json_encode($identityVerificationFiles);
 
+        if ($identityVerificationFiles) {
+            foreach ($identityVerificationFiles as $identityVerificationFile) {
+                $identityVerificationFilePath = $identityVerificationFile->store('files', 'public');
+                if (!in_array($identityVerificationFilePath, $existingFiles)) {
+                    $existingFiles[] = $identityVerificationFilePath;
+                }
+            }
+        } else {
+            $existingFiles = $existingFiles ?? [];
+        }
 
+        $personalInformation->identity_verification_files = json_encode($existingFiles);
 
 
         $personalInformation->save();
