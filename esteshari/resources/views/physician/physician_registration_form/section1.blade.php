@@ -34,7 +34,7 @@
             <option value="DDS">DDS (Doctor of Dental Surgery)</option>
             <option value="Other">Other</option>
         </select>
-        <script>document.getElementById('designation').value = "{{ old('designation') }}";</script>
+        <script>document.getElementById('designation').value = "{{ $personalInformation ? $personalInformation->designation : old('designation') }}";</script>
         <label for="designation">Designation</label>
         @error('designation')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -43,7 +43,8 @@
 
     <div id="otherDesignationContainer" class="form-floating col-md-2" style="display: none;">
         <input type="text" placeholder="Other Designation" id="otherTitle" name="otherDesignation"
-               class="form-control">
+               class="form-control"
+               value="{{ $personalInformation ? $personalInformation->otherDesignation : old('otherDesignation') }}">
         <label for="otherTitle">Other designation</label>
     </div>
 
@@ -67,7 +68,7 @@
         <input type="text" id="full_name" name="full_name"
                placeholder="Enter full name (as in ID/Passport)"
                class="form-control @error('full_name') is-invalid @enderror"
-               value="{{ old('full_name') }}" required>
+               value="{{ $personalInformation ? $personalInformation->full_name : old('full_name') }}" required>
         <label for="full_name">Full Name</label>
 
         @error('full_name')
@@ -78,7 +79,7 @@
     <div class="col-md-6 form-floating">
         <input type="date" id="date_of_birth" name="date_of_birth"
                class="form-control @error('date_of_birth') is-invalid @enderror"
-               value="{{ old('date_of_birth') }}">
+               value="{{ $personalInformation ? $personalInformation->date_of_birth : old('date_of_birth') }}" required>
         <label for="date_of_birth">Date of Birth</label>
 
         @error('date_of_birth')
@@ -93,7 +94,7 @@
             <option value="Male">Male</option>
             <option value="Female">Female</option>
         </select>
-        <script>document.getElementById('gender').value = "{{ old('gender') }}";</script>
+        <script>document.getElementById('gender').value = "{{ $personalInformation ? $personalInformation->gender : old('gender') }}";</script>
         <label for="gender">Gender</label>
         @error('gender')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -110,19 +111,15 @@
     @endphp
 
     <div class="col-md-6 form-floating">
-        {{--        <input type="email" placeholder="Enter email address" id="email_address" name="email_address"--}}
-        {{--               class="form-control @error('email_address') is-invalid @enderror" value="{{ old('email_address') }}">--}}
-        {{--        <label for="email_address">Email Address</label>--}}
-        {{--        @error('email_address')--}}
-        {{--        <div class="invalid-feedback">{{ $message }}</div>--}}
-        {{--        @enderror--}}
         @if ($isChecked)
             <input type="hidden" name="same_email" value="1">
         @endif
 
         <input type="email" placeholder="Enter email address" id="email_address" name="email_address"
                class="form-control @error('email_address') is-invalid @enderror"
-               value="{{ old('email_address', $userEmail) }}" @if ($isChecked) disabled @endif>
+               value="{{ $personalInformation ? $personalInformation->email_address : old('email_address', $userEmail)  }}"
+               @if ($isChecked) disabled @endif required>
+
         <label for="email_address">Email Address</label>
         @error('email_address')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -136,35 +133,36 @@
     </div>
 
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var sameEmailCheckbox = document.getElementById('same_email');
-                var emailInput = document.getElementById('email_address');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var sameEmailCheckbox = document.getElementById('same_email');
+            var emailInput = document.getElementById('email_address');
 
-                sameEmailCheckbox.addEventListener('change', function () {
-                    emailInput.disabled = this.checked;
+            sameEmailCheckbox.addEventListener('change', function () {
+                emailInput.disabled = this.checked;
 
-                    if (this.checked) {
-                        emailInput.value = "{{ $userEmail }}";
-                    } else {
-                        emailInput.value = "";
-                    }
-                });
-
-                emailInput.disabled = "{{ $isChecked }}";
-                sameEmailCheckbox.checked = "{{ $isChecked }}";
-
-                if ("{{ $isChecked }}") {
+                if (this.checked) {
                     emailInput.value = "{{ $userEmail }}";
+                } else {
+                    emailInput.value = "";
                 }
             });
-        </script>
+
+            emailInput.disabled = "{{ $isChecked }}";
+            sameEmailCheckbox.checked = "{{ $isChecked }}";
+
+            if ("{{ $isChecked }}") {
+                emailInput.value = "{{ $userEmail }}";
+            }
+        });
+    </script>
 
     <div class="col-md-6 form-floating">
         <input type="email" placeholder="Enter alternative email address" id="alternative_email_address"
                name="alternative_email_address"
                class="form-control @error('alternative_email_address') is-invalid @enderror"
-               value="{{ old('alternative_email_address') }}" required>
+               value="{{ $personalInformation ? $personalInformation->alternative_email_address : old('alternative_email_address') }}"
+               required>
         <label for="alternative_email_address">Alternative Email Address</label>
 
         @error('alternative_email_address')
@@ -433,7 +431,7 @@
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
         </select>
-        <script>document.getElementById('nationality').value = "{{ old('nationality') }}";</script>
+        <script>document.getElementById('nationality').value = "{{ $personalInformation ? $personalInformation->nationality : old('nationality') }}";        </script>
         <label for="nationality">Nationality</label>
         @error('nationality')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -663,7 +661,7 @@
                         <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
                     </select>
 
-                    <script>document.getElementById('country_code').value = "{{ old('country_code') }}";</script>
+                    <script>document.getElementById('country_code').value = "{{ $personalInformation ? $personalInformation->country_code : old('country_code') }}";</script>
 
                     <label for="country_code">Code</label>
                     @error('country_code')
@@ -676,7 +674,8 @@
                     <input type="text" placeholder="Enter mobile number" id="mobile_number"
                            name="mobile_number"
                            class="form-control col-md-3 @error('mobile_number') is-invalid @enderror"
-                           value="{{ old('mobile_number') }}" required>
+                           value="{{ $personalInformation ? $personalInformation->mobile_number : old('mobile_number') }}"
+                           required>
                     <label for="mobile_number">Mobile Number</label>
                     @error('mobile_number')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -691,7 +690,8 @@
         <input type="text" placeholder="Enter telephone number" id="telephone_number"
                name="telephone_number"
                class="form-control @error('telephone_number') is-invalid @enderror"
-               value="{{ old('telephone_number') }}" required>
+               value="{{ $personalInformation ? $personalInformation->telephone_number : old('telephone_number') }}"
+               required>
         <label for="telephone_number">Telephone Number</label>
 
         @error('telephone_number')
@@ -702,7 +702,8 @@
     <div class="form-floating col-md-12">
         <input type="text" placeholder="Enter address line 1" id="address_line_1" name="address_line_1"
                class="form-control @error('address_line_1') is-invalid @enderror"
-               value="{{ old('address_line_1') }}" required>
+               value="{{ $personalInformation ? $personalInformation->address_line_1 : old('address_line_1') }}"
+               required>
         <label for="address_line_1">Address Line</label>
 
         @error('address_line_1')
@@ -713,7 +714,8 @@
     <div class="form-floating col-md-12">
         <input type="text" placeholder="Enter address line 2" id="address_line_2" name="address_line_2"
                class="form-control @error('address_line_2') is-invalid @enderror"
-               value="{{ old('address_line_2') }}" required>
+               value="{{ $personalInformation ? $personalInformation->address_line_2 : old('address_line_2') }}"
+               required>
         <label for="address_line_2">Address Line 2</label>
 
         @error('address_line_2')
@@ -724,7 +726,7 @@
     <div class="form-floating col-md-6">
         <input type="text" placeholder="Enter city" id="city" name="city"
                class="form-control @error('city') is-invalid @enderror"
-               value="{{ old('city') }}" required>
+               value="{{ $personalInformation ? $personalInformation->city : old('city') }}" required>
         <label for="city">City</label>
 
         @error('city')
@@ -735,7 +737,7 @@
     <div class="form-floating col-md-6">
         <input type="text" placeholder="Enter state" id="state" name="state"
                class="form-control @error('state') is-invalid @enderror"
-               value="{{ old('state') }}" required>
+               value="{{ $personalInformation ? $personalInformation->state : old('state') }}" required>
         <label for="state">State</label>
 
         @error('state')
@@ -746,7 +748,7 @@
     <div class="form-floating col-md-6">
         <input type="text" placeholder="Enter postal code" id="postal_code" name="postal_code"
                class="form-control @error('postal_code') is-invalid @enderror"
-               value="{{ old('postal_code') }}" required>
+               value="{{ $personalInformation ? $personalInformation->postal_code : old('postal_code') }}" required>
         <label for="postal_code">Postal Code</label>
 
         @error('postal_code')
@@ -1019,7 +1021,7 @@
 
         </select>
 
-        <script>document.getElementById('country').value = "{{ old('country') }}";</script>
+        <script>document.getElementById('country').value = "{{ $personalInformation ? $personalInformation->country : old('country') }}";</script>
         <label for="country">Country</label>
         @error('country')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -1037,14 +1039,67 @@
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
 
-        @if(old('identity_verification_files'))
+        {{--        @if(old('identity_verification_files'))--}}
+        {{--            <div class="mt-2">--}}
+        {{--                <strong>Previously uploaded files:</strong>--}}
+        {{--                @foreach(old('identity_verification_files') as $file)--}}
+        {{--                    <div>{{ $file }}</div>--}}
+        {{--                @endforeach--}}
+        {{--            </div>--}}
+        {{--        @endif--}}
+
+{{--        @if($personalInformation)--}}
+{{--            <div class="mt-2">--}}
+{{--                <strong>Previously uploaded files:</strong>--}}
+{{--                @foreach(json_decode($personalInformation->identity_verification_files) as $file)--}}
+{{--                    <div>--}}
+{{--                        <a href="{{ asset($file) }}" target="_blank" download>{{ $file }}</a>--}}
+{{--                    </div>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        @elseif(old('identity_verification_files'))--}}
+{{--            <div class="mt-2">--}}
+{{--                <strong>Previously uploaded files:</strong>--}}
+{{--                @foreach(old('identity_verification_files') as $file)--}}
+{{--                    <div>--}}
+{{--                        <a href="{{ asset($file) }}" target="_blank" download>{{ $file }}</a>--}}
+{{--                    </div>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        @endif--}}
+
+        @if ($personalInformation)
             <div class="mt-2">
                 <strong>Previously uploaded files:</strong>
-                @foreach(old('identity_verification_files') as $file)
+                @foreach (json_decode($personalInformation->identity_verification_files) as $file)
+                    <div>
+                        <a href="{{ asset('storage/'. $file) }}" target="_blank">View File: {{ $file }}</a>
+                    </div>
+                @endforeach
+            </div>
+        @elseif (old('identity_verification_files'))
+            <div class="mt-2">
+                <strong>Previously uploaded files:</strong>
+                @foreach (old('identity_verification_files') as $file)
                     <div>{{ $file }}</div>
                 @endforeach
             </div>
         @endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 
     <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -1060,7 +1115,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to submit Section 1? Once you submit, all data entered in Section 1 will be saved and cannot be edited or viewed.
+                    Are you sure you want to submit Section 1? Once you submit, all data entered in Section 1 will be
+                    saved and cannot be edited or viewed.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

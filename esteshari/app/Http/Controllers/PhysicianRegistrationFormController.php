@@ -13,7 +13,10 @@ class PhysicianRegistrationFormController extends Controller
 {
     public function index($section = 1)
     {
-        return view('physician.physician_registration_form.physician_registration_form', compact('section'));
+        $user = Auth::user();
+        $personalInformation = $user->personalInformation()->first();
+
+        return view('physician.physician_registration_form.physician_registration_form', compact('section', 'personalInformation'));
     }
 
     public function store(Request $request)
@@ -91,9 +94,15 @@ class PhysicianRegistrationFormController extends Controller
             'identity_verification_files.*' => 'file',
         ]);
 
-        $personalInformation = new PersonalInformation();
+//        $personalInformation = new PersonalInformation();
         $user = Auth::user();
-        $personalInformation->user()->associate($user);
+        $personalInformation = $user->personalInformation;
+//        $personalInformation->user()->associate($user);
+
+        if (!$personalInformation) {
+            $personalInformation = new PersonalInformation();
+            $personalInformation->user()->associate($user);
+        }
 
         // Check if the selected title is "Other"
         if ($request->input('designation') === 'Other') {
@@ -128,12 +137,21 @@ class PhysicianRegistrationFormController extends Controller
         $personalInformation->postal_code = $request->input('postal_code');
         $personalInformation->country = $request->input('country');
 
+//        $identityVerificationFiles = [];
+//        foreach ($request->file('identity_verification_files') as $identityVerificationFile) {
+//            $insuranceFilePath = $identityVerificationFile->store('files');
+//            $identityVerificationFiles[] = $insuranceFilePath;
+//        }
+//        $personalInformation->identity_verification_files = json_encode($identityVerificationFiles);
+
         $identityVerificationFiles = [];
         foreach ($request->file('identity_verification_files') as $identityVerificationFile) {
-            $insuranceFilePath = $identityVerificationFile->store('files');
+            $insuranceFilePath = $identityVerificationFile->store('files', 'public');
             $identityVerificationFiles[] = $insuranceFilePath;
         }
         $personalInformation->identity_verification_files = json_encode($identityVerificationFiles);
+
+
 
 
         $personalInformation->save();
