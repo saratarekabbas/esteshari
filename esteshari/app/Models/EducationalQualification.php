@@ -11,6 +11,14 @@ class EducationalQualification extends Model
 
     protected $table = 'educational_qualifications';
 
+    protected $fillable = [
+        'degree_level',
+        'degree_title',
+        'institute',
+        'institute_location',
+        'year_of_graduation',
+        'medical_degree_files',
+    ];
 
     public function user()
     {

@@ -185,140 +185,153 @@ class PhysicianRegistrationFormController extends Controller
         $personalInformation->save();
     }
 
-    public function section2(Request $request)
-    {
-        // Section 2: Educational Qualifications
-        $validatedData = $request->validate([
-            // Qualification
-            'qualifications.*.degree_level' => 'required|string',
-            'qualifications.*.degree_title' => 'required|string',
-            'qualifications.*.institute' => 'required|string',
-            'qualifications.*.institute_location' => 'required|string',
-            'qualifications.*.year_of_graduation' => 'required|date',
-            'qualifications.*.medical_degree_files' => ['sometimes', 'required', 'array', 'max:10'],
-            'qualifications.*.medical_degree_files.*' => 'file',
-            // Honor
-            'qualifications.*.honors.*.award_type' => 'nullable|string',
-            'qualifications.*.honors.*.award_title' => 'nullable|string',
-            'qualifications.*.honors.*.date_of_award' => 'nullable|date',
-            'qualifications.*.honors.*.award_description' => 'nullable|string',
-        ]);
-
-        $user = Auth::user();
-
-        foreach ($request->input('qualifications') as $qualificationData) {
-            $educationalQualification = new EducationalQualification();
-            $educationalQualification->user()->associate($user);
-
-            if ($qualificationData['degree_level'] === 'Other') {
-                $educationalQualification->degree_level = $qualificationData['otherDegree'];
-            } else {
-                $educationalQualification->degree_level = $qualificationData['degree_level'];
-            }
-
-            $educationalQualification->degree_title = $qualificationData['degree_title'];
-            $educationalQualification->institute = $qualificationData['institute'];
-            $educationalQualification->institute_location = $qualificationData['institute_location'];
-            $educationalQualification->year_of_graduation = $qualificationData['year_of_graduation'];
-
-            $existingMedicalDegreeFiles = [];
-
-            if (isset($qualificationData['medical_degree_files'])) {
-                foreach ($qualificationData['medical_degree_files'] as $medicalDegreeFilesFile) {
-                    $medicalDegreeFilePath = $medicalDegreeFilesFile->store('files', 'public');
-                    $existingMedicalDegreeFiles[] = $medicalDegreeFilePath;
-                }
-            }
-
-            $educationalQualification->medical_degree_files = json_encode($existingMedicalDegreeFiles);
-
-            $educationalQualification->save();
-
-            // Save honors for the qualification
-            if (isset($qualificationData['honors'])) {
-                foreach ($qualificationData['honors'] as $honorData) {
-                    $honor = new HonorAward();
-                    $honor->educationalQualification()->associate($educationalQualification);
-                    if ($qualificationData['award_type'] === 'Other') {
-                        $educationalQualification->award_type = $honorData['otherAwardType'];
-                    } else {
-                        $educationalQualification->award_type = $honorData['award_type'];
-                    }
-                    $honor->award_title = $honorData['award_title'];
-                    $honor->date_of_award = $honorData['date_of_award'];
-                    $honor->award_description = $honorData['award_description'];
-                    $honor->save();
-                }
-            }
-        }
-    }
-
-
 //    public function section2(Request $request)
 //    {
-////Section 2: Educational Qualifications
+//        // Section 2: Educational Qualifications
 //        $validatedData = $request->validate([
-////           Qualification
-//            'degree_level' => 'required|string',
-//            'degree_title' => 'required|string',
-//            'institute' => 'required|string',
-//            'institute_location' => 'required|string',
-//            'year_of_graduation' => 'required|date',
-//            'medical_degree_files' => ['sometimes', 'required', 'array', 'max:10'],
-//            'medical_degree_files.*' => 'file',
-////           Honor
-//            'award_type' => 'nullable|string',
-//            'award_title' => 'nullable|string',
-//            'date_of_award' => 'nullable|date',
-//            'award_description' => 'nullable|string',
+//            // Qualification
+//            'qualifications.*.degree_level' => 'required|string',
+//            'qualifications.*.degree_title' => 'required|string',
+//            'qualifications.*.institute' => 'required|string',
+//            'qualifications.*.institute_location' => 'required|string',
+//            'qualifications.*.year_of_graduation' => 'required|date',
+//            'qualifications.*.medical_degree_files' => ['sometimes', 'required', 'array', 'max:10'],
+//            'qualifications.*.medical_degree_files.*' => 'file',
+//            // Honor
+//            'qualifications.*.honors.*.award_type' => 'nullable|string',
+//            'qualifications.*.honors.*.award_title' => 'nullable|string',
+//            'qualifications.*.honors.*.date_of_award' => 'nullable|date',
+//            'qualifications.*.honors.*.award_description' => 'nullable|string',
 //        ]);
 //
 //        $user = Auth::user();
-//        $educationalQualification = $user->educationalQualification;
 //
-//        if (!$educationalQualification) {
+//        foreach ($request->input('educationalQualification') as $qualificationData) {
 //            $educationalQualification = new EducationalQualification();
 //            $educationalQualification->user()->associate($user);
-//        }
 //
-//        if ($request->input('degree_level') === 'Other') {
-//            $educationalQualification->degree_level = $request->input('otherAwardType');
-//        } else {
-//            $educationalQualification->degree_level = $request->input('otherDegree');
-//        }
+//            if ($qualificationData['degree_level'] === 'Other') {
+//                $educationalQualification->degree_level = $qualificationData['otherDegree'];
+//            } else {
+//                $educationalQualification->degree_level = $qualificationData['degree_level'];
+//            }
 //
-//        $educationalQualification->degree_title = $request->input('degree_title');
-//        $educationalQualification->institute = $request->input('institute');
-//        $educationalQualification->institute_location = $request->input('institute_location');
-//        $educationalQualification->year_of_graduation = $request->input('year_of_graduation');
+//            $educationalQualification->degree_title = $qualificationData['degree_title'];
+//            $educationalQualification->institute = $qualificationData['institute'];
+//            $educationalQualification->institute_location = $qualificationData['institute_location'];
+//            $educationalQualification->year_of_graduation = $qualificationData['year_of_graduation'];
 //
+//            $existingMedicalDegreeFiles = [];
 //
-//        $existingMedicalDegreeFiles = json_decode($educationalQualification->medical_degree_files, true) ?? [];
-//        $medicalDegreeFilesFiles = $request->file('medical_degree_files');
-//
-//// Check if no existing files and no old files exist
-//        if (empty($existingMedicalDegreeFiles) && empty(old('medical_degree_files'))) {
-//            $request->validate([
-//                'medical_degree_files' => 'required',
-//            ]);
-//        }
-//
-//        if ($medicalDegreeFilesFiles) {
-//            foreach ($medicalDegreeFilesFiles as $medicalDegreeFilesFile) {
-//                $medicalDegreeFilePath = $medicalDegreeFilesFile->store('files', 'public');
-//                if (!in_array($medicalDegreeFilePath, $existingMedicalDegreeFiles)) {
+//            if (isset($qualificationData['medical_degree_files'])) {
+//                foreach ($qualificationData['medical_degree_files'] as $medicalDegreeFilesFile) {
+//                    $medicalDegreeFilePath = $medicalDegreeFilesFile->store('files', 'public');
 //                    $existingMedicalDegreeFiles[] = $medicalDegreeFilePath;
 //                }
 //            }
-//        } else {
-//            $existingMedicalDegreeFiles = $existingMedicalDegreeFiles ?? [];
+//
+//            $educationalQualification->medical_degree_files = json_encode($existingMedicalDegreeFiles);
+//
+//            $educationalQualification->save();
+//
+//            // Save honors for the qualification
+//            if (isset($qualificationData['honors'])) {
+//                foreach ($qualificationData['honors'] as $honorData) {
+//                    $honor = new HonorAward();
+//                    $honor->educationalQualification()->associate($educationalQualification);
+//                    if ($qualificationData['award_type'] === 'Other') {
+//                        $educationalQualification->award_type = $honorData['otherAwardType'];
+//                    } else {
+//                        $educationalQualification->award_type = $honorData['award_type'];
+//                    }
+//                    $honor->award_title = $honorData['award_title'];
+//                    $honor->date_of_award = $honorData['date_of_award'];
+//                    $honor->award_description = $honorData['award_description'];
+//                    $honor->save();
+//                }
+//            }
 //        }
-//
-//        $educationalQualification->medical_degree_files = json_encode($existingMedicalDegreeFiles);
-//
-//
-//        $educationalQualification->save();
 //    }
+
+
+    public function section2(Request $request)
+    {
+//Section 2: Educational Qualifications
+        $validatedData = $request->validate([
+//           Qualification
+            'degree_level' => 'required|string',
+            'degree_title' => 'required|string',
+            'institute' => 'required|string',
+            'institute_location' => 'required|string',
+            'year_of_graduation' => 'required|date',
+            'medical_degree_files' => ['sometimes', 'required', 'array', 'max:10'],
+            'medical_degree_files.*' => 'file',
+//           Honor
+            'award_type' => 'nullable|string',
+            'award_title' => 'nullable|string',
+            'date_of_award' => 'nullable|date',
+            'award_description' => 'nullable|string',
+        ]);
+
+        $user = Auth::user();
+        $educationalQualification = $user->educationalQualification()->firstOrNew();
+
+        if (!$educationalQualification) {
+            $educationalQualification = new EducationalQualification();
+            $educationalQualification->user()->associate($user);
+        }
+
+        if ($request->input('degree_level') === 'Other') {
+            $educationalQualification->degree_level = $request->input('otherDegreeType');
+        } else {
+            $educationalQualification->degree_level = $request->input('degree_level');
+        }
+
+        $educationalQualification->degree_title = $request->input('degree_title');
+        $educationalQualification->institute = $request->input('institute');
+        $educationalQualification->institute_location = $request->input('institute_location');
+        $educationalQualification->year_of_graduation = $request->input('year_of_graduation');
+
+
+        $existingMedicalDegreeFiles = json_decode($educationalQualification->medical_degree_files, true) ?? [];
+        $medicalDegreeFiles = $request->file('medical_degree_files');
+
+        // Check if no existing files and no old files exist
+        if (empty($existingMedicalDegreeFiles) && empty(old('medical_degree_files'))) {
+            $request->validate([
+                'medical_degree_files' => 'required',
+            ]);
+        }
+
+        if ($medicalDegreeFiles) {
+            foreach ($medicalDegreeFiles as $medicalDegreeFile) {
+                $medicalDegreeFilePath = $medicalDegreeFile->store('files', 'public');
+                if (!in_array($medicalDegreeFilePath, $existingMedicalDegreeFiles)) {
+                    $existingMedicalDegreeFiles[] = $medicalDegreeFilePath;
+                }
+            }
+        } else {
+            $existingMedicalDegreeFiles = $existingMedicalDegreeFiles ?? [];
+        }
+
+        $educationalQualification->medical_degree_files = json_encode($existingMedicalDegreeFiles);
+
+// Handle awards data
+        $awardType = $request->input('award_type');
+        if ($awardType) {
+            $award = new HonorAward();
+            $award->award_type = $awardType;
+            $award->award_title = $request->input('award_title');
+            $award->date_of_award = $request->input('date_of_award');
+            $award->award_description = $request->input('award_description');
+            $award->save();
+
+            $educationalQualification->award_id = $award->id;
+        }
+
+        $educationalQualification->save();
+
+    }
 
     public function section3(Request $request)
     {
