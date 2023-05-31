@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth', 'role:patient']], function () {
 
 // Routes for the physician process
 Route::middleware(['auth', 'role:physician', 'physician.status'])->group(function () {
-    Route::get('/physician/registration/{section?}', [PhysicianRegistrationFormController::class, 'index'])->name('physician.registration.create'); //the whole page; which displays section 1 by default
+    Route::get('/physician/registration/{section?}', [PhysicianRegistrationFormController::class, 'index'])->name('physician.registration.create');
     Route::post('/physician/registration', [PhysicianRegistrationFormController::class, 'store'])->name('physician.registration.store');
 
 
