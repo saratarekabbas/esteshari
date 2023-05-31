@@ -212,8 +212,138 @@
             <h5 class="form-subtitle">Certification ${certificationCount}:</h5>
         </div>
 
-            </ol>
-            `;
+<div class="col-md-3 form-floating">
+        <select id="certification_type" name="certification_type"
+                class="form-select @error('certification_type') is-invalid @enderror"
+                required>
+            <option value="">Select Certification Type</option>
+            <option value="Specialty Board Certification">Specialty Board Certification</option>
+            <option value="Sub-specialty Board Certification">Sub-specialty Board Certification</option>
+            <option value="Advanced Practice Certification">Advanced Practice Certification</option>
+            <option value="Surgical Board Certification">Surgical Board Certification</option>
+            <option value="Primary Care Board Certification">Primary Care Board Certification</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="title">Certification Type</label>
+        @error('certification_type')
+                <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+                </div>
+
+                <div id="otherCertificationContainer" class="form-floating col-md-3" style="display: none;">
+                    <input type="text" placeholder="Other Certification Type" id="otherCertification" name="otherCertification"
+                           class="form-control
+@error('certification_type') is-invalid @enderror"
+               value="{{ $boardCertification ? $boardCertification->otherCertification : old('otherCertification') }}">
+        <label for="otherCertification">Other Certification Type</label>
+        @error('certification_type')
+                <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+                </div>
+
+
+                <div class="col-md-6 form-floating">
+                    <input type="text" id="certification_title" name="certification_title"
+                           placeholder="Enter Certification Title"
+                           class="form-control @error('certification_title') is-invalid @enderror"
+               value="{{ $boardCertification ? $boardCertification->certification_title : old('certification_title') }}"
+               required>
+        <label for="degree_title">Certification Title</label>
+        @error('certification_title')
+                <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+                </div>
+
+                <div class="col-md-4 form-floating">
+                    <input type="text" id="certification_issuing_board" name="certification_issuing_board"
+                           placeholder="Enter Issuing Board Name"
+                           class="form-control @error('certification_issuing_board') is-invalid @enderror"
+               value="{{ $boardCertification ? $boardCertification->certification_issuing_board : old('certification_issuing_board') }}"
+               required>
+        <label for="degree_title">Issuing Board</label>
+        @error('certification_issuing_board')
+                <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+                </div>
+
+                <div class="col-md-4 form-floating">
+                    <input type="date" id="certification_issue_date" name="certification_issue_date"
+                           class="form-control @error('certification_issue_date') is-invalid @enderror"
+               value="{{ $boardCertification ? $boardCertification->certification_issue_date : old('certification_issue_date') }}"
+               required>
+
+        <label for="certification_issue_date">Issue Date</label>
+        @error('certification_issue_date')
+                <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+                </div>
+
+                <div class="col-md-4 form-floating">
+                    <input type="date" id="certification_expiry_date" name="certification_expiry_date"
+                           class="form-control @error('certification_expiry_date') is-invalid @enderror"
+               value="{{ $boardCertification ? $boardCertification->certification_expiry_date : old('certification_expiry_date') }}"
+        >
+
+        <label for="certification_expiry_date">Expiration Date</label>
+        @error('certification_expiry_date')
+                <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+                </div>
+
+                <div class="col-md-4 form-floating">
+                    <input type="text" id="certification_credential_id" name="certification_credential_id"
+                           placeholder="Enter Credential ID"
+                           class="form-control @error('certification_credential_id') is-invalid @enderror"
+               value="{{ $boardCertification ? $boardCertification->certification_credential_id : old('certification_credential_id') }}"
+               >
+        <label for="certification_credential_id">Credential ID</label>
+        @error('certification_credential_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+                </div>
+
+                <div class="col-md-8 form-floating">
+                    <input type="text" id="certification_credential_url" name="certification_credential_url"
+                           placeholder="Enter Credential URL"
+                           class="form-control @error('certification_credential_url') is-invalid @enderror"
+               value="{{ $boardCertification ? $boardCertification->certification_credential_url : old('certification_credential_url') }}"
+        >
+        <label for="certification_credential_url">Credential URL</label>
+        @error('certification_credential_url')
+                <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="certification_files" class="form-label">Certification Files:</label>
+                    <input class="form-control @error('certification_files') is-invalid @enderror" type="file"
+               name="certification_files[]"
+               id="certification_files" multiple/>
+
+        @error('certification_files')
+                <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+
+                @if ($boardCertification)
+                <div class="mt-2">
+                    <strong>Previously uploaded files:</strong>
+@foreach (json_decode($boardCertification->certification_files) as $file)
+                <div>
+                    <a href="{{ asset('storage/'. $file) }}" target="_blank">View File: {{ $file }}</a>
+                    </div>
+                @endforeach
+                </div>
+@elseif (old('certification_files'))
+                <div class="mt-2">
+                    <strong>Previously uploaded files:</strong>
+@foreach (old('certification_files') as $file)
+                <div>{{ $file }}</div>
+                @endforeach
+                </div>
+@endif
+                </div>
+`;
 
             const buttonDiv = addCertificationBtn.parentNode;
             buttonDiv.insertAdjacentHTML('beforebegin', newCertificationSection);

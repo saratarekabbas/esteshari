@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BoardCertification;
 use App\Models\EducationalQualification;
 use App\Models\HonorAward;
 use App\Models\PersonalInformation;
@@ -271,7 +272,7 @@ class PhysicianRegistrationFormController extends Controller
         }
 
         if ($request->input('degree_level') === 'Other') {
-            $educationalQualification->degree_level = $request->input('otherDegreeType');
+            $educationalQualification->degree_level = $request->input('otherDegree');
         } else {
             $educationalQualification->degree_level = $request->input('degree_level');
         }
@@ -384,7 +385,60 @@ class PhysicianRegistrationFormController extends Controller
 
     public function section4(Request $request)
     {
+//        Section 4: Board Certification
+        $validatedData = $request->validate([
+            'certification_type' => 'required|string',
+            'certification_title' => 'required|string',
+            'certification_issuing_board' => 'required|string',
+            'certification_issue_date' => 'required|date',
+            'certification_expiry_date' => 'nullable|date|after:certification_issue_date',
+            'certification_credential_id' => 'nullable|string',
+            'certification_credential_url' => 'nullable|string|url',
+            'certification_files' => 'array|max:10',
+            'certification_files.*' => 'file',
+        ]);
 
+        $user = Auth::user();
+
+        $boardCertification = $user->boardCertification;
+
+        if (!$boardCertification) {
+            $boardCertification = new BoardCertification();
+            $boardCertification->user()->associate($user);
+        }
+
+        if ($request->input('degree_level') === 'Other') {
+            $boardCertification->certification_type = $request->input('otherCertification');
+        } else {
+            $boardCertification->certification_type = $request->input('certification_type');
+        }
+        $boardCertification->certification_title = $request->input('certification_title');
+        $boardCertification->certification_issuing_board = $request->input('certification_issuing_board');
+        $boardCertification->certification_issue_date = $request->input('certification_issue_date');
+        $boardCertification->certification_expiry_date = $request->input('certification_expiry_date');
+        $boardCertification->certification_credential_id = $request->input('certification_credential_id');
+        $boardCertification->certification_credential_url = $request->input('certification_credential_url');
+
+
+        $existingBoardCertificationFiles = json_decode($boardCertification->certification_files, true) ?? [];
+        $boardCertificationFiles = $request->file('certification_files');
+
+// Check if no existing files and no old files exist
+
+        if ($boardCertificationFiles) {
+            foreach ($boardCertificationFiles as $boardCertificationFile) {
+                $boardCertificationFilePath = $boardCertificationFile->store('files', 'public');
+                if (!in_array($boardCertificationFilePath, $existingBoardCertificationFiles)) {
+                    $existingBoardCertificationFiles[] = $boardCertificationFilePath;
+                }
+            }
+        } else {
+            $existingBoardCertificationFiles = $existingBoardCertificationFiles ?? [];
+        }
+
+        $boardCertification->certification_files = json_encode($existingBoardCertificationFiles);
+
+        $boardCertification->save();
     }
 
     public function section5(Request $request)

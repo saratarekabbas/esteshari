@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->date('certification_expiry_date')->nullable();
             $table->string('certification_credential_id')->nullable();
             $table->string('certification_credential_url')->nullable();
-            $table->json('certification_credential_url')->nullable();
             $table->json('certification_files')->nullable();
             $table->timestamps();
         });
