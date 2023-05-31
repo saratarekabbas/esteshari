@@ -16,4 +16,9 @@ class EducationalQualification extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function honorAwards()
+    {
+        return $this->hasMany(HonorAward::class, 'award_id');
+    }
 }

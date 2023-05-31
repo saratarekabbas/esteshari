@@ -11,18 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('educational_qualifications', function (Blueprint $table) {
+        Schema::create('honors_awards', function (Blueprint $table) {
             $table->id();
-            $table->string('degree_level');
-            $table->string('degree_title');
-            $table->string('institute');
-            $table->string('institute_location');
-            $table->date('year_of_graduation');
-            $table->json('medical_degree_files');
-
+          //            AWARDS
+            $table->string('award_type');
+            $table->string('award_title');
+            $table->date('date_of_award');
+            $table->text('award_description');
             $table->timestamps();
-
-
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('educational_qualifications');
+        Schema::dropIfExists('honors_awards');
     }
 };

@@ -61,7 +61,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function educationalQualification() //section2
     {
-        return $this->hasOne(EducationalQualification::class, 'user_id');
+        return $this->hasMany(EducationalQualification::class, 'user_id');
     }
 
     public function workExperience() //section3

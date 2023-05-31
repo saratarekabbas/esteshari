@@ -43,7 +43,7 @@
 
     <div id="otherDesignationContainer" class="form-floating col-md-2" style="display: none;">
         <input type="text" placeholder="Other Designation" id="otherTitle" name="otherDesignation"
-               class="form-control"
+               class="form-control  @error('otherDesignation') is-invalid @enderror"
                value="{{ $personalInformation ? $personalInformation->otherDesignation : old('otherDesignation') }}">
         <label for="otherTitle">Other designation</label>
     </div>
