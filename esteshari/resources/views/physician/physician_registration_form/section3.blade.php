@@ -9,6 +9,7 @@
     </div>
 
     <h4 class="form-subtitle">Section 3: Work Experience</h4>
+    <hr class="hr hr-blurry"/>
 
     <div class="col-md-12">
         <h5 class="form-subtitle">Experience 1:</h5>
@@ -42,18 +43,18 @@
         <select id="employment_type" name="employment_type"
                 class="form-select @error('employment_type') is-invalid @enderror" required>
             <option value="">Select Employment Type</option>
-            <option value="Afghanistan">Full-time</option>
-            <option value="Aland Islands">Part-time</option>
-            <option value="Albania">Self-employed</option>
-            <option value="Zambia">Fellowships</option>
-            <option value="Zambia">Residency</option>
-            <option value="Zambia">Specialized Training</option>
-            <option value="Zambia">Research Experience</option>
-            <option value="Zambia">Freelance</option>
-            <option value="Zimbabwe">Contract</option>
-            <option value="Zimbabwe">Internship</option>
-            <option value="Zimbabwe">Apprenticeship</option>
-            <option value="Zimbabwe">Seasonal</option>
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+            <option value="Self-employed">Self-employed</option>
+            <option value="Fellowships">Fellowships</option>
+            <option value="Residency">Residency</option>
+            <option value="Specialized Training">Specialized Training</option>
+            <option value="Research Experience">Research Experience</option>
+            <option value="Freelance">Freelance</option>
+            <option value="Contract">Contract</option>
+            <option value="Internship">Internship</option>
+            <option value="Apprenticeship">Apprenticeship</option>
+            <option value="Seasonal">Seasonal</option>
         </select>
         <label for="employment_type">Employment Type</label>
         @error('employment_type')
@@ -83,25 +84,28 @@
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="same_role" name="same_role" onchange="handleCheckboxChange()">
-            <label class="form-check-label" for="same_role">I am currently working in this role</label>
-            <input type="hidden" id="current_role" name="current_role" value="{{ $workExperience && $workExperience->current_role ? 'true' : 'false' }}">
+            <input type="checkbox" class="form-check-input" id="current_role" name="current_role"
+                   onchange="handleCheckboxChange()">
+            <label class="form-check-label" for="current_role">I am currently working in this role</label>
+            <input type="hidden" id="current_role" name="current_role"
+                   value="{{ $workExperience && $workExperience->current_role ? 1 : 0 }}">
+
         </div>
     </div>
 
     <script>
         function handleCheckboxChange() {
-            var checkbox = document.getElementById('same_role');
+            var checkbox = document.getElementById('current_role');
             var endDateInput = document.getElementById('end_date_of_employment');
             var currentRoleInput = document.getElementById('current_role');
 
             if (checkbox.checked) {
                 endDateInput.value = ''
                 endDateInput.disabled = true;
-                currentRoleInput.value = 'true';
+                currentRoleInput.value = 1;
             } else {
                 endDateInput.disabled = false;
-                currentRoleInput.value = 'false';
+                currentRoleInput.value = 0;
             }
         }
     </script>
@@ -393,9 +397,9 @@
         <select id="location_type" name="location_type"
                 class="form-select @error('location_type') is-invalid @enderror" required>
             <option value="">Select Job Location</option>
-            <option value="Afghanistan">On-site</option>
-            <option value="Aland Islands">Hybrid</option>
-            <option value="Albania">Remote</option>
+            <option value="On-site">On-site</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Remote">Remote</option>
         </select>
         <label for="institute_location">Location Type</label>
         @error('location_type')
@@ -416,15 +420,14 @@
     </div>
 
     <div class="form-group">
-        <label for="job_experience_files" class="form-label">Job Experience Related Files:</label>
+        <label for="job_experience_files" class="form-label">Job Experience Files:</label>
         <input class="form-control @error('job_experience_files') is-invalid @enderror" type="file"
-               name="medical_degree_files[]"
+               name="job_experience_files[]"
                id="job_experience_files" multiple/>
 
         @error('job_experience_files')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
-
         @if ($workExperience)
             <div class="mt-2">
                 <strong>Previously uploaded files:</strong>
@@ -468,3 +471,13 @@
         </div>
     </div>
 </form>
+
+<script>
+    // -------------------------------------------------
+    // START OF old value management for lists
+    document.getElementById('employment_type').value = "{{ $workExperience ? $workExperience->employment_type : old('employment_type') }}";
+    document.getElementById('job_location_country').value = "{{ $workExperience ? $workExperience->job_location_country : old('job_location_country') }}";
+    document.getElementById('location_type').value = "{{ $workExperience ? $workExperience->location_type : old('location_type') }}";
+    // END OF old value management for lists
+
+</script>

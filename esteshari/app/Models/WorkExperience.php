@@ -11,6 +11,19 @@ class WorkExperience extends Model
 
     protected $table = 'work_experiences';
 
+    protected $fillable = [
+        'job_title',
+        'employer_name',
+        'employment_type',
+        'start_date_of_employment',
+        'end_date_of_employment',
+        'current_role',
+        'job_location_city',
+        'job_location_country',
+        'location_type',
+        'job_description',
+        'job_experience_files',
+    ];
 
     public function user()
     {

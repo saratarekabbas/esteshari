@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('employment_type');
             $table->date('start_date_of_employment');
             $table->date('end_date_of_employment')->nullable();
-            $table->boolean('current_role');
+            $table->tinyInteger('current_role')->default(0);
             $table->string('job_location_city');
             $table->string('job_location_country');
             $table->string('location_type');

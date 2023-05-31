@@ -6,6 +6,7 @@ use App\Models\EducationalQualification;
 use App\Models\HonorAward;
 use App\Models\PersonalInformation;
 use App\Models\PhysicianRegistration;
+use App\Models\WorkExperience;
 use App\Rules\MinimumAge;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,10 +100,8 @@ class PhysicianRegistrationFormController extends Controller
             'identity_verification_files.*' => 'file',
         ]);
 
-//        $personalInformation = new PersonalInformation();
         $user = Auth::user();
         $personalInformation = $user->personalInformation;
-//        $personalInformation->user()->associate($user);
 
         if (!$personalInformation) {
             $personalInformation = new PersonalInformation();
@@ -141,23 +140,6 @@ class PhysicianRegistrationFormController extends Controller
         $personalInformation->state = $request->input('state');
         $personalInformation->postal_code = $request->input('postal_code');
         $personalInformation->country = $request->input('country');
-
-
-//        $existingFiles = json_decode($personalInformation->identity_verification_files, true) ?? [];
-//        $identityVerificationFiles = $request->file('identity_verification_files');
-//
-//        if ($identityVerificationFiles) {
-//            foreach ($identityVerificationFiles as $identityVerificationFile) {
-//                $identityVerificationFilePath = $identityVerificationFile->store('files', 'public');
-//                if (!in_array($identityVerificationFilePath, $existingFiles)) {
-//                    $existingFiles[] = $identityVerificationFilePath;
-//                }
-//            }
-//        } else {
-//            $existingFiles = $existingFiles ?? [];
-//        }
-//
-//        $personalInformation->identity_verification_files = json_encode($existingFiles);
 
         $existingFiles = json_decode($personalInformation->identity_verification_files, true) ?? [];
         $identityVerificationFiles = $request->file('identity_verification_files');
@@ -336,8 +318,62 @@ class PhysicianRegistrationFormController extends Controller
 
     public function section3(Request $request)
     {
+//        Section 3: Work Experience
+        $validatedData = $request->validate([
+            'job_title' => 'required|string',
+            'employer_name' => 'required|string',
+            'employment_type' => 'required|string',
+            'start_date_of_employment' => 'required|date',
+            'end_date_of_employment' => 'nullable|date|after:start_date_of_employment',
+            'current_role' => 'required|int',
+            'job_location_city' => 'required|string',
+            'job_location_country' => 'required|string',
+            'location_type' => 'required|string',
+            'job_description' => 'required|string',
+            'job_experience_files' => 'array|max:10',
+            'job_experience_files.*' => 'file',
+        ]);
+        
+        $user = Auth::user();
+
+        $workExperience = $user->workExperience;
+
+        if (!$workExperience) {
+            $workExperience = new WorkExperience();
+            $workExperience->user()->associate($user);
+        }
+
+        $workExperience->job_title = $request->input('job_title');
+        $workExperience->employer_name = $request->input('employer_name');
+        $workExperience->employment_type = $request->input('employment_type');
+        $workExperience->start_date_of_employment = $request->input('start_date_of_employment');
+        $workExperience->end_date_of_employment = $request->input('end_date_of_employment');
+        $workExperience->current_role = $request->input('current_role') ? 1 : 0;
+        $workExperience->job_location_city = $request->input('job_location_city');
+        $workExperience->job_location_country = $request->input('job_location_country');
+        $workExperience->location_type = $request->input('location_type');
+        $workExperience->job_description = $request->input('job_description');
 
 
+        $existingJobExperienceFiles = json_decode($workExperience->job_experience_files, true) ?? [];
+        $jobExperienceFiles = $request->file('job_experience_files');
+
+// Check if no existing files and no old files exist
+
+        if ($jobExperienceFiles) {
+            foreach ($jobExperienceFiles as $jobExperienceFile) {
+                $jobExperienceFilePath = $jobExperienceFile->store('files', 'public');
+                if (!in_array($jobExperienceFilePath, $existingJobExperienceFiles)) {
+                    $existingJobExperienceFiles[] = $jobExperienceFilePath;
+                }
+            }
+        } else {
+            $existingJobExperienceFiles = $existingJobExperienceFiles ?? [];
+        }
+
+        $workExperience->job_experience_files = json_encode($existingJobExperienceFiles);
+
+        $workExperience->save();
     }
 
     public function section4(Request $request)
