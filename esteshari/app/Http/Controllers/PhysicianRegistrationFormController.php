@@ -20,8 +20,14 @@ class PhysicianRegistrationFormController extends Controller
         $personalInformation = $user->personalInformation()->first();
         $educationalQualification = $user->educationalQualification()->first();
         $workExperience = $user->workExperience()->first();
+        $boardCertification = $user->boardCertification()->first();
+        $professionalRegistration = $user->professionalRegistration()->first();
+        $physicianReference = $user->physicianReference()->first();
+        $langaugeQualification = $user->langaugeQualification()->first();
+        $insurance = $user->insurance()->first();
 
-        return view('physician.physician_registration_form.physician_registration_form', compact('section', 'personalInformation', 'educationalQualification', 'workExperience'));
+        return view('physician.physician_registration_form.physician_registration_form', compact('section', 'personalInformation',
+            'educationalQualification', 'workExperience', 'boardCertification', 'professionalRegistration', 'physicianReference', 'langaugeQualification', 'insurance'));
     }
 
 
@@ -329,7 +335,7 @@ class PhysicianRegistrationFormController extends Controller
             'job_location_city' => 'required|string',
             'job_location_country' => 'required|string',
             'location_type' => 'required|string',
-            'job_description' => 'required|string',
+            'job_description' => 'nullable|string',
             'job_experience_files' => 'array|max:10',
             'job_experience_files.*' => 'file',
         ]);
