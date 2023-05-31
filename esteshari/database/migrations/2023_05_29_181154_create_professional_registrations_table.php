@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('professional_registrations', function (Blueprint $table) {
             $table->id();
+            $table->string('registration_type');
+            $table->string('registration_title');
+            $table->string('registration_number');
+            $table->date('registration_issue_date');
+            $table->date('registration_expiry_date');
+            $table->json('registration_files')->nullable();
             $table->timestamps();
         });
     }

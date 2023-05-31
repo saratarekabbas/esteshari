@@ -29,7 +29,7 @@
             <option value="Other">Other</option>
         </select>
 
-        <label for="title">Certification Type</label>
+        <label for="certification_type">Certification Type</label>
         @error('certification_type')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
