@@ -18,8 +18,9 @@ class PhysicianRegistrationFormController extends Controller
         $user = Auth::user();
         $personalInformation = $user->personalInformation()->first();
         $educationalQualification = $user->educationalQualification()->first();
+        $workExperience = $user->workExperience()->first();
 
-        return view('physician.physician_registration_form.physician_registration_form', compact('section', 'personalInformation', 'educationalQualification'));
+        return view('physician.physician_registration_form.physician_registration_form', compact('section', 'personalInformation', 'educationalQualification', 'workExperience'));
     }
 
 
@@ -335,6 +336,7 @@ class PhysicianRegistrationFormController extends Controller
 
     public function section3(Request $request)
     {
+
 
     }
 
