@@ -333,7 +333,7 @@ class PhysicianRegistrationFormController extends Controller
             'job_experience_files' => 'array|max:10',
             'job_experience_files.*' => 'file',
         ]);
-        
+
         $user = Auth::user();
 
         $workExperience = $user->workExperience;
