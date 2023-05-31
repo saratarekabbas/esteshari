@@ -7,6 +7,7 @@ use App\Models\EducationalQualification;
 use App\Models\HonorAward;
 use App\Models\PersonalInformation;
 use App\Models\PhysicianRegistration;
+use App\Models\ProfessionalRegistration;
 use App\Models\WorkExperience;
 use App\Rules\MinimumAge;
 use Illuminate\Http\Request;
@@ -443,7 +444,54 @@ class PhysicianRegistrationFormController extends Controller
 
     public function section5(Request $request)
     {
+//        Section 4: Professional Registration
+        $validatedData = $request->validate([
+            'registration_type' => 'required|string',
+            'registration_title' => 'required|string',
+            'registration_number' => 'required|string',
+            'registration_issue_date' => 'required|date',
+            'registration_expiry_date' => 'date|after:registration_issue_date',
+            'registration_files' => 'array|max:10',
+            'registration_files.*' => 'file',
+        ]);
 
+        $user = Auth::user();
+
+        $professionalRegistration = $user->professionalRegistration;
+
+        if (!$professionalRegistration) {
+            $professionalRegistration = new ProfessionalRegistration();
+            $professionalRegistration->user()->associate($user);
+        }
+
+        if ($request->input('registration_type') === 'Other') {
+            $professionalRegistration->registration_type = $request->input('otherRegistration');
+        } else {
+            $professionalRegistration->registration_type = $request->input('registration_type');
+        }
+        $professionalRegistration->registration_title = $request->input('registration_title');
+        $professionalRegistration->registration_number = $request->input('registration_number');
+        $professionalRegistration->registration_issue_date = $request->input('registration_issue_date');
+        $professionalRegistration->registration_expiry_date = $request->input('registration_expiry_date');
+
+
+        $existingRegistrationFiles = json_decode($professionalRegistration->registration_files, true) ?? [];
+        $registrationFiles = $request->file('registration_files');
+
+        if ($registrationFiles) {
+            foreach ($registrationFiles as $registrationFile) {
+                $registrationFilePath = $registrationFile->store('files', 'public');
+                if (!in_array($registrationFilePath, $existingRegistrationFiles)) {
+                    $existingRegistrationFiles[] = $registrationFilePath;
+                }
+            }
+        } else {
+            $existingRegistrationFiles = $existingRegistrationFiles ?? [];
+        }
+
+        $professionalRegistration->registration_files = json_encode($existingRegistrationFiles);
+
+        $professionalRegistration->save();
     }
 
     public function section6(Request $request)
