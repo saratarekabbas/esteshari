@@ -1038,37 +1038,6 @@
         @error('identity_verification_files')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
-
-        {{--        @if(old('identity_verification_files'))--}}
-        {{--            <div class="mt-2">--}}
-        {{--                <strong>Previously uploaded files:</strong>--}}
-        {{--                @foreach(old('identity_verification_files') as $file)--}}
-        {{--                    <div>{{ $file }}</div>--}}
-        {{--                @endforeach--}}
-        {{--            </div>--}}
-        {{--        @endif--}}
-
-{{--        @if($personalInformation)--}}
-{{--            <div class="mt-2">--}}
-{{--                <strong>Previously uploaded files:</strong>--}}
-{{--                @foreach(json_decode($personalInformation->identity_verification_files) as $file)--}}
-{{--                    <div>--}}
-{{--                        <a href="{{ asset($file) }}" target="_blank" download>{{ $file }}</a>--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
-{{--            </div>--}}
-{{--        @elseif(old('identity_verification_files'))--}}
-{{--            <div class="mt-2">--}}
-{{--                <strong>Previously uploaded files:</strong>--}}
-{{--                @foreach(old('identity_verification_files') as $file)--}}
-{{--                    <div>--}}
-{{--                        <a href="{{ asset($file) }}" target="_blank" download>{{ $file }}</a>--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
-{{--            </div>--}}
-{{--        @endif--}}
-
-
         @if ($personalInformation)
             <div class="mt-2">
                 <strong>Previously uploaded files:</strong>

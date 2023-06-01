@@ -15,6 +15,10 @@ use App\Rules\MinimumAge;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/*
+ * This controller is for physicians. It is to manage the Physician Registration Form Display to the physician with its different
+ * sections, and to also save the data into the database.
+ */
 
 class PhysicianRegistrationFormController extends Controller
 {

@@ -6,6 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+        integrity="sha512-FcdSL2q1UZyfJxwQ1oFYZrYpA/f+Xv32RD34VhFGWjt5X4C0agC2HvlB+3IUtWzQsByc9V02AZXUbc3KAVv95g=="
+        crossorigin="anonymous"
+    />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
@@ -24,8 +30,8 @@
             <li class="dropdown">
                 <button href="#">Physician Registration Applications</button>
                 <div class="dropdown-content">
-                    <a href="#">View Pending Requests</a>
-                    <a href="#">View All Physician Registration Applications</a>
+                    <a href="{{ route('administrator.registration.index')}}">View Pending Requests</a>
+                    <a href="{{ route('administrator.registration.indexAll')}}">View All Physician Registration Applications</a>
                 </div>
             </li>
             <li class="dropdown">
@@ -75,5 +81,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"
+    integrity="sha512-jJrECcYrQpPcAXvl+92wCAjfqZpEsV/mK2+FcP8w6Q6XK6OYt3GpBd8UEG8dFtsXQZNL+02bGm8VwKwYVt0FbA=="
+    crossorigin="anonymous"
+></script>
 </body>
 </html>

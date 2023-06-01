@@ -3,6 +3,7 @@
 use App\Http\Controllers\General\GeneralController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\PhysicianRegistrationApplicationsManagementController;
 use App\Http\Controllers\PhysicianRegistrationFormController;
 use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Auth;
@@ -39,9 +40,13 @@ Route::get('/callback/{service}', [SocialController::class, 'callback']);
 //});
 
 
-//MIDDLEWARE ROUTES
+
 // Routes for the system admin
 Route::group(['middleware' => ['auth', 'role:system_admin']], function () {
+    Route::get('/administrator/physician_pending_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'index'])->name('administrator.registration.index'); //the whole page; which displays section 1 by default
+    Route::post('/administrator/physician_pending_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'respond'])->name('administrator.registration.respond'); //the whole page; which displays section 1 by default
+    Route::get('/administrator/all_physician_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'indexAll'])->name('administrator.registration.indexAll');
+
     Route::get('/admin/dashboard', function () {
         return view('administrator.dashboard');
     })->name('admin.dashboard');
@@ -58,8 +63,6 @@ Route::group(['middleware' => ['auth', 'role:patient']], function () {
 Route::middleware(['auth', 'role:physician', 'physician.status'])->group(function () {
     Route::get('/physician/registration/{section?}', [PhysicianRegistrationFormController::class, 'index'])->name('physician.registration.create'); //the whole page; which displays section 1 by default
     Route::post('/physician/registration', [PhysicianRegistrationFormController::class, 'store'])->name('physician.registration.store');
-
-
     Route::get('/physician/pending', function () {
         return view('physician.pending');
     })->name('physician.pending');
