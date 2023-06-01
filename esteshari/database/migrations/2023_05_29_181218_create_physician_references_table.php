@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('physician_references', function (Blueprint $table) {
             $table->id();
+            $table->string('reference_title');
+            $table->string('reference_full_name');
+            $table->string('reference_relationship');
+            $table->string('reference_email_address');
+            $table->string('reference_email_address');
+            $table->string('reference_email_address');
+            $table->integer('country_code');
+            $table->bigInteger('mobile_number');
             $table->timestamps();
         });
     }
