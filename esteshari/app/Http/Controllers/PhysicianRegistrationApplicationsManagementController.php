@@ -48,15 +48,25 @@ class PhysicianRegistrationApplicationsManagementController extends Controller
 
     public function respond(Request $request)
     {
-//        Section 1 : Personal Information
-        $validatedData = $request->validate([
-            'rejection_reason' => 'nullable|string',
-            'response' => 'required|int'
-        ]);
+        $physicianId = $request->input('id');
+        $action = $request->input('action');
 
-//        Send email
+        $physician = User::find($physicianId);
 
+        if ($physician) {
+            if ($action === 'approve') {
+                $physician->status = 'approved';
+            } elseif ($action === 'reject') {
+                $physician->status = 'denied';
+            }
 
-//        $personalInformation->save();
+            $physician->save();
+
+            // Redirect or return a response
+            return redirect()->back()->with('success', 'Physician status updated successfully.');
+        }
+
+        // Redirect or return a response in case of failure
+        return redirect()->back()->with('error', 'Physician not found.');
     }
 }

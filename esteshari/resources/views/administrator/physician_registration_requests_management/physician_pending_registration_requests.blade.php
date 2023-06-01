@@ -1,6 +1,12 @@
 @extends('layouts.admin_layout')
 
 @section('content')
+    @if (Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+    @endif
+
     <h4 class="form-subtitle">All Pending Physician Registration Requests</h4>
     <table class="table align-middle mb-0 bg-white">
         <thead class="bg-light">
@@ -38,18 +44,30 @@
                         | {{ $physician->personalInformation->email_address }}</p>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-link btn-sm btn-rounded">
+                    <button type="button" class="btn btn-link btn-sm">
                         View
                     </button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-link btn-sm btn-rounded">
-                        Approve
-                    </button>
-                    <button type="button" class="btn btn-link btn-sm btn-rounded">
-                        Reject
-                    </button>
+                    <div class="d-flex">
+
+                        <form action="{{ route('administrator.registration.respond') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $physician->id }}">
+                            <button type="submit" name="action" value="approve" class="btn btn-primary btn-sm me-2">
+                                Approve
+                            </button>
+                        </form>
+                        <form action="{{ route('administrator.registration.respond') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $physician->id }}">
+                            <button type="submit" name="action" value="reject" class="btn btn-secondary btn-sm">
+                                Reject
+                            </button>
+                        </form>
+                    </div>
                 </td>
+
             </tr>
 
         @endforeach
