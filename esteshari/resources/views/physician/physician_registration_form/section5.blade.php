@@ -13,8 +13,6 @@
     <div class="col-md-12">
         <h5 class="form-subtitle">Registration 1:</h5>
     </div>
-
-
     <div class="col-md-3 form-floating">
         <select id="registration_type" name="registration_type"
                 class="form-select @error('registration_type') is-invalid @enderror"
