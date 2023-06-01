@@ -25,11 +25,11 @@ class PhysicianRegistrationFormController extends Controller
         $boardCertification = $user->boardCertification()->first();
         $professionalRegistration = $user->professionalRegistration()->first();
         $physicianReference = $user->physicianReference()->first();
-        $langaugeQualification = $user->langaugeQualification()->first();
+        $languageQualification = $user->langaugeQualification()->first();
         $insurance = $user->insurance()->first();
 
         return view('physician.physician_registration_form.physician_registration_form', compact('section', 'personalInformation',
-            'educationalQualification', 'workExperience', 'boardCertification', 'professionalRegistration', 'physicianReference', 'langaugeQualification', 'insurance'));
+            'educationalQualification', 'workExperience', 'boardCertification', 'professionalRegistration', 'physicianReference', 'languageQualification', 'insurance'));
     }
 
 
