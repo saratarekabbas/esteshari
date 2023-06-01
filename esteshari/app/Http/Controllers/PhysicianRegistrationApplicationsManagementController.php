@@ -22,12 +22,14 @@ class PhysicianRegistrationApplicationsManagementController extends Controller
 {
     public function index()
     {
-        $physician = User::where('role', 'physician')->get();
-        $personalInformation = PersonalInformation::get();
-        return view('administrator.physician_registration_requests_management.physician_pending_registration_requests', compact('physician', 'personalInformation'));
+        $pendingPhysicians = User::where('role', 'physician')
+            ->where('status', 'pending')
+            ->with('personalInformation')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('administrator.physician_registration_requests_management.physician_pending_registration_requests', compact('pendingPhysicians'));
     }
-
-
 
     public function indexAll()
     {
@@ -53,7 +55,6 @@ class PhysicianRegistrationApplicationsManagementController extends Controller
         ]);
 
 //        Send email
-
 
 
 //        $personalInformation->save();

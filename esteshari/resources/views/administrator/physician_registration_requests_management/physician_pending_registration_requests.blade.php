@@ -12,73 +12,47 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <div class="d-flex align-items-center">
-                    <img
-                        src="{{asset('/assets/female_physician.png')}}"
-                        alt=""
-                        style="width: 45px; height: 45px"
-                        class="rounded-circle"
-                    />
-                    <div class="ms-3">
-                        <p class="fw-bold mb-1">John Doe</p>
-                        <p class="text-muted mb-0">2 hours ago</p>
+        @foreach ($pendingPhysicians as $physician)
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center">
+                        @if( $physician->personalInformation->gender == 'Female' )
+                            <img
+                                src="{{asset('/assets/female_physician.png')}}" alt="" style="width: 45px; height: 45px"
+                                class="rounded-circle"/>
+                        @elseif( $physician->personalInformation->gender == 'Male')
+                            <img
+                                src="{{asset('/assets/male_physician.png')}}" alt="" style="width: 45px; height: 45px"
+                                class="rounded-circle"/>
+                        @endif
+                        <div class="ms-3">
+                            <p class="fw-bold mb-1">{{ $physician->personalInformation->full_name}}</p>
+                            <p class="text-muted mb-0">{{ $physician->created_at->diffForHumans() }}</p>
+                        </div>
                     </div>
-                </div>
-            </td>
-            <td>
-                <p class="fw-normal mb-1">Dr</p>
-                <p class="text-muted mb-0">+60-1160563562 | abbassara@gmail.com</p>
-            </td>
-            <td>
-                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                    View
-                </button>
-            </td>
-            <td>
-                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                    Approve
-                </button>
-                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                    Reject
-                </button>
-            </td>
-        </tr>
+                </td>
+                <td>
+                    <p class="fw-normal mb-1">{{ $physician->personalInformation->designation }}</p>
+                    <p class="text-muted mb-0">+{{ $physician->personalInformation->country_code }}
+                        -{{ $physician->personalInformation->mobile_number }}
+                        | {{ $physician->personalInformation->email_address }}</p>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-link btn-sm btn-rounded">
+                        View
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-link btn-sm btn-rounded">
+                        Approve
+                    </button>
+                    <button type="button" class="btn btn-link btn-sm btn-rounded">
+                        Reject
+                    </button>
+                </td>
+            </tr>
 
-        <tr>
-            <td>
-                <div class="d-flex align-items-center">
-                    <img
-                        src="{{asset('/assets/male_physician.png')}}"
-                        alt=""
-                        style="width: 45px; height: 45px"
-                        class="rounded-circle"
-                    />
-                    <div class="ms-3">
-                        <p class="fw-bold mb-1">John Doe</p>
-                        <p class="text-muted mb-0">2 hours ago</p>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <p class="fw-normal mb-1">Dr</p>
-                <p class="text-muted mb-0">+60-1160563562 | abbassara@gmail.com</p>
-            </td>
-            <td>
-                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                    View
-                </button>
-            </td>
-            <td>
-                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                    Approve
-                </button>
-                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                    Reject
-                </button>
-            </td>
-        </tr>
+        @endforeach
         </tbody>
     </table>
 
