@@ -72,7 +72,7 @@
                class="form-control @error('reference_full_name') is-invalid @enderror"
                value="{{ $physicianReference ? $physicianReference->reference_full_name : old('reference_full_name') }}"
         >
-        <label for="registration_number">Reference Full Name</label>
+        <label for="reference_full_name">Reference Full Name</label>
         @error('reference_full_name')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror

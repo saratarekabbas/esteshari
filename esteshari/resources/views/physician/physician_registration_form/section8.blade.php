@@ -17,7 +17,7 @@
     <div class="col-md-3 form-floating">
         <select id="insurance_type" name="insurance_type"
                 class="form-select @error('insurance_type') is-invalid @enderror"
-                required>
+                >
             <option value="">Select Insurance Type</option>
             <option value="Physician Malpractice Insurance">Physician Malpractice Insurance</option>
             <option value="General Liability Insurance">General Liability Insurance</option>
@@ -50,30 +50,42 @@
                placeholder="Enter Insurance Title"
                class="form-control @error('insurance_title') is-invalid @enderror"
                value="{{ $insurance ? $insurance->insurance_title : old('insurance_title') }}"
-               required>
+               >
         <label for="insurance_title">Insurance Title</label>
         @error('insurance_title')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
 
-    <div class="col-md-4 form-floating">
+
+    <div class="col-md-6 form-floating">
         <input type="text" id="insurance_number" name="insurance_number"
-               placeholder="Enter insurance Number"
+               placeholder="Enter Insurance Number"
                class="form-control @error('insurance_number') is-invalid @enderror"
                value="{{ $insurance ? $insurance->insurance_number : old('insurance_number') }}"
-        >
+               >
         <label for="insurance_number">Insurance Number</label>
         @error('insurance_number')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
 
-    <div class="col-md-4 form-floating">
+    <div class="col-md-6 form-floating">
+        <input type="text" id="insurance_provider" name="insurance_provider"
+               placeholder="Enter Insurance Provider's Name"
+               class="form-control @error('insurance_provider') is-invalid @enderror"
+               value="{{ $insurance ? $insurance->insurance_provider : old('insurance_provider') }}">
+        <label for="insurance_provider">Insurance Provider</label>
+        @error('insurance_provider')
+        <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="col-md-6 form-floating">
         <input type="date" id="insurance_issue_date" name="insurance_issue_date"
                class="form-control @error('insurance_issue_date') is-invalid @enderror"
                value="{{ $insurance ? $insurance->insurance_issue_date : old('insurance_issue_date') }}"
-               required>
+               >
 
         <label for="insurance_issue_date">Issue Date</label>
         @error('insurance_issue_date')
@@ -81,11 +93,11 @@
         @enderror
     </div>
 
-    <div class="col-md-4 form-floating">
+    <div class="col-md-6 form-floating">
         <input type="date" id="insurance_expiry_date" name="insurance_expiry_date"
                class="form-control @error('insurance_expiry_date') is-invalid @enderror"
                value="{{ $insurance ? $insurance->insurance_expiry_date : old('insurance_expiry_date') }}"
-               required>
+               >
 
         <label for="insurance_expiry_date">Expiration Date</label>
         @error('insurance_expiry_date')
@@ -168,10 +180,10 @@
         insuranceTypeSelect.addEventListener('change', function () {
             if (this.value === 'Other') {
                 otherInsuranceContainer.style.display = 'block';
-                otherInsuranceInput.required = true;
+                // otherInsuranceInput.required = true;
             } else {
                 otherInsuranceContainer.style.display = 'none';
-                otherInsuranceInput.required = false;
+                // otherInsuranceInput.required = false;
             }
         });
 
@@ -192,7 +204,7 @@
 <div class="col-md-3 form-floating">
         <select id="insurance_type" name="insurance_type"
                 class="form-select @error('insurance_type') is-invalid @enderror"
-                required>
+                >
             <option value="">Select Insurance Type</option>
             <option value="Medical License">Medical License</option>
             <option value="Other">Other</option>
@@ -220,7 +232,7 @@
                        placeholder="Enter Insurance Title"
                        class="form-control @error('insurance_title') is-invalid @enderror"
                value="{{ $insurance ? $insurance->insurance_title : old('insurance_title') }}"
-               required>
+               >
         <label for="insurance_title">insurance Title</label>
         @error('insurance_title')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -243,7 +255,7 @@
                 <input type="date" id="insurance_issue_date" name="insurance_issue_date"
                        class="form-control @error('insurance_issue_date') is-invalid @enderror"
                value="{{ $insurance ? $insurance->insurance_issue_date : old('insurance_issue_date') }}"
-               required>
+               >
 
         <label for="insurance_issue_date">Issue Date</label>
         @error('insurance_issue_date')
@@ -255,7 +267,7 @@
                 <input type="date" id="insurance_expiry_date" name="insurance_expiry_date"
                        class="form-control @error('insurance_expiry_date') is-invalid @enderror"
                value="{{ $insurance ? $insurance->insurance_expiry_date : old('insurance_expiry_date') }}"
-               required>
+               >
 
         <label for="insurance_expiry_date">Expiration Date</label>
         @error('insurance_expiry_date')

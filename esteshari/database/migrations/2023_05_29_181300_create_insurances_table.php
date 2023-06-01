@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('insurance_type')->nullable();
             $table->string('insurance_title')->nullable();
-            $table->string('insurance_number')->nullable();
+            $table->bigInteger('insurance_number')->nullable();
             $table->date('insurance_issue_date')->nullable();
             $table->date('insurance_expiry_date')->nullable();
+            $table->string('insurance_provider')->nullable();
             $table->json('insurance_files')->nullable();
             $table->timestamps();
         });

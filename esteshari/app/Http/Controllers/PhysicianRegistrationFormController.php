@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\BoardCertification;
 use App\Models\EducationalQualification;
 use App\Models\HonorAward;
+use App\Models\Insurance;
+use App\Models\LanguageQualification;
 use App\Models\PersonalInformation;
-use App\Models\PhysicianRegistration;
+use App\Models\PhysicianReference;
 use App\Models\ProfessionalRegistration;
 use App\Models\WorkExperience;
 use App\Rules\MinimumAge;
@@ -444,11 +446,11 @@ class PhysicianRegistrationFormController extends Controller
 
     public function section5(Request $request)
     {
-//        Section 4: Professional Registration
+//        Section 5: Professional Registration
         $validatedData = $request->validate([
             'registration_type' => 'required|string',
             'registration_title' => 'required|string',
-            'registration_number' => 'required|string',
+            'registration_number' => 'required|int',
             'registration_issue_date' => 'required|date',
             'registration_expiry_date' => 'date|after:registration_issue_date',
             'registration_files' => 'array|max:10',
@@ -496,114 +498,147 @@ class PhysicianRegistrationFormController extends Controller
 
     public function section6(Request $request)
     {
+//        Section 6: References
+        $validatedData = $request->validate([
+            'reference_title' => 'required|string',
+            'reference_full_name' => 'required|string',
+            'reference_relationship' => 'required|string',
+            'reference_email_address' => 'required|string|email',
+            'country_code' => ['required', 'numeric', 'digits_between:1,5'],
+            'mobile_number' => ['required', 'numeric', 'digits_between:9,10'],
+        ]);
 
+        $user = Auth::user();
+
+        $physicianReference = $user->physicianReference;
+
+        if (!$physicianReference) {
+            $physicianReference = new PhysicianReference();
+            $physicianReference->user()->associate($user);
+        }
+
+        if ($request->input('reference_title') === 'Other') {
+            $physicianReference->reference_title = $request->input('otherReferenceTitle');
+        } else {
+            $physicianReference->reference_title = $request->input('reference_title');
+        }
+        $physicianReference->reference_full_name = $request->input('reference_full_name');
+        $physicianReference->reference_relationship = $request->input('reference_relationship');
+        $physicianReference->reference_email_address = $request->input('reference_email_address');
+        $physicianReference->country_code = $request->input('country_code');
+        $physicianReference->mobile_number = $request->input('mobile_number');
+
+
+        $physicianReference->save();
     }
 
     public function section7(Request $request)
     {
+//    Section 7: Language Qualifications
 
+        $validatedData = $request->validate([
+            'qualification_type' => 'nullable|string',
+            'qualification_title' => 'nullable|string',
+            'qualification_issuing_board' => 'nullable|string',
+            'qualification_issue_date' => 'nullable|date',
+            'qualification_expiry_date' => 'nullable|date|after:qualification_issue_date',
+            'qualification_files' => 'nullable|array|max:10',
+            'qualification_files.*' => 'file',
+        ]);
+
+        $user = Auth::user();
+
+        $languageQualification = $user->languageQualification;
+
+        if (!$languageQualification) {
+            $languageQualification = new LanguageQualification();
+            $languageQualification->user()->associate($user);
+        }
+
+        if ($request->input('qualification_type') === 'Other') {
+            $languageQualification->qualification_type = $request->input('otherQualification');
+        } else {
+            $languageQualification->qualification_type = $request->input('certification_type');
+        }
+        $languageQualification->qualification_title = $request->input('qualification_title');
+        $languageQualification->qualification_issuing_board = $request->input('qualification_issuing_board');
+        $languageQualification->qualification_issue_date = $request->input('qualification_issue_date');
+        $languageQualification->qualification_expiry_date = $request->input('qualification_expiry_date');
+
+        $existingLanguageQualificationFiles = json_decode($languageQualification->qualification_files, true) ?? [];
+        $languageQualificationFiles = $request->file('qualification_files');
+
+
+        if ($languageQualificationFiles) {
+            foreach ($languageQualificationFiles as $languageQualificationFile) {
+                $languageQualificationFilePath = $languageQualificationFile->store('files', 'public');
+                if (!in_array($languageQualificationFilePath, $existingLanguageQualificationFiles)) {
+                    $existingLanguageQualificationFiles[] = $languageQualificationFilePath;
+                }
+            }
+        } else {
+            $existingLanguageQualificationFiles = $existingLanguageQualificationFiles ?? [];
+        }
+
+        $languageQualification->qualification_files = json_encode($existingLanguageQualificationFiles);
+
+        $languageQualification->save();
     }
 
     public function section8(Request $request)
     {
+//        Section 8: Insurance
+        $validatedData = $request->validate([
+            'insurance_type' => 'nullable|string',
+            'insurance_title' => 'nullable|string',
+            'insurance_number' => 'nullable|int',
+            'insurance_provider' => 'nullable|string',
+            'insurance_issue_date' => 'nullable|date',
+            'insurance_expiry_date' => 'nullable|date|after:insurance_issue_date',
+            'insurance_files' => 'nullable|array|max:10',
+            'insurance_files.*' => 'file',
+        ]);
+
         $user = Auth::user();
+
+        $insurance = $user->insurance;
+
+        if (!$insurance) {
+            $insurance = new Insurance();
+            $insurance->user()->associate($user);
+        }
+
+        if ($request->input('insurance_type') === 'Other') {
+            $insurance->insurance_type = $request->input('otherInsurance');
+        } else {
+            $insurance->insurance_type = $request->input('insurance_type');
+        }
+        $insurance->insurance_title = $request->input('insurance_title');
+        $insurance->insurance_number = $request->input('insurance_number');
+        $insurance->insurance_issue_date = $request->input('insurance_issue_date');
+        $insurance->insurance_issue_date = $request->input('insurance_issue_date');
+        $insurance->insurance_expiry_date = $request->input('insurance_expiry_date');
+
+        $existingInsuranceFiles = json_decode($insurance->insurance_files, true) ?? [];
+        $insuranceFiles = $request->file('insurance_files');
+
+
+        if ($insuranceFiles) {
+            foreach ($insuranceFiles as $insuranceFile) {
+                $insuranceFilePath = $insuranceFile->store('files', 'public');
+                if (!in_array($insuranceFilePath, $existingInsuranceFiles)) {
+                    $existingInsuranceFiles[] = $insuranceFilePath;
+                }
+            }
+        } else {
+            $existingInsuranceFiles = $existingInsuranceFiles ?? [];
+        }
+
+        $insurance->insurance_files = json_encode($existingInsuranceFiles);
+
+        $insurance->save();
+
         $user->status = 'pending';
         $user->save();
     }
-
-    /*  public function store(Request $request)
-      {
-          // Validate the form data
-  //        $validatedData = $request->validate([
-  //            'full_name' => 'required|string',
-  //            'phone_number' => 'required',
-  //            'job_title' => 'required',
-  //        ]);
-
-          // Create a new PhysicianRegistration instance
-          $physicianRegistration = new PhysicianRegistration();
-
-          // Set the values from the form
-
-
-  //        SECTION 1: PERSONAL INFO
-          // Check if the selected title is "Other"
-          if ($request->input('title') === 'Other') {
-              // Save the value from the "Other Title" input field
-              $physicianRegistration->title = $request->input('otherTitle');
-          } else {
-              // Save the selected title
-              $physicianRegistration->title = $request->input('title');
-          }
-
-          $physicianRegistration->full_name = $request->input('full_name');
-          $physicianRegistration->date_of_birth = $request->input('date_of_birth');
-          $physicianRegistration->gender = $request->input('gender');
-          $physicianRegistration->alternative_email_address = $request->input('alternative_email_address');
-          $physicianRegistration->nationality = $request->input('nationality');
-          $physicianRegistration->country_code = $request->input('country_code');
-          $physicianRegistration->mobile_number = $request->input('mobile_number');
-          $physicianRegistration->telephone_number = $request->input('telephone_number');
-          $physicianRegistration->street_address = $request->input('street_address');
-          $physicianRegistration->street_address2 = $request->input('street_address2');
-          $physicianRegistration->city = $request->input('city');
-          $physicianRegistration->state_province = $request->input('state_province');
-          $physicianRegistration->postal_code = $request->input('postal_code');
-          $physicianRegistration->country = $request->input('country');
-          if ($request->hasFile('identity_verification_files')) {
-              $identityVerificationFiles = [];
-              foreach ($request->file('identity_verification_files') as $identityVerificationFile) {
-                  $insuranceFilePath = $identityVerificationFile->store('files'); // Store each insurance file in the 'files' directory
-                  $identityVerificationFiles[] = $insuranceFilePath;
-              }
-              // Save the insurance files' paths to the database as a JSON array
-              $physicianRegistration->identity_verification_files = json_encode($identityVerificationFiles);
-          }
-
-
-  //        SINGLE FILE
-          if ($request->hasFile('passport')) {
-              $passportFile = $request->file('passport');
-              $passportFilePath = $passportFile->store('files'); // Store the passport file in the 'files' directory
-              // Save the passport file path to the database
-              $physicianRegistration->passport_file = $passportFilePath;
-          }
-  //        MULTIPLE FILES
-          if ($request->hasFile('insurance')) {
-              $insuranceFiles = [];
-              foreach ($request->file('insurance') as $insuranceFile) {
-                  $insuranceFilePath = $insuranceFile->store('files'); // Store each insurance file in the 'files' directory
-                  $insuranceFiles[] = $insuranceFilePath;
-              }
-              // Save the insurance files' paths to the database as a JSON array
-              $physicianRegistration->insurance_files = json_encode($insuranceFiles);
-          }
-
-
-          $user = Auth::user();
-
-          // Check if the "same email" checkbox is selected
-          if ($request->has('same_email')) {
-              // Use the same email address as the user's registration
-              $email = $user->email;
-          } else {
-              // Use the email address entered in the form
-              $email = $request->input('email');
-          }
-
-          // Set the email address for the physician registration
-          $physicianRegistration->email = $email;
-          $physicianRegistration->user()->associate($user);
-
-          // Save the physician registration data
-          $physicianRegistration->save();
-
-          // Update the user's status to 'pending'
-          $user->status = 'pending';
-          $user->save();
-
-  //            return back()->with('success', 'Registration submitted successfully!');
-          return redirect()->route('physician.pending')->with('success', 'Registration submitted successfully!');
-      }
-    */
 }

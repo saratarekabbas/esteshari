@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('language_qualifications', function (Blueprint $table) {
             $table->id();
-            $table->string('qualification_type');
-            $table->string('qualification_title');
-            $table->date('qualification_issue_date');
-            $table->date('qualification_expiry_date');
-            $table->json('qualification_files');
+            $table->string('qualification_type')->nullable();
+            $table->string('qualification_title')->nullable();
+            $table->string('qualification_issuing_board')->nullable();
+            $table->date('qualification_issue_date')->nullable();
+            $table->date('qualification_expiry_date')->nullable();
+            $table->json('qualification_files')->nullable();
             $table->timestamps();
         });
     }

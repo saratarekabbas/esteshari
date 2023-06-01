@@ -49,10 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-//    public function physicianRegistration()
-//    {
-//        return $this->hasOne(PhysicianRegistration::class, 'user_id');
-//    }
+
 
     public function personalInformation() //section1
     {

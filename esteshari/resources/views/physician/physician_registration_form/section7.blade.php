@@ -72,7 +72,18 @@
         @enderror
     </div>
 
-    <div class="col-md-6 form-floating">
+    <div class="col-md-4 form-floating">
+        <input type="text" id="qualification_title" name="qualification_title"
+               placeholder="Enter Language Qualification Issuing Board"
+               class="form-control @error('qualification_issuing_board') is-invalid @enderror"
+               value="{{ $languageQualification ? $languageQualification->qualification_issuing_board : old('qualification_issuing_board') }}">
+        <label for="qualification_title">Language Qualification Issuing Board</label>
+        @error('qualification_title')
+        <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="col-md-4 form-floating">
         <input type="date" id="qualification_issue_date" name="qualification_issue_date"
                class="form-control @error('qualification_issue_date') is-invalid @enderror"
                value="{{ $languageQualification ? $languageQualification->qualification_issue_date : old('qualification_issue_date') }}">
@@ -82,7 +93,7 @@
         @enderror
     </div>
 
-    <div class="col-md-6 form-floating">
+    <div class="col-md-4 form-floating">
         <input type="date" id="qualification_expiry_date" name="qualification_expiry_date"
                class="form-control @error('qualification_expiry_date') is-invalid @enderror"
                value="{{ $languageQualification ? $languageQualification->qualification_expiry_date : old('qualification_expiry_date') }}">
@@ -128,7 +139,7 @@
 
 
     <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Next
+        Save & Proceed
     </button>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
