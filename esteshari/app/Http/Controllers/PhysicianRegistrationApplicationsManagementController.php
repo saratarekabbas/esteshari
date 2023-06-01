@@ -34,21 +34,6 @@ class PhysicianRegistrationApplicationsManagementController extends Controller
         return view('administrator.physician_registration_requests_management.physician_pending_registration_requests', compact('pendingPhysicians'));
     }
 
-    public function indexAll()
-    {
-        $physician = User::where('role', 'physician')->get();
-        $personalInformation = PersonalInformation::get();
-        $educationalQualification = EducationalQualification::get();
-        $workExperience = WorkExperience::get();
-        $boardCertification = BoardCertification::get();
-        $professionalRegistration = ProfessionalRegistration::get();
-        $physicianReference = PhysicianReference::get();
-        $languageQualification = LanguageQualification::get();
-        $insurance = Insurance::get();
-        return view('administrator.physician_registration_requests_management.all_physician_registration_applications', compact('physician', 'personalInformation',
-            'educationalQualification', 'workExperience', 'boardCertification', 'professionalRegistration', 'physicianReference', 'languageQualification', 'insurance'));
-    }
-
     public function respond(Request $request)
     {
         $physicianId = $request->input('id');
@@ -71,5 +56,25 @@ class PhysicianRegistrationApplicationsManagementController extends Controller
             return redirect()->back()->with('success', 'Physician status updated successfully.');
         }
         return redirect()->back()->with('error', 'Physician not found.');
+    }
+
+    public function view($id)
+    {
+        $physician = User::with('personalInformation', 'educationalQualification', 'workExperience',
+            'boardCertification', 'professionalRegistration', 'physicianReference', 'langaugeQualification', 'insurance')
+            ->find($id);
+
+        if ($physician) {
+            return view('administrator.physician_registration_requests_management.physician_pending_registration_request',  ['physician' => $physician]);
+        }
+
+        return redirect()->back()->with('error', 'Physician not found.');
+    }
+
+
+
+    public function indexAll()
+    {
+        return view('administrator.physician_registration_requests_management.all_physician_registration_applications');
     }
 }

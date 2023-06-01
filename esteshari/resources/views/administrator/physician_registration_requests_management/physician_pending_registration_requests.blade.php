@@ -44,9 +44,9 @@
                         | {{ $physician->personalInformation->email_address }}</p>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-link btn-sm">
+                    <a href="{{ route('administrator.registration.view', ['id' => $physician->id]) }}" class="btn btn-link btn-sm">
                         View
-                    </button>
+                    </a>
                 </td>
                 <td>
                     <div class="d-flex">

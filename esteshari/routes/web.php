@@ -39,24 +39,25 @@ Route::get('/callback/{service}', [SocialController::class, 'callback']);
 //    });
 //});
 
-
-
-// Routes for the system admin
-Route::group(['middleware' => ['auth', 'role:system_admin']], function () {
-    Route::get('/administrator/physician_pending_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'index'])->name('administrator.registration.index'); //the whole page; which displays section 1 by default
-    Route::post('/administrator/physician_pending_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'respond'])->name('administrator.registration.respond'); //the whole page; which displays section 1 by default
-    Route::get('/administrator/all_physician_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'indexAll'])->name('administrator.registration.indexAll');
-
-    Route::get('/admin/dashboard', function () {
-        return view('administrator.dashboard');
-    })->name('admin.dashboard');
-});
-
 // Routes for the patient
 Route::group(['middleware' => ['auth', 'role:patient']], function () {
     Route::get('/patient/dashboard', function () {
         return view('patient.dashboard');
     })->name('patient.dashboard');
+});
+
+
+// Routes for the system admin
+Route::group(['middleware' => ['auth', 'role:system_admin']], function () {
+    Route::get('/administrator/physician_pending_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'index'])->name('administrator.registration.index');
+    Route::post('/administrator/physician_pending_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'respond'])->name('administrator.registration.respond');
+    Route::get('/administrator/physician_pending_registration_request/{id}', [PhysicianRegistrationApplicationsManagementController::class, 'view'])->name('administrator.registration.view');
+
+    Route::get('/administrator/all_physician_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'indexAll'])->name('administrator.registration.indexAll');
+
+    Route::get('/admin/dashboard', function () {
+        return view('administrator.dashboard');
+    })->name('admin.dashboard');
 });
 
 // Routes for the physician process
