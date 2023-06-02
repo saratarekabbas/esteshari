@@ -6,8 +6,7 @@
         <thead class="bg-light">
         <tr>
             <th>Name</th>
-            <th>Contact Information</th>
-            <th>Application Date</th>
+            <th>About</th>
             <th>Application</th>
             <th>Status</th>
         </tr>
@@ -21,24 +20,24 @@
                             <img src="{{asset('/assets/female_physician.png')}}" alt="" style="width: 45px; height: 45px" class="rounded-circle"/>
                         @elseif( $physician->personalInformation && $physician->personalInformation->gender == 'Male')
                             <img src="{{asset('/assets/male_physician.png')}}" alt="" style="width: 45px; height: 45px" class="rounded-circle"/>
+                        @else
+                            <img src="{{asset('/assets/unknown.webp')}}" alt="" style="width: 45px; height: 45px" class="rounded-circle"/>
                         @endif
                             <div class="ms-3">
-                                <p class="fw-bold mb-1">{{ $physician->personalInformation ? $physician->personalInformation->full_name : 'N/A'}}, {{ $physician->personalInformation ? $physician->personalInformation->designation : 'N/A' }}</p>
+                                <p class="fw-bold mb-1">{{ $physician->personalInformation ? $physician->personalInformation->full_name : $physician->name}}</p>
                             </div>
 
                     </div>
                 </td>
                 <td>
-                    <p class="text-muted mb-1">+{{ $physician->personalInformation ? $physician->personalInformation->country_code : 'N/A' }}
+                    <p class="fw-normal mb-1">{{ $physician->personalInformation ? $physician->personalInformation->designation : 'N/A' }}</p>
+                    <p class="text-muted mb-0">+{{ $physician->personalInformation ? $physician->personalInformation->country_code : 'N/A' }}
                         -{{ $physician->personalInformation ? $physician->personalInformation->mobile_number : 'N/A' }}
                         | {{ $physician->personalInformation ? $physician->personalInformation->email_address : $physician->email}}</p>
                 </td>
                 <td>
-                    <p class="text-muted mb-1">{{ $physician->insurance ? $physician->insurance->created_at : 'N/A' }}</p>
-                </td>
-                <td>
                     @if($physician->personalInformation)
-                    <a href="{{ route('administrator.registration.view', ['id' => $physician->id]) }}" class="btn btn-link btn-sm mb-1">
+                    <a href="{{ route('administrator.registration.view', ['id' => $physician->id]) }}" class="btn btn-link btn-sm">
                         View
                     </a>
                     @else
@@ -46,12 +45,14 @@
                         @endif
                 </td>
                 <td>
-                    @if ($physician->status == 'pending')
-                        <span class="badge bg-primary mb-1">Pending</span>
+                    @if ($physician->status == 'registered')
+                        <span class="badge bg-secondary">Registered</span>
+                    @elseif ($physician->status == 'pending')
+                        <span class="badge bg-primary">Pending</span>
                     @elseif ($physician->status == 'approved')
-                        <span class="badge bg-success mb-1">Approved</span>
+                        <span class="badge bg-success">Approved</span>
                     @elseif ($physician->status == 'rejected')
-                        <span class="badge bg-danger mb-1">Rejected</span>
+                        <span class="badge bg-danger">Rejected</span>
                     @endif
                 </td>
             </tr>

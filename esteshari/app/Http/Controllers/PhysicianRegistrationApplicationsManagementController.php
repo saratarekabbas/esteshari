@@ -65,16 +65,22 @@ class PhysicianRegistrationApplicationsManagementController extends Controller
             ->find($id);
 
         if ($physician) {
-            return view('administrator.physician_registration_requests_management.physician_pending_registration_request',  ['physician' => $physician]);
+            return view('administrator.physician_registration_requests_management.physician_pending_registration_request', ['physician' => $physician]);
         }
 
         return redirect()->back()->with('error', 'Physician not found.');
     }
 
-
-
     public function indexAll()
     {
-        return view('administrator.physician_registration_requests_management.all_physician_registration_applications');
+        $allPhysicians = User::where('role', 'physician')
+            ->where('status', '!=', 'registered')
+            ->with('personalInformation', 'educationalQualification', 'workExperience',
+                'boardCertification', 'professionalRegistration', 'physicianReference', 'langaugeQualification', 'insurance')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('administrator.physician_registration_requests_management.all_physician_registration_applications', compact('allPhysicians'));
+
     }
 }

@@ -367,36 +367,36 @@
             <h4 class="form-subtitle">Section 7: Language Qualifications</h4>
             <table class="table table-bordered" style="background-color: #ffffff">
                 <tbody>
-                @if ($physician->languageQualification)
+                @if ($physician->langaugeQualification)
                     <tr>
                         <th colspan="2" class="table-primary"><h5>Language Qualification #1</h5></th>
                     </tr>
                     <tr>
                         <th style="width: 25%;">Language Qualification Type</th>
-                        <td style="width: 75%;">{{ $physician->languageQualification->qualification_type ?: 'N/A' }}</td>
+                        <td style="width: 75%;">{{ $physician->langaugeQualification->qualification_type ?: 'N/A' }}</td>
                     </tr>
                     <tr>
                         <th>Language Qualification Title</th>
-                        <td>{{ $physician->languageQualification->qualification_title ?: 'N/A' }}</td>
+                        <td>{{ $physician->langaugeQualification->qualification_title ?: 'N/A' }}</td>
                     </tr>
                     <tr>
                         <th>Language Qualification Issuing Board</th>
-                        <td>{{ $physician->languageQualification->qualification_issuing_board ?: 'N/A' }}</td>
+                        <td>{{ $physician->langaugeQualification->qualification_issuing_board ?: 'N/A' }}</td>
                     </tr>
                     <tr>
                         <th>Language Qualification Issuing Board</th>
-                        <td>{{ $physician->languageQualification->qualification_issue_date ?: 'N/A' }}</td>
+                        <td>{{ $physician->langaugeQualification->qualification_issue_date ?: 'N/A' }}</td>
                     </tr>
                     <tr>
                         <th>Language Qualification Expiry Date</th>
-                        <td>{{ $physician->languageQualification->qualification_expiry_date ?: 'N/A' }}</td>
+                        <td>{{ $physician->langaugeQualification->qualification_expiry_date ?: 'N/A' }}</td>
                     </tr>
                     <tr>
                         <th>Language Qualification Files</th>
                         <td>
                             <ol class="list-group list-group-numbered">
-                                @if (!empty($physician->languageQualification->qualification_files))
-                                    @foreach(json_decode($physician->languageQualification->qualification_files) as $file)
+                                @if (!empty($physician->langaugeQualification->qualification_files))
+                                    @foreach(json_decode($physician->langaugeQualification->qualification_files) as $file)
                                         <li class="list-group-item"><a href="{{ asset('storage/'. $file) }}" target="_blank">{{ $file }}</a></li>
                                     @endforeach
                                 @else
