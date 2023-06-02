@@ -14,13 +14,22 @@
 <body>
 <div class="row header">
     <div class="col-lg-2 col-md-3">
-        <div class="navbar-logo">
-            <img src="{{ asset('assets/favicon.ico') }}" alt="Esteshari Logo" height="30">
-            {{__('homepage.esteshari')}}
-        </div>
+        <a href="{{route('physician.dashboard')}}" style="text-decoration: none">
+            <div class="navbar-logo">
+                <img src="{{ asset('assets/favicon.ico') }}" alt="Esteshari Logo" height="30">
+                {{__('homepage.esteshari')}}
+            </div>
+        </a>
     </div>
     <div class="col-lg-10 col-md-9">
         <ul>
+            <li class="dropdown">
+                <button href="#">Portfolio</button>
+                <div class="dropdown-content">
+                    <a href="#">View Portfolio</a>
+                    <a href="#">Manage Portfolio</a>
+                </div>
+            </li>
             <li class="dropdown">
                 <button href="#">Schedule</button>
                 <div class="dropdown-content">
@@ -43,28 +52,20 @@
                     <a href="#">View Patients List</a>
                 </div>
             </li>
-            <li class="dropdown">
-                <button href="#">Portfolio</button>
-                <div class="dropdown-content">
-                    <a href="#">View Portfolio</a>
-                    <a href="#">Manage Portfolio</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <button href="#">Finances</button>
-                <div class="dropdown-content">
-                    <a href="#">View Revenue</a>{{--ANALYTICAL IF POSSIBLE; This week, all time, etc // GROSS INCOME--}}
-                    <a href="#">Manage My Rate</a>{{--Manage Banking Details; Manage Session Costs; Add discount--}}
-                </div>
-            </li>
-            <li class="dropdown">
-                <button href="#">Reports</button>
-                <div class="dropdown-content">
-                    <a href="#">Patient Medical History Report</a>
-                    <a href="#">Patient Pre-Session Questionnaire</a>
-                </div>
-            </li>
-
+{{--            <li class="dropdown">--}}
+{{--                <button href="#">Finances</button>--}}
+{{--                <div class="dropdown-content">--}}
+{{--                    <a href="#">View Revenue</a>--}}{{--ANALYTICAL IF POSSIBLE; This week, all time, etc // GROSS INCOME--}}
+{{--                    <a href="#">Manage My Rate</a>--}}{{--Manage Banking Details; Manage Session Costs; Add discount--}}
+{{--                </div>--}}
+{{--            </li>--}}
+{{--            <li class="dropdown">--}}
+{{--                <button href="#">Reports</button>--}}
+{{--                <div class="dropdown-content">--}}
+{{--                    <a href="#">Patient Medical History Report</a>--}}
+{{--                    <a href="#">Patient Pre-Session Questionnaire</a>--}}
+{{--                </div>--}}
+{{--            </li>--}}
             <li class="dropdown" style="float:right">
                 <div class="dropdown-button" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                      aria-haspopup="true" aria-expanded="false">

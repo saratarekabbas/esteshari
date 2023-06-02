@@ -15,7 +15,9 @@
         <tbody>
         @if ($allPhysicians->isEmpty())
             <tr>
-                <td colspan="5" class="text-center">No Physician Registration Applications Exist</td>
+                <td colspan="5"> <div class="text-center">No physician registration applications exist.
+                    </div></td>
+
             </tr>
         @else
             @foreach ($allPhysicians as $physician)

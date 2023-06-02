@@ -18,11 +18,34 @@ use Illuminate\Support\Facades\Mail;
 
 /*
  * This controller is for the system administrator. It is to manage the Physician Registration Application Requests, so that the admin can
- * view the registration requests, and respond to their request.
+ * view the physician registration requests, and respond to their request.
  */
 
 class PhysicianRegistrationApplicationsManagementController extends Controller
 {
+    public function dashboardIndex()
+    {
+        $registeredPhysiciansCount = User::where('role', 'physician')
+            ->where('status', 'registered')
+            ->count();
+
+        $pendingPhysiciansCount = User::where('role', 'physician')
+            ->where('status', 'pending')
+            ->count();
+
+        $rejectedPhysiciansCount = User::where('role', 'physician')
+            ->where('status', 'rejected')
+            ->count();
+
+        $approvedPhysiciansCount = User::where('role', 'physician')
+            ->where('status', 'approved')
+            ->count();
+
+        $pendingPhysicians = User::where('role', 'physician')
+            ->where('status', 'pending')->with('personalInformation')->orderBy('created_at', 'desc')->get();
+        return view('administrator.dashboard', compact('registeredPhysiciansCount', 'pendingPhysiciansCount', 'rejectedPhysiciansCount', 'approvedPhysiciansCount', 'pendingPhysicians'));
+    }
+
     public function index()
     {
         $pendingPhysicians = User::where('role', 'physician')
@@ -84,7 +107,8 @@ class PhysicianRegistrationApplicationsManagementController extends Controller
 
     }
 
-    public function indexAllPhysicians(){
+    public function indexAllPhysicians()
+    {
         $allPhysicians = User::where('role', 'physician')
             ->with('personalInformation', 'educationalQualification', 'workExperience',
                 'boardCertification', 'professionalRegistration', 'physicianReference', 'langaugeQualification', 'insurance')

@@ -20,7 +20,10 @@
         <tbody>
         @if ($pendingPhysicians->isEmpty())
             <tr>
-                <td colspan="5">No Pending Requests</td>
+                <td colspan="5">
+                    <div class="text-center">No pending physician registration requests.
+                    </div>
+                </td>
             </tr>
         @else
             @foreach ($pendingPhysicians as $physician)
