@@ -3,29 +3,37 @@
 @section('content')
     <div id='calendar'></div>
     {{--Slot modal--}}
+
     <div class="modal fade" id="addSlotModal" tabindex="-1" role="dialog" aria-labelledby="addSlotModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addSlotModalLabel">Add Slot</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="addSlotModalLabel">Add a New Schedule Slot</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="addSlotForm" action="{{ route('physician.schedule.store') }}" method="POST">
-                        @csrf
+                <form id="addSlotForm" action="{{ route('physician.schedule.store') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+
                         <div class="form-group">
                             <label for="slotTime">Slot Time</label>
-                            <input type="time" class="form-control" id="slotTime" name="slot_time" required>
+                            <input type="time" class="form-control @error('slot_time') is-invalid @enderror"
+                                   id="slotTime" name="slot_time" required>
+                            @error('slot_time')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <input type="hidden" name="slot_date" id="slotDate" value="">
+                    </div>
+                    <div class="modal-footer">
                         <div class="text-end">
                             <button type="submit" class="btn btn-primary">Add Slot</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -35,12 +43,18 @@
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
+                headerToolbar: {
+                    start: 'prev,today,next',
+                    center: 'title',
+                    right: 'dayGridDay,dayGridWeek,dayGridMonth,dayGridYear'
+                },
+                selectable: true,
+                selectHelper: true,
                 themeSystem: 'standard',
                 events: {!! $events !!},
                 eventClick: function (info) {
                     console.log(info.event);
                 },
-
                 dateClick: function (info) {
                     $('#slotDate').val(info.dateStr);
                     $('#addSlotModal').modal('show');
