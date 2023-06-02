@@ -20,10 +20,12 @@
 <body>
 <div class="row header">
     <div class="col-lg-2 col-md-3">
+        <a href="{{route('admin.dashboard')}}" style="text-decoration: none">
         <div class="navbar-logo">
             <img src="{{ asset('assets/favicon.ico') }}" alt="Esteshari Logo" height="30">
             {{__('homepage.esteshari')}}
         </div>
+        </a>
     </div>
     <div class="col-lg-10 col-md-9">
         <ul>
@@ -37,7 +39,7 @@
             <li class="dropdown">
                 <button href="#">Physicians</button>
                 <div class="dropdown-content">
-                    <a href="#">View Physicians List</a>
+                    <a href="{{ route('administrator.indexAllPhysicians')}}">View Physicians List</a>
                 </div>
             </li>
             <li class="dropdown">

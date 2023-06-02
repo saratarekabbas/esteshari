@@ -83,4 +83,14 @@ class PhysicianRegistrationApplicationsManagementController extends Controller
         return view('administrator.physician_registration_requests_management.all_physician_registration_applications', compact('allPhysicians'));
 
     }
+
+    public function indexAllPhysicians(){
+        $allPhysicians = User::where('role', 'physician')
+            ->with('personalInformation', 'educationalQualification', 'workExperience',
+                'boardCertification', 'professionalRegistration', 'physicianReference', 'langaugeQualification', 'insurance')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('administrator.all_physicians.all_physicians', compact('allPhysicians'));
+    }
 }

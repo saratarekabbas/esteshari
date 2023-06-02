@@ -52,8 +52,9 @@ Route::group(['middleware' => ['auth', 'role:system_admin']], function () {
     Route::get('/administrator/physician_pending_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'index'])->name('administrator.registration.index');
     Route::post('/administrator/physician_pending_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'respond'])->name('administrator.registration.respond');
     Route::get('/administrator/physician_pending_registration_request/{id}', [PhysicianRegistrationApplicationsManagementController::class, 'view'])->name('administrator.registration.view');
-
     Route::get('/administrator/all_physician_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'indexAll'])->name('administrator.registration.indexAll');
+
+    Route::get('/administrator/all_physicians', [PhysicianRegistrationApplicationsManagementController::class, 'indexAllPhysicians'])->name('administrator.indexAllPhysicians');
 
     Route::get('/admin/dashboard', function () {
         return view('administrator.dashboard');
