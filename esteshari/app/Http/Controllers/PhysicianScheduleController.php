@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PhysicianSchedule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
@@ -30,12 +31,14 @@ class PhysicianScheduleController extends Controller
         return view('physician.physician_schedule.schedule_view', compact('events'));
     }
 
-    public function store(Request $request){
-
+    public function store(Request $request)
+    {
         $validatedData = $request->validate([
             'slot_date' => 'required|date',
             'slot_time' => 'required|date_format:H:i'
         ]);
+
+        $user = Auth::user();
 
         $slotDate = $validatedData['slot_date'];
         $slotTime = $validatedData['slot_time'];
@@ -47,16 +50,18 @@ class PhysicianScheduleController extends Controller
         if ($existingSlot) {
             $errors = new MessageBag;
             $errors->add('slot_time', 'A slot with the same date and time already exists.');
-
-            return Redirect::back()->withErrors($errors)->withInput();
+            return redirect()->back()->withErrors($errors)->withInput();
         }
 
-        $slot = new PhysicianSchedule();
-        $slot->slot_date = $slotDate;
-        $slot->slot_time = $slotTime;
-        $slot->save();
+        $physicianSchedule = new PhysicianSchedule();
+        $physicianSchedule->slot_date = $slotDate;
+        $physicianSchedule->slot_time = $slotTime;
+        $physicianSchedule->user()->associate($user);
+        $physicianSchedule->save();
+
         return redirect()->route('physician.schedule.view')->with('success', 'Slot has been added successfully');
     }
+
 
     public function indexManage(){
         return view('physician.physician_schedule.schedule_manage');

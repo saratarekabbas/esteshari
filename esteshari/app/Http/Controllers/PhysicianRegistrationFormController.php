@@ -141,7 +141,6 @@ class PhysicianRegistrationFormController extends Controller
             $email = $request->input('email_address');
         }
         $personalInformation->email_address = $email;
-//                $personalInformation->user()->associate($user);
 
         $personalInformation->alternative_email_address = $request->input('alternative_email_address');
         $personalInformation->nationality = $request->input('nationality');
