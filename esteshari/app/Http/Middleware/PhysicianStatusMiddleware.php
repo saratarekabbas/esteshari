@@ -51,9 +51,9 @@ class PhysicianStatusMiddleware
             }
             // If the user's status is "approved" and they are not on the physician dashboard route (physician.dashboard),
             // they are redirected to the physician dashboard (physician.dashboard).
-            elseif ($user->status == 'approved' && $request->route()->getName() != 'physician.dashboard') {
-                return redirect()->route('physician.dashboard');
-            }
+//            elseif ($user->status == 'approved' && $request->route()->getName() != 'physician.dashboard') {
+//                return redirect()->route('physician.dashboard');
+//            }
         }
         return $next($request);
     }

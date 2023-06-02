@@ -24,21 +24,21 @@
     <div class="col-lg-10 col-md-9">
         <ul>
             <li class="dropdown">
-                <button href="#">Portfolio</button>
+                <button href="">Portfolio</button>
                 <div class="dropdown-content">
                     <a href="#">View Portfolio</a>
                     <a href="#">Manage Portfolio</a>
                 </div>
             </li>
             <li class="dropdown">
-                <button href="#">Schedule</button>
+                <button href="">Schedule</button>
                 <div class="dropdown-content">
-                    <a href="#">View Schedule</a>
-                    <a href="#">Manage Schedule</a>
+                    <a href="{{route('physician.schedule.view')}}">View Schedule</a>
+                    <a href="{{route('physician.schedule.manage')}}">Manage Schedule</a>
                 </div>
             </li>
             <li class="dropdown">
-                <button href="#">Appointments</button>
+                <button href="">Appointments</button>
                 <div class="dropdown-content">
                     <a href="#">Pending Appointments</a>
                     <a href="#">Upcoming Appointments</a>

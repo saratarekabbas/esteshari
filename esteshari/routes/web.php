@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PhysicianRegistrationApplicationsManagementController;
 use App\Http\Controllers\PhysicianRegistrationFormController;
+use App\Http\Controllers\PhysicianScheduleController;
 use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -63,6 +64,10 @@ Route::group(['middleware' => ['auth', 'role:system_admin']], function () {
 
 // Routes for the physician process
 Route::middleware(['auth', 'role:physician', 'physician.status'])->group(function () {
+    Route::get('/physician/dashboard', function () {
+        return view('physician.dashboard');
+    })->name('physician.dashboard');
+
     Route::get('/physician/registration/{section?}', [PhysicianRegistrationFormController::class, 'index'])->name('physician.registration.create'); //the whole page; which displays section 1 by default
     Route::post('/physician/registration', [PhysicianRegistrationFormController::class, 'store'])->name('physician.registration.store');
     Route::get('/physician/pending', function () {
@@ -71,9 +76,11 @@ Route::middleware(['auth', 'role:physician', 'physician.status'])->group(functio
     Route::get('/physician/denied', function () {
         return view('physician.denied');
     })->name('physician.denied');
-    Route::get('/physician/dashboard', function () {
-        return view('physician.dashboard');
-    })->name('physician.dashboard');
+
+    Route::get('/physician/schedule/view', [PhysicianScheduleController::class, 'index'])->name('physician.schedule.view');
+    Route::get('/physician/schedule/manage', [PhysicianScheduleController::class, 'store'])->name('physician.schedule.manage');
+
+
 });
 
 
