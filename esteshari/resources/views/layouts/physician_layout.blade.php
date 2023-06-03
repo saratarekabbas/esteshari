@@ -48,7 +48,6 @@
                 <button href="">Schedule</button>
                 <div class="dropdown-content">
                     <a href="{{route('physician.schedule.view')}}">View Schedule</a>
-                    <a href="{{route('physician.schedule.manage')}}">Manage Schedule</a>
                 </div>
             </li>
             <li class="dropdown">

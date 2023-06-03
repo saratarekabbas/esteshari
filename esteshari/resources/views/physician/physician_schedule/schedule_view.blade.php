@@ -42,15 +42,22 @@
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
+                initialView: 'listMonth',
                 headerToolbar: {
-                    start: 'prev,today,next',
+                    start: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridDay,dayGridWeek,dayGridMonth,dayGridYear'
+                    right: 'listMonth dayGridDay,dayGridWeek,dayGridMonth,dayGridYear',
                 },
+                editable: true,
+                nowIndicator: true,
                 selectable: true,
                 selectHelper: true,
                 themeSystem: 'standard',
+                eventTimeFormat: {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    omitZeroMinute: false,
+                },
                 events: {!! $events !!},
                 eventClick: function (info) {
                     console.log(info.event);
