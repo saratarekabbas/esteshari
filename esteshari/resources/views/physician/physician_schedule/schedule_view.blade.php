@@ -1,25 +1,25 @@
 @extends('layouts.physician_layout')
 
 @section('content')
-{{--    @if ($errors->any())--}}
-{{--        <div class="alert alert-danger">--}}
-{{--            <ul>--}}
-{{--                @foreach ($errors->all() as $error)--}}
-{{--                    <li>{{ $error }}</li>--}}
-{{--                @endforeach--}}
-{{--            </ul>--}}
-{{--        </div>--}}
-{{--    @endif--}}
+    {{--    @if ($errors->any())--}}
+    {{--        <div class="alert alert-danger">--}}
+    {{--            <ul>--}}
+    {{--                @foreach ($errors->all() as $error)--}}
+    {{--                    <li>{{ $error }}</li>--}}
+    {{--                @endforeach--}}
+    {{--            </ul>--}}
+    {{--        </div>--}}
+    {{--    @endif--}}
 
-{{--    @if (session('success'))--}}
-{{--        <div class="alert alert-success">--}}
-{{--            {{ session('success') }}--}}
-{{--        </div>--}}
-{{--    @endif--}}
+    {{--    @if (session('success'))--}}
+    {{--        <div class="alert alert-success">--}}
+    {{--            {{ session('success') }}--}}
+    {{--        </div>--}}
+    {{--    @endif--}}
 
     <div id='calendar'></div>
-    {{--Slot modal--}}
 
+    {{--Add Slot modal--}}
     <div class="modal fade" id="addSlotModal" tabindex="-1" role="dialog" aria-labelledby="addSlotModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -54,6 +54,39 @@
         </div>
     </div>
 
+    <!-- Edit Slot Modal -->
+    <div id="editSlotModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editSlotModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editSlotModalLabel">Edit Schedule Slot</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="editSlotForm" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="editSlotDate">Slot Date</label>
+                            <input type="date" class="form-control" id="editSlotDate" name="slot_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editSlotTime">Slot Time</label>
+                            <input type="time" class="form-control" id="editSlotTime" name="slot_time" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
@@ -76,7 +109,20 @@
                 },
                 events: {!! $events !!},
                 eventClick: function (info) {
-                    console.log(info.event);
+                    // Retrieve the event data
+                    var event = info.event;
+
+                    // Get the slot date and time from the event
+                    var slotId = event.id;
+                    var slotDate = event.start.toISOString().slice(0, 10);
+                    var slotTime = event.start.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+
+                    // Set the values in the edit modal
+                    $('#editSlotDate').val(slotDate);
+                    $('#editSlotTime').val(slotTime);
+
+                    // Show the edit modal
+                    $('#editSlotModal').modal('show');
                 },
                 dateClick: function (info) {
                     $('#slotDate').val(info.dateStr);

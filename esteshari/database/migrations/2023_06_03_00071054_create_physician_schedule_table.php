@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('slot_date');
             $table->time('slot_time');
+            $table->string('status')->default('available');
             $table->timestamps();
         });
     }

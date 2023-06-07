@@ -66,10 +66,38 @@ class PhysicianScheduleController extends Controller
         $physicianSchedule = new PhysicianSchedule();
         $physicianSchedule->slot_date = $slotDate;
         $physicianSchedule->slot_time = $slotTime;
+//        $physicianSchedule->status = 'available';
         $physicianSchedule->user()->associate($user);
         $physicianSchedule->save();
 
         return redirect()->route('physician.schedule.view')->with('success', 'Slot has been added successfully');
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'edit_slot_date' => 'required|date',
+            'edit_slot_time' => 'required|date_format:H:i', Rule::in($this->getValidSlotTimes())
+        ]);
+
+        $slotDate = $validatedData['edit_slot_date'];
+        $slotTime = $validatedData['edit_slot_time'];
+
+        $existingSlot = PhysicianSchedule::where('id', $id)->first();
+
+        if (!$existingSlot) {
+            // Slot not found
+            return redirect()->back()->withErrors('Slot not found.');
+        }
+
+        // Update the slot date and time
+        $existingSlot->slot_date = $slotDate;
+        $existingSlot->slot_time = $slotTime;
+//        $existingSlot->status = 'available';
+        $existingSlot->save();
+
+        return redirect()->route('physician.schedule.view')->with('success', 'Slot has been updated successfully');
     }
 
 
