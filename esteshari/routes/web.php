@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+//Route::get('/old_app', function () {
+//    return view('layouts/old_app');
+//});
+
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
