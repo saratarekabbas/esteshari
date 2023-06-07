@@ -30,9 +30,11 @@ class VerificationController extends Controller
      */
     protected function redirectTo()
     {
-        if (Auth::user()->hasRole('patient')) {
+        $user = Auth::user();
+
+        if ($user && $user->hasRole('patient')) {
             return route('patient.dashboard');
-        } elseif (Auth::user()->hasRole('physician')) {
+        } elseif ($user && $user->hasRole('physician')) {
             return route('physician.dashboard');
         } else {
             return RouteServiceProvider::HOME;
