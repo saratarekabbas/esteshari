@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\General\GeneralController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OfferController;
 use App\Http\Controllers\PhysicianRegistrationApplicationsManagementController;
 use App\Http\Controllers\PhysicianRegistrationFormController;
 use App\Http\Controllers\PhysicianScheduleController;
@@ -13,11 +12,7 @@ use App\Http\Api\ZoomApi;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/landing', function () {
-    return view('general.landing');
+    return view('homepage');
 });
 
 Auth::routes(['verify' => true]);

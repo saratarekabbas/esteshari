@@ -41,6 +41,7 @@
                 <li class="nav-item"><a class="nav-link" href="#services">{{__('homepage.services')}}</a></li>
                 <li class="nav-item"><a class="nav-link" href="#portfolio">{{__('homepage.contact')}}</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">{{__('homepage.join')}}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
             </ul>
         </div>
     </div>
