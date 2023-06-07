@@ -101,7 +101,31 @@
 </div>
 
 <div class="row-lg content">
-    @yield('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {{-- Display any errors/success messages --}}
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger">
+                     {{ $error }}
+                    </div>
+                    @endforeach
+                @endif
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @yield('content')
+            </div>
+        </div>
+    </div>
 </div>
 
 <footer class="bg-light text-center text-lg-start">
