@@ -1,21 +1,6 @@
 @extends('layouts.physician_layout')
 
 @section('content')
-    {{--    @if ($errors->any())--}}
-    {{--        <div class="alert alert-danger">--}}
-    {{--            <ul>--}}
-    {{--                @foreach ($errors->all() as $error)--}}
-    {{--                    <li>{{ $error }}</li>--}}
-    {{--                @endforeach--}}
-    {{--            </ul>--}}
-    {{--        </div>--}}
-    {{--    @endif--}}
-
-    {{--    @if (session('success'))--}}
-    {{--        <div class="alert alert-success">--}}
-    {{--            {{ session('success') }}--}}
-    {{--        </div>--}}
-    {{--    @endif--}}
 
     <div id='calendar'></div>
 
@@ -63,10 +48,11 @@
                     <h5 class="modal-title" id="editSlotModalLabel">Edit Schedule Slot</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editSlotForm" method="POST">
+                <form id="editSlotForm" method="POST"  action="{{ route('physician.schedule.update', ['id' => ':id']) }}">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">
+                        <input type="hidden" name="id" id="editSlotId">
                         <div class="form-group">
                             <label for="editSlotDate">Slot Date</label>
                             <input type="date" class="form-control" id="editSlotDate" name="slot_date" required>
@@ -100,7 +86,6 @@
                 editable: true,
                 nowIndicator: true,
                 selectable: true,
-                selectHelper: true,
                 themeSystem: 'standard',
                 eventTimeFormat: {
                     hour: 'numeric',
@@ -113,13 +98,21 @@
                     var event = info.event;
 
                     // Get the slot date and time from the event
-                    var slotId = event.id;
+                    var slotId = event.extendedProps.id;
+
                     var slotDate = event.start.toISOString().slice(0, 10);
                     var slotTime = event.start.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
 
+                    // Set the action URL for the edit form
+                    var editFormAction = '{{ route("physician.schedule.update", ":id") }}';
+                    editFormAction = editFormAction.replace(':id', slotId);
+
+
                     // Set the values in the edit modal
+                    $('#editSlotId').val(slotId);
                     $('#editSlotDate').val(slotDate);
                     $('#editSlotTime').val(slotTime);
+                    $('#editSlotForm').attr('action', editFormAction);
 
                     // Show the edit modal
                     $('#editSlotModal').modal('show');
@@ -129,28 +122,82 @@
                     $('#addSlotModal').modal('show');
                 },
 
-                success: function (response) {
-                    // Parse the response to get the slot details
-                    var slot = JSON.parse(response);
+                eventDidMount: function (info) {
+                    // Add the database ID as a data attribute to the event element
+                    var event = info.event;
+                    var databaseId = event.extendedProps.id;
+                    $(info.el).attr('data-database-id', databaseId);
+                },
+                eventAdd: function (info) {
+                    // Retrieve the event data
+                    var event = info.event;
 
-                    // Create an event object for the new slot
-                    var event = {
-                        title: 'Slot',
-                        start: slot.slot_date + 'T' + slot.slot_time + ':00',
-                        allDay: false
-                    };
+                    // Get the database ID from the event element
+                    var databaseId = $(info.el).attr('data-database-id');
 
-                    // Add the event to the calendar
-                    calendar.addEvent(event);
+                    // Add the database ID as a property to the event
+                    event.extendedProps.id = databaseId;
+                },
+                eventChange: function (info) {
+                    // Retrieve the event data
+                    var event = info.event;
 
-                    // Close the modal and reset the form
-                    $('#addSlotModal').modal('hide');
-                    form[0].reset();
+                    // Get the database ID from the event element
+                    var databaseId = $(info.el).attr('data-database-id');
+
+                    // Update the database ID in the event
+                    event.extendedProps.id = databaseId;
+                },
+                eventRemove: function (info) {
+                    // Retrieve the event data
+                    var event = info.event;
+
+                    // Remove the database ID from the event
+                    delete event.extendedProps.id;
                 }
-
             });
+
             calendar.render();
         });
+
+        //         success: function (response) {
+        //             // Parse the response to get the slot details
+        //             var slot = JSON.parse(response);
+        //
+        //             // Create an event object for the new slot
+        //             var event = {
+        //                 title: 'Slot',
+        //                 start: slot.slot_date + 'T' + slot.slot_time + ':00',
+        //                 // end: slot.slot_date + 'T' + slot.slot_time + ':00',
+        //                 allDay: false,
+        //
+        //             };
+        //
+        //             // Find the existing event with the same id and update its properties
+        //             var existingEvent = calendar.getEventById(event.id);
+        //             if (existingEvent) {
+        //                 existingEvent.setProp('title', event.title);
+        //                 existingEvent.setStart(event.start);
+        //                 existingEvent.setEnd(event.end);
+        //                 existingEvent.setAllDay(event.allDay);
+        //             } else {
+        //                 // Add the event to the calendar
+        //                 calendar.addEvent(event);
+        //             }
+        //
+        //             // Close the modal and reset the form
+        //             $('#addSlotModal').modal('hide');
+        //             $('#editSlotModal').modal('hide');
+        //
+        //             // form[0].reset();
+        //
+        //             $('#addSlotForm')[0].reset();
+        //             $('#editSlotForm')[0].reset();
+        //         }
+        //
+        //     });
+        //     calendar.render();
+        // });
 
 
     </script>

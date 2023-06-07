@@ -21,7 +21,10 @@ class PhysicianScheduleController extends Controller
             $event = [
                 'title' => 'Slot',
                 'start' => $slot->slot_date . 'T' . $slot->slot_time,
-                'allDay' => false
+                'allDay' => false,
+                'extendedProps' => [
+                    'id' => $slot->id, // Add the database ID as a property
+                ],
             ];
 
             $events[] = $event;
@@ -77,12 +80,12 @@ class PhysicianScheduleController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'edit_slot_date' => 'required|date',
-            'edit_slot_time' => 'required|date_format:H:i', Rule::in($this->getValidSlotTimes())
+            'slot_date' => 'required|date',
+            'slot_time' => 'required|date_format:H:i', Rule::in($this->getValidSlotTimes())
         ]);
 
-        $slotDate = $validatedData['edit_slot_date'];
-        $slotTime = $validatedData['edit_slot_time'];
+        $slotDate = $validatedData['slot_date'];
+        $slotTime = $validatedData['slot_time'];
 
         $existingSlot = PhysicianSchedule::where('id', $id)->first();
 
