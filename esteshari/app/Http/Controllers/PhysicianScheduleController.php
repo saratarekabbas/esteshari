@@ -28,6 +28,13 @@ class PhysicianScheduleController extends Controller
                 ],
             ];
 
+            if ($slot->status == 'booked') {
+                $event['color'] = 'green';
+
+            }else{
+                $event['color'] = 'gray';
+            }
+
             $events[] = $event;
         }
 

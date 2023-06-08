@@ -93,7 +93,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <form id="deleteSlotForm" method="POST" action="{{ route('physician.schedule.destroy', ['id' => ':id']) }}">
+                    <form id="deleteSlotForm" method="POST"
+                          action="{{ route('physician.schedule.destroy', ['id' => ':id']) }}">
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="id" id="deleteSlotId">
@@ -174,11 +175,6 @@
 
     <style>
         /* Custom styles for the calendar */
-        /*#calendar {*/
-        /*    width: 800px;*/
-        /*    margin: 0 auto;*/
-        /*}*/
-
         .fc-toolbar {
             padding: 10px;
         }
@@ -201,12 +197,13 @@
         }
 
         .fc-today {
-            background-color: #eaf3ff;
+            /*background-color: #eaf3ff;*/
         }
 
         .fc-event {
-            background-color: #007bff;
-            color: #fff;
+            /*background-color: #ececec;*/
+            /*color: #ff8400;*/
+
         }
 
         a {
@@ -216,6 +213,11 @@
 
         a:hover {
             color: #0a58ca;
+        }
+
+        .fc-list-event-time:hover {
+            color: #0a58ca;
+            cursor: pointer;
         }
     </style>
 @endsection
