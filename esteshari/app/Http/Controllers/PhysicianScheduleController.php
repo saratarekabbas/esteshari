@@ -21,6 +21,7 @@ class PhysicianScheduleController extends Controller
             $event = [
                 'title' => 'Slot',
                 'start' => $slot->slot_date . 'T' . $slot->slot_time,
+                'end' =>date('Y-m-d H:i:s', strtotime(($slot->slot_date . 'T' . $slot->slot_time) . ' +1 hour')),
                 'allDay' => false,
                 'extendedProps' => [
                     'id' => $slot->id, // Add the database ID as a property
@@ -69,7 +70,7 @@ class PhysicianScheduleController extends Controller
         $physicianSchedule = new PhysicianSchedule();
         $physicianSchedule->slot_date = $slotDate;
         $physicianSchedule->slot_time = $slotTime;
-//        $physicianSchedule->status = 'available';
+        $physicianSchedule->status = 'available';
         $physicianSchedule->user()->associate($user);
         $physicianSchedule->save();
 
@@ -84,6 +85,14 @@ class PhysicianScheduleController extends Controller
             'slot_time' => 'required|date_format:H:i', Rule::in($this->getValidSlotTimes())
         ]);
 
+        $slotTime = $validatedData['slot_time'];
+        if (substr($slotTime, -2) !== '00') {
+            // Slot time does not have 00 minutes, add a validation error
+            $errors = new MessageBag;
+            $errors->add('slot_time', 'The slot time must have 00 minutes.');
+            return redirect()->back()->withErrors($errors)->withInput();
+        }
+
         $slotDate = $validatedData['slot_date'];
         $slotTime = $validatedData['slot_time'];
 
@@ -97,7 +106,7 @@ class PhysicianScheduleController extends Controller
         // Update the slot date and time
         $existingSlot->slot_date = $slotDate;
         $existingSlot->slot_time = $slotTime;
-//        $existingSlot->status = 'available';
+        $existingSlot->status = 'available';
         $existingSlot->save();
 
         return redirect()->route('physician.schedule.view')->with('success', 'Slot has been updated successfully');

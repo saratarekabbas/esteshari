@@ -23,7 +23,7 @@
                                    id="slotTime" name="slot_time" required>
                             @error('slot_time')
                             <span class="invalid-feedback" role="alert">
-{{--                                    <strong>{{ $message }}</strong>--}}
+                                    <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
@@ -94,8 +94,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <form id="deleteSlotForm" method="POST" action="{{ route('physician.schedule.destroy', ['id' => ':id']) }}">
-{{--                        <form id="deleteSlotForm" method="POST" action="{{ route('physician.schedule.destroy', ':id') }}">--}}
-
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="id" id="deleteSlotId">
@@ -167,43 +165,7 @@
                     $('#slotDate').val(info.dateStr);
                     $('#addSlotModal').modal('show');
                 },
-
-                eventDidMount: function (info) {
-                    // Add the database ID as a data attribute to the event element
-                    var event = info.event;
-                    var databaseId = event.extendedProps.id;
-                    $(info.el).attr('data-database-id', databaseId);
-                },
-                eventAdd: function (info) {
-                    // Retrieve the event data
-                    var event = info.event;
-
-                    // Get the database ID from the event element
-                    var databaseId = $(info.el).attr('data-database-id');
-
-                    // Add the database ID as a property to the event
-                    event.extendedProps.id = databaseId;
-                },
-                eventChange: function (info) {
-                    // Retrieve the event data
-                    var event = info.event;
-
-                    // Get the database ID from the event element
-                    var databaseId = $(info.el).attr('data-database-id');
-
-                    // Update the database ID in the event
-                    event.extendedProps.id = databaseId;
-                },
-                eventRemove: function (info) {
-                    // Retrieve the event data
-                    var event = info.event;
-
-                    // Remove the database ID from the event
-                    delete event.extendedProps.id;
-                }
             });
-
-
             calendar.render();
         });
 
