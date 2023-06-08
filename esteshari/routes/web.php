@@ -79,7 +79,7 @@ Route::middleware(['auth', 'role:physician', 'physician.status'])->group(functio
     Route::get('/physician/schedule/view', [PhysicianScheduleController::class, 'index'])->name('physician.schedule.view');
     Route::put('/physician/schedule/{id}', [PhysicianScheduleController::class, 'update'])->name('physician.schedule.update');
     Route::post('/physician/schedule/store', [PhysicianScheduleController::class, 'store'])->name('physician.schedule.store');
-
+    Route::delete('/physician/schedule/{id}', [PhysicianScheduleController::class, 'destroy'])->name('physician.schedule.destroy');
 });
 
 

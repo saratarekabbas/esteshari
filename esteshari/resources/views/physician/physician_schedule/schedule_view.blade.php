@@ -23,7 +23,7 @@
                                    id="slotTime" name="slot_time" required>
                             @error('slot_time')
                             <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+{{--                                    <strong>{{ $message }}</strong>--}}
                                 </span>
                             @enderror
                         </div>
@@ -48,7 +48,8 @@
                     <h5 class="modal-title" id="editSlotModalLabel">Edit Schedule Slot</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="editSlotForm" method="POST"  action="{{ route('physician.schedule.update', ['id' => ':id']) }}">
+                <form id="editSlotForm" method="POST"
+                      action="{{ route('physician.schedule.update', ['id' => ':id']) }}">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">
@@ -63,11 +64,44 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <div class="text-end">
+                        <div class="text-start">
                             <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#confirmDeleteModal">Delete Slot
+                            </button>
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    {{--    Delete Slot Modal--}}
+    <div id="confirmDeleteModal" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="confirmDeleteModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this slot?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form id="deleteSlotForm" method="POST" action="{{ route('physician.schedule.destroy', ['id' => ':id']) }}">
+{{--                        <form id="deleteSlotForm" method="POST" action="{{ route('physician.schedule.destroy', ':id') }}">--}}
+
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="id" id="deleteSlotId">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -107,15 +141,27 @@
                     var editFormAction = '{{ route("physician.schedule.update", ":id") }}';
                     editFormAction = editFormAction.replace(':id', slotId);
 
-
                     // Set the values in the edit modal
                     $('#editSlotId').val(slotId);
+                    $('#deleteSlotId').val(slotId);
                     $('#editSlotDate').val(slotDate);
                     $('#editSlotTime').val(slotTime);
                     $('#editSlotForm').attr('action', editFormAction);
 
                     // Show the edit modal
                     $('#editSlotModal').modal('show');
+
+                    // Set the action URL for the delete form
+                    var deleteFormAction = '{{ route("physician.schedule.destroy", ":id") }}';
+                    deleteFormAction = deleteFormAction.replace(':id', slotId);
+
+                    // Set the value in the delete modal
+                    $('#deleteSlotId').val(slotId);
+                    $('#deleteSlotForm').attr('action', deleteFormAction);
+
+                    // Show the delete modal
+                    // $('#confirmDeleteModal').modal('show');
+
                 },
                 dateClick: function (info) {
                     $('#slotDate').val(info.dateStr);
@@ -157,47 +203,9 @@
                 }
             });
 
+
             calendar.render();
         });
-
-        //         success: function (response) {
-        //             // Parse the response to get the slot details
-        //             var slot = JSON.parse(response);
-        //
-        //             // Create an event object for the new slot
-        //             var event = {
-        //                 title: 'Slot',
-        //                 start: slot.slot_date + 'T' + slot.slot_time + ':00',
-        //                 // end: slot.slot_date + 'T' + slot.slot_time + ':00',
-        //                 allDay: false,
-        //
-        //             };
-        //
-        //             // Find the existing event with the same id and update its properties
-        //             var existingEvent = calendar.getEventById(event.id);
-        //             if (existingEvent) {
-        //                 existingEvent.setProp('title', event.title);
-        //                 existingEvent.setStart(event.start);
-        //                 existingEvent.setEnd(event.end);
-        //                 existingEvent.setAllDay(event.allDay);
-        //             } else {
-        //                 // Add the event to the calendar
-        //                 calendar.addEvent(event);
-        //             }
-        //
-        //             // Close the modal and reset the form
-        //             $('#addSlotModal').modal('hide');
-        //             $('#editSlotModal').modal('hide');
-        //
-        //             // form[0].reset();
-        //
-        //             $('#addSlotForm')[0].reset();
-        //             $('#editSlotForm')[0].reset();
-        //         }
-        //
-        //     });
-        //     calendar.render();
-        // });
 
 
     </script>

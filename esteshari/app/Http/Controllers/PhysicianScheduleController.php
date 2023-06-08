@@ -103,6 +103,19 @@ class PhysicianScheduleController extends Controller
         return redirect()->route('physician.schedule.view')->with('success', 'Slot has been updated successfully');
     }
 
+    public function destroy($id)
+    {
+        $slot = PhysicianSchedule::find($id);
+
+        if (!$slot) {
+            return redirect()->back()->withErrors('Slot not found.');
+        }
+
+        $slot->delete();
+
+        return redirect()->route('physician.schedule.view')->with('success', 'Slot has been deleted successfully');
+    }
+
 
 //    public function indexManage(){
 //        return view('physician.physician_schedule.schedule_manage');
