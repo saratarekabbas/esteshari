@@ -16,10 +16,6 @@ Route::get('/', function () {
     return view('homepage');
 });
 
-//Route::get('/old_app', function () {
-//    return view('layouts/old_app');
-//});
-
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
@@ -27,9 +23,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware(
 //This is for redirecting to services (e.g., facebook)
 Route::get('/redirect/{service}', [SocialController::class, 'redirect']);
 Route::get('/callback/{service}', [SocialController::class, 'callback']);
-
-//Offer
-//Route::get('fillable', [OfferController::class, 'getOffers']);
 
 //Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
 //    Route::get('index', [GeneralController::class, 'getIndex']);
@@ -50,6 +43,9 @@ Route::group(['middleware' => ['auth', 'role:patient']], function () {
     Route::post('/patient/physicians_list/view/', [PhysiciansListController::class, 'book'])->name('patient.physicians_list.book');
     Route::post('/patient/session_booking/', [PhysiciansListController::class, 'payment'])->name('patient.session_booking');
     Route::post('/patient/session_booking_confirm/', [PhysiciansListController::class, 'makePayment'])->name('patient.booking_confirm');
+
+    Route::get('/patient/appointments/upcoming_appointments', function(){
+    return view('patient.appointments.upcoming_appointments');})->name('patient.upcoming_appointments');
 
 });
 

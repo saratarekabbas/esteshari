@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('physician_portfolio', function (Blueprint $table) {
             $table->id();
-            $table->date('slot_date');
-            $table->time('slot_time');
-            $table->string('status')->default('available');
+//            $table->date('slot_date');
+//            $table->time('slot_time');
+//            $table->string('status')->default('available');
             $table->timestamps();
         });
     }

@@ -1,11 +1,7 @@
 @extends('layouts.patient_layout')
 
 @section('content')
-    @if (Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
-    @endif
+
     <div class="container">
         <h3 class="form-title">Payment for Session with Dr. {{$physician->name}} on {{$session->slot_date}}, {{ substr($session->slot_time, 0, 5) }}</h3>
         <form method="post" action="{{ route('patient.booking_confirm') }}">

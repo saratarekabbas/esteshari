@@ -48,15 +48,17 @@ class PhysiciansListController extends Controller
         $patient = Auth::user();
 
         PhysicianSchedule::where('id', '=', $session->id)->update([
-            'status' => "booked"
+            'status' => "booked",
+            'patient_id' => $patient->id
         ]);
 
         Mail::to($physician->email)->send(new PhysicianSessionBookedEmail($physician->email, $physician->name, 'Dr.', $patient->name, 'Ms.', substr($session->slot_time, 0, 5), $session->slot_date));
         Mail::to($patient->email)->send(new PatientSessionBookedEmail($patient->email, $patient->name, 'Ms.', $physician->name, 'Dr.', substr($session->slot_time, 0, 5), $session->slot_date));
 
-        return view('patient.session_booking.booking_confirm', compact('session', 'physician'));
-
+        return redirect()->route('patient.upcoming_appointments')->with('success', 'Your booking has been confirmed');
     }
+
+
 
 }
 
