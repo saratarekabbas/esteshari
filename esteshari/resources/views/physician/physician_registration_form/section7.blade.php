@@ -200,7 +200,7 @@
         </div>
 
     <div class="col-md-3 form-floating">
-        <select id="qualification_type" name="qualification_type"
+        <select id="qualification_type"
                 class="form-select @error('qualification_type') is-invalid @enderror">
             <option value="">Select qualification type</option>
             <option value="TOEFL (Test of English as a Foreign Language)">TOEFL (Test of English as a Foreign
@@ -235,7 +235,7 @@
 
             <div id="otherQualificationTypeContainer" class="form-floating col-md-3" style="display: none;">
                 <input type="text" placeholder="Other Qualification Type" id="otherQualificationType"
-                       name="otherQualificationType"
+
                        class="form-control
 @error('qualification_type') is-invalid @enderror"
                value="{{ $languageQualification ? $languageQualification->otherQualificationType : old('otherQualificationType') }}">
@@ -246,7 +246,7 @@
             </div>
 
             <div class="col-md-6 form-floating">
-                <input type="text" id="qualification_title" name="qualification_title"
+                <input type="text" id="qualification_title"
                        placeholder="Enter Language Qualification Title"
                        class="form-control @error('qualification_title') is-invalid @enderror"
                value="{{ $languageQualification ? $languageQualification->qualification_title : old('qualification_title') }}">
@@ -257,7 +257,7 @@
             </div>
 
             <div class="col-md-6 form-floating">
-                <input type="date" id="qualification_issue_date" name="qualification_issue_date"
+                <input type="date" id="qualification_issue_date"
                        class="form-control @error('qualification_issue_date') is-invalid @enderror"
                value="{{ $languageQualification ? $languageQualification->qualification_issue_date : old('qualification_issue_date') }}">
         <label for="qualification_issue_date">Issue Date</label>
@@ -267,7 +267,7 @@
             </div>
 
             <div class="col-md-6 form-floating">
-                <input type="date" id="qualification_expiry_date" name="qualification_expiry_date"
+                <input type="date" id="qualification_expiry_date"
                        class="form-control @error('qualification_expiry_date') is-invalid @enderror"
                value="{{ $languageQualification ? $languageQualification->qualification_expiry_date : old('qualification_expiry_date') }}">
         <label for="qualification_expiry_date">Expiration Date</label>
@@ -279,7 +279,7 @@
             <div class="form-group">
                 <label for="qualification_files" class="form-label">Language Qualification Files:</label>
                 <input class="form-control @error('qualification_files') is-invalid @enderror" type="file"
-               name="qualification_files[]"
+
                id="qualification_files" multiple/>
 
         @error('qualification_files')

@@ -28,7 +28,7 @@
 <body>
 <div class="row header">
     <div class="col-lg-2 col-md-3">
-        <a href="{{route('physician.dashboard')}}" style="text-decoration: none">
+        <a href="{{route('patient.dashboard')}}" style="text-decoration: none">
             <div class="navbar-logo">
                 <img src="{{ asset('assets/favicon.ico') }}" alt="Esteshari Logo" height="30">
                 {{__('homepage.esteshari')}}

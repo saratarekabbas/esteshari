@@ -503,11 +503,11 @@
         </div>
 
  <div class="col-md-4 form-floating">
-        <input type="text" id="job_title" name="job_title"
+        <input type="text" id="job_title"
                placeholder="Enter Job Title"
                class="form-control @error('job_title') is-invalid @enderror"
                value="{{ $workExperience ? $workExperience->job_title : old('job_title') }}"
-               required>
+               >
         <label for="degree_title">Job Title</label>
         @error('job_title')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -515,11 +515,11 @@
         </div>
 
         <div class="col-md-4 form-floating">
-            <input type="text" id="employer_name" name="employer_name"
+            <input type="text" id="employer_name"
                    placeholder="Enter Employer Name"
                    class="form-control  @error('employer_name') is-invalid @enderror"
                value="{{ $workExperience ? $workExperience->employer_name : old('employer_name') }}"
-               required>
+               >
         <label for="institute">Employer Name</label>
         @error('employer_name')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -527,8 +527,8 @@
         </div>
 
         <div class="col-md-4 form-floating">
-            <select id="employment_type" name="employment_type"
-                    class="form-select @error('employment_type') is-invalid @enderror" required>
+            <select id="employment_type"
+                    class="form-select @error('employment_type') is-invalid @enderror" >
             <option value="">Select Employment Type</option>
             <option value="Full-time">Full-time</option>
             <option value="Part-time">Part-time</option>
@@ -550,10 +550,10 @@
         </div>
 
         <div class="col-md-6 form-floating">
-            <input type="date" id="start_date_of_employment" name="start_date_of_employment"
+            <input type="date" id="start_date_of_employment"
                    class="form-control @error('start_date_of_employment') is-invalid @enderror"
                value="{{ $workExperience ? $workExperience->start_date_of_employment : old('start_date_of_employment') }}"
-               required>
+               >
 
         <label for="year_of_graduation">Start Date of Employment</label>
         @error('start_date_of_employment')
@@ -562,30 +562,30 @@
         </div>
 
         <div class="col-md-6 form-floating">
-            <input type="date" id="end_date_of_employment" name="end_date_of_employment"
+            <input type="date" id="end_date_of_employment"
                    class="form-control @error('end_date_of_employment') is-invalid @enderror"
                value="{{ $workExperience ? $workExperience->end_date_of_employment : old('end_date_of_employment') }}"
-               required>
+               >
         <label for="end_date_of_employment">End Date of Employment</label>
         @error('end_date_of_employment')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="current_role" name="current_role"
+            <input type="checkbox" class="form-check-input" id="current_role
                    onchange="handleCheckboxChange()">
             <label class="form-check-label" for="current_role">I am currently working in this role</label>
-            <input type="hidden" id="current_role" name="current_role"
+            <input type="hidden" id="current_role"
                    value="{{ $workExperience && $workExperience->current_role ? 1 : 0 }}">
 
         </div>
     </div>
 
     <div class="col-md-4 form-floating">
-        <input type="text" id="job_location_city" name="job_location_city"
+        <input type="text" id="job_location_city"
                placeholder="Enter Job Location - City"
                class="form-control  @error('job_location_city') is-invalid @enderror"
                value="{{ $workExperience ? $workExperience->job_location_city : old('job_location_city') }}"
-               required>
+               >
         <label for="institute">Job Location - City</label>
         @error('job_location_city')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -593,8 +593,8 @@
         </div>
 
         <div class="col-md-4 form-floating">
-            <select id="job_location_country" name="job_location_country"
-                    class="form-select @error('job_location_country') is-invalid @enderror" required>
+            <select id="job_location_country"
+                    class="form-select @error('job_location_country') is-invalid @enderror" >
             <option value="">Select Job Location</option>
             <option value="Afghanistan">Afghanistan</option>
             <option value="Aland Islands">Aland Islands</option>
@@ -863,8 +863,8 @@
         </div>
 
         <div class="col-md-4 form-floating">
-            <select id="location_type" name="location_type"
-                    class="form-select @error('location_type') is-invalid @enderror" required>
+            <select id="location_type"
+                    class="form-select @error('location_type') is-invalid @enderror" >
             <option value="">Select Job Location</option>
             <option value="On-site">On-site</option>
             <option value="Hybrid">Hybrid</option>
@@ -879,7 +879,7 @@
 
         <div class="col-12 col-md-12">
             <div class="form-floating">
-                            <textarea rows="3" type="text" id="job_description" name="job_description"
+                            <textarea rows="3" type="text" id="job_description"
                                       class="form-control @error('job_description') is-invalid @enderror">{{ $workExperience ? $workExperience->job_description : old('job_description') }}</textarea>
             <label for="job_description">Job Description</label>
             @error('job_description')
@@ -891,7 +891,7 @@
     <div class="form-group">
         <label for="job_experience_files" class="form-label">Job Experience Files:</label>
         <input class="form-control @error('job_experience_files') is-invalid @enderror" type="file"
-               name="job_experience_files[]"
+
                id="job_experience_files" multiple/>
 
         @error('job_experience_files')

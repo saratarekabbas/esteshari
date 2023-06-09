@@ -546,6 +546,7 @@
         </div>
     </div>
 
+</form>
     <script>
         // -------------------------------------------------
         // START OF old value management for lists
@@ -605,7 +606,7 @@
             <div class="row align-items-center">
                 <div class="col-12 col-md-2">
                     <div class="form-floating">
-                        <select id="award_type" name="award_type"
+                        <select id="award_type"
                                 class="form-select @error('award_type') is-invalid @enderror">
                             <option disabled selected>Select Award</option>
                             <optgroup label="1. Academic Honors">
@@ -677,7 +678,7 @@
         </div>
 
         <div id="otherAwardTypeContainer" class="form-floating col-md-2" style="display: none;">
-            <input type="text" placeholder="Other Award Type" id="otherAwardType" name="otherAwardType"
+            <input type="text" placeholder="Other Award Type" id="otherAwardType"
                    class="form-control"
                    value="{{ $educationalQualification ? $educationalQualification->otherAwardType : old('otherAwardType') }}">
                     <label for="otherTitle">Other Award Type</label>
@@ -688,7 +689,7 @@
 
             <div class="col-12 col-md-4">
                 <div class="form-floating">
-                    <input type="text" id="award_title" name="award_title"
+                    <input type="text" id="award_title"
                            placeholder="Award Title"
                            class="form-control @error('award_title') is-invalid @enderror"
                                value="{{ $educationalQualification ? $educationalQualification->award_title : old('award_title') }}">
@@ -701,7 +702,7 @@
 
         <div class="col-12 col-md-4">
             <div class="form-floating">
-                <input type="date" id="date_of_award" name="date_of_award"
+                <input type="date" id="date_of_award"
                        class="form-control @error('date_of_award') is-invalid @enderror"
                                value="{{ $educationalQualification ? $educationalQualification->date_of_award : old('date_of_award') }}">
                         <label for="date_of_birth">Date of Award</label>
@@ -713,7 +714,7 @@
 
         <div class="col-12 col-md-12">
             <div class="form-floating">
-                <textarea rows="3" type="text" id="award_description" name="award_description"
+                <textarea rows="3" type="text" id="award_description"
                           class="form-control @error('award_description') is-invalid @enderror">{{ $educationalQualification ? $educationalQualification->award_description : old('award_description') }}</textarea>
                         <label for="award_description">Award Description</label>
                         @error('award_description')
@@ -744,9 +745,9 @@
             <h5 class="form-subtitle">Qualification ${qualificationCount}:</h5>
         </div>
 <div class="col-md-3 form-floating">
-        <select id="degree_level" name="degree_level"
-                class="form-select @error('degree_level') is-invalid @enderror"
-                required>
+        <select id="degree_level"
+                class="form-select"
+                >
             <option value="">Select degree</option>
             <option value="Dr">Diploma</option>
             <option value="Prof">Associate Degree</option>
@@ -761,50 +762,35 @@
         </select>
 
         <label for="title">Degree Level</label>
-        @error('degree_level')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
             </div>
 
             <div id="otherDegreeContainer" class="form-floating col-md-3" style="display: none;">
-                <input type="text" placeholder="Other Degree Level" id="otherDegree" name="otherDegree"
-                       class="form-control
-@error('degree_level') is-invalid @enderror"
-               value="{{ $educationalQualification ? $educationalQualification->otherDegree : old('otherDegree') }}">
+                <input type="text" placeholder="Other Degree Level" id="otherDegree"
+                       class="form-control">
         <label for="otherDegree">Other Degree Level</label>
-        @error('degree_level')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
             </div>
 
 
             <div class="col-md-6 form-floating">
-                <input type="text" id="degree_title" name="degree_title"
+                <input type="text" id="degree_title"
                        placeholder="Enter Degree Title"
-                       class="form-control @error('degree_title') is-invalid @enderror"
-               value="{{ $educationalQualification ? $educationalQualification->degree_title : old('degree_title') }}"
-               required>
+                       class="form-control"
+               >
         <label for="degree_title">Degree Title</label>
-        @error('degree_title')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
             </div>
 
             <div class="col-md-4 form-floating">
-                <input type="text" id="institute" name="institute"
+                <input type="text" id="institute"
                        placeholder="Enter Institute Title"
-                       class="form-control  @error('institute') is-invalid @enderror"
-               value="{{ $educationalQualification ? $educationalQualification->institute : old('institute') }}"
-               required>
+                       class="form-control"
+               value=""
+               >
         <label for="institute">Institute/University Name</label>
-        @error('institute')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
             </div>
 
             <div class="col-md-4 form-floating">
-                <select id="institute_location" name="institute_location"
-                        class="form-select @error('institute_location') is-invalid @enderror" required>
+                <select id="institute_location"
+                        class="form-select" >
             <option value="">Select Institute Location</option>
             <option value="Afghanistan">Afghanistan</option>
             <option value="Aland Islands">Aland Islands</option>
@@ -1067,66 +1053,39 @@
             <option value="Zimbabwe">Zimbabwe</option>
         </select>
         <label for="institute_location">Institute/University Location</label>
-        @error('institute_location')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
             </div>
 
             <div class="col-md-4 form-floating">
-                <input type="date" id="year_of_graduation" name="year_of_graduation"
-                       class="form-control @error('year_of_graduation') is-invalid @enderror"
-               value="{{ $educationalQualification ? $educationalQualification->year_of_graduation : old('year_of_graduation') }}"
-               required>
+                <input type="date" id="year_of_graduation"
+                       class="form-control"
+               >
 
         <label for="year_of_graduation">Year of Graduation</label>
-        @error('year_of_graduation')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
             </div>
 
 {{--    ORIGINAL--}}
             <div class="form-group">
                 <label for="medical_degree_files" class="form-label">Medical Degree Files (e.g., Certificate, Academic
                     Transcript, etc.):</label>
-                <input class="form-control @error('medical_degree_files') is-invalid @enderror" type="file"
-               name="medical_degree_files[]"
+                <input class="form-control" type="file"
                id="medical_degree_files" multiple/>
 
-        @error('medical_degree_files')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
 
-            @if ($educationalQualification)
-            <div class="mt-2">
-                <strong>Previously uploaded files:</strong>
-                @foreach (json_decode($educationalQualification->medical_degree_files) as $file)
-            <div>
-                <a href="{{ asset('storage/'. $file) }}" target="_blank">View File: {{ $file }}</a>
-                    </div>
-                @endforeach
-            </div>
-        @elseif (old('medical_degree_files'))
-            <div class="mt-2">
-                <strong>Previously uploaded files:</strong>
-                @foreach (old('medical_degree_files') as $file)
-            <div>{{ $file }}</div>
-                @endforeach
-            </div>
-        @endif
+
             </div>
 
 
-            <div class="col-md-12">
-                <h5 class="form-subtitle">Honors, Awards, Recognitions and Distinctions:</h5>
-            </div>
+             <div class="col-md-12">
+        <h5 class="form-subtitle">Honors, Awards, Recognitions and Distinctions:</h5>
+    </div>
 
-            <ol class="list-group list-group-numbered">
-                <li class="list-group-item">
-                    <div class="row align-items-center">
-                        <div class="col-12 col-md-2">
-                            <div class="form-floating">
-                                <select id="award_type" name="award_type"
-                                        class="form-select @error('award_type') is-invalid @enderror">
+    <ol class="list-group list-group-numbered">
+        <li class="list-group-item">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-2">
+                    <div class="form-floating">
+                        <select id="award_type"
+                                class="form-select @error('award_type') is-invalid @enderror">
                             <option disabled selected>Select Award</option>
                             <optgroup label="1. Academic Honors">
                                 <option value="Dean's List">Dean's List</option>
@@ -1197,7 +1156,7 @@
         </div>
 
         <div id="otherAwardTypeContainer" class="form-floating col-md-2" style="display: none;">
-            <input type="text" placeholder="Other Award Type" id="otherAwardType" name="otherAwardType"
+            <input type="text" placeholder="Other Award Type" id="otherAwardType"
                    class="form-control"
                    value="{{ $educationalQualification ? $educationalQualification->otherAwardType : old('otherAwardType') }}">
                     <label for="otherTitle">Other Award Type</label>
@@ -1208,7 +1167,7 @@
 
             <div class="col-12 col-md-4">
                 <div class="form-floating">
-                    <input type="text" id="award_title" name="award_title"
+                    <input type="text" id="award_title"
                            placeholder="Award Title"
                            class="form-control @error('award_title') is-invalid @enderror"
                                value="{{ $educationalQualification ? $educationalQualification->award_title : old('award_title') }}">
@@ -1221,7 +1180,7 @@
 
         <div class="col-12 col-md-4">
             <div class="form-floating">
-                <input type="date" id="date_of_award" name="date_of_award"
+                <input type="date" id="date_of_award"
                        class="form-control @error('date_of_award') is-invalid @enderror"
                                value="{{ $educationalQualification ? $educationalQualification->date_of_award : old('date_of_award') }}">
                         <label for="date_of_birth">Date of Award</label>
@@ -1233,13 +1192,9 @@
 
         <div class="col-12 col-md-12">
             <div class="form-floating">
-                <textarea rows="3" type="text" id="award_description" name="award_description"
+                <textarea rows="3" type="text" id="award_description"
                           class="form-control @error('award_description') is-invalid @enderror">{{ $educationalQualification ? $educationalQualification->award_description : old('award_description') }}</textarea>
                         <label for="award_description">Award Description</label>
-                        @error('award_description')
-            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-            </div>
         </div>
     </div>
 </li>
@@ -1255,5 +1210,5 @@
 
 
     </script>
-</form>
+
 

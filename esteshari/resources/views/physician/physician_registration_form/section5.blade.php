@@ -186,9 +186,9 @@
         </div>
 
 <div class="col-md-3 form-floating">
-        <select id="registration_type" name="registration_type"
+        <select id="registration_type"
                 class="form-select @error('registration_type') is-invalid @enderror"
-                required>
+                >
             <option value="">Select Registration Type</option>
             <option value="Medical License">Medical License</option>
             <option value="State Registration">State Registration</option>
@@ -204,7 +204,7 @@
             </div>
 
             <div id="otherRegistrationContainer" class="form-floating col-md-3" style="display: none;">
-                <input type="text" placeholder="Other Registration Type" id="otherRegistration" name="otherRegistration"
+                <input type="text" placeholder="Other Registration Type" id="otherRegistration"
                        class="form-control
 @error('registration_type') is-invalid @enderror"
                value="{{ $professionalRegistration ? $professionalRegistration->otherRegistration : old('otherRegistration') }}">
@@ -215,11 +215,11 @@
             </div>
 
             <div class="col-md-6 form-floating">
-                <input type="text" id="registration_title" name="registration_title"
+                <input type="text" id="registration_title"
                        placeholder="Enter Registration Title"
                        class="form-control @error('registration_title') is-invalid @enderror"
                value="{{ $professionalRegistration ? $professionalRegistration->registration_title : old('registration_title') }}"
-               required>
+               >
         <label for="registration_title">Registration Title</label>
         @error('registration_title')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -227,7 +227,7 @@
             </div>
 
             <div class="col-md-4 form-floating">
-                <input type="text" id="registration_number" name="registration_number"
+                <input type="text" id="registration_number"
                        placeholder="Enter Registration Number"
                        class="form-control @error('registration_number') is-invalid @enderror"
                value="{{ $professionalRegistration ? $professionalRegistration->registration_number : old('registration_number') }}"
@@ -239,10 +239,10 @@
             </div>
 
             <div class="col-md-4 form-floating">
-                <input type="date" id="registration_issue_date" name="registration_issue_date"
+                <input type="date" id="registration_issue_date"
                        class="form-control @error('registration_issue_date') is-invalid @enderror"
                value="{{ $professionalRegistration ? $professionalRegistration->registration_issue_date : old('registration_issue_date') }}"
-               required>
+               >
 
         <label for="registration_issue_date">Issue Date</label>
         @error('registration_issue_date')
@@ -251,10 +251,10 @@
             </div>
 
             <div class="col-md-4 form-floating">
-                <input type="date" id="registration_expiry_date" name="registration_expiry_date"
+                <input type="date" id="registration_expiry_date"
                        class="form-control @error('registration_expiry_date') is-invalid @enderror"
                value="{{ $professionalRegistration ? $professionalRegistration->registration_expiry_date : old('registration_expiry_date') }}"
-               required>
+               >
 
         <label for="registration_expiry_date">Expiration Date</label>
         @error('registration_expiry_date')
@@ -266,7 +266,7 @@
             <div class="form-group">
                 <label for="registration_files" class="form-label">Registration Files:</label>
                 <input class="form-control @error('registration_files') is-invalid @enderror" type="file"
-               name="registration_files[]"
+
                id="registration_files" multiple/>
 
         @error('registration_files')

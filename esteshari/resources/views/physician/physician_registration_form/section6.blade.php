@@ -457,9 +457,9 @@
         </div>
 
  <div class="col-md-2 form-floating">
-        <select id="reference_title" name="reference_title"
+        <select id="reference_title"
                 class="form-select @error('reference_title') is-invalid @enderror"
-                required>
+                >
             <option value="">Select title</option>
             <option value="Dr">Dr (Doctor)</option>
             <option value="Capt.">Capt (Captain)</option>
@@ -501,7 +501,7 @@
             </div>
 
             <div id="otherReferenceTitleContainer" class="form-floating col-md-2" style="display: none;">
-                <input type="text" placeholder="Other Title" id="otherReferenceTitle" name="otherReferenceTitle"
+                <input type="text" placeholder="Other Title" id="otherReferenceTitle"
                        class="form-control  @error('reference_title') is-invalid @enderror"
                value="{{ $physicianReference ? $physicianReference->otherReferenceTitle : old('otherReferenceTitle') }}">
         <label for="otherReferenceTitle">Other Title</label>
@@ -509,7 +509,7 @@
 
 
     <div class="col-md-8 form-floating">
-        <input type="text" id="reference_full_name" name="reference_full_name"
+        <input type="text" id="reference_full_name"
                placeholder="Enter Reference Full Name"
                class="form-control @error('reference_full_name') is-invalid @enderror"
                value="{{ $physicianReference ? $physicianReference->reference_full_name : old('reference_full_name') }}"
@@ -521,9 +521,9 @@
             </div>
 
             <div class="col-md-3 form-floating">
-                <select id="reference_relationship" name="reference_relationship"
+                <select id="reference_relationship"
                         class="form-select @error('reference_relationship') is-invalid @enderror"
-                required>
+                >
             <option value="">Select Relationship</option>
             <option value="Supervisor">Supervisor</option>
             <option value="Colleague">Colleague</option>
@@ -549,17 +549,17 @@
             </div>
 
             <div id="otherReferenceRelationshipContainer" class="form-floating col-md-2" style="display: none;">
-                <input type="text" placeholder="Other Relationship" id="otherReferenceRelationship" name="otherReferenceRelationship"
+                <input type="text" placeholder="Other Relationship" id="otherReferenceRelationship"
                        class="form-control  @error('reference_relationship') is-invalid @enderror"
                value="{{ $physicianReference ? $physicianReference->otherReferenceRelationship : old('otherReferenceRelationship') }}">
         <label for="otherReferenceRelationship">Other Relationship</label>
     </div>
 
     <div class="col-md-3 form-floating">
-            <input type="email" placeholder="Reference email address" id="reference_email_address" name="reference_email_address"
+            <input type="email" placeholder="Reference email address" id="reference_email_address"
                class="form-control @error('reference_email_address') is-invalid @enderror"
                value="{{ $physicianReference ? $physicianReference->reference_email_address : old('reference_email_address')  }}"
-                required>
+                >
 
         <label for="reference_email_address">Reference Email Address</label>
         @error('reference_email_address')
@@ -571,8 +571,8 @@
                 <div class="row">
                     <div class="input-group">
                         <div class="col-md-3 form-floating">
-                            <select id="country_code" name="country_code"
-                                    class="form-select @error('country_code') is-invalid @enderror" required>
+                            <select id="country_code"
+                                    class="form-select @error('country_code') is-invalid @enderror" >
                         <option>Select Code</option>
                         <option data-countryCode="DZ" value="213">Algeria (+213)</option>
                         <option data-countryCode="AD" value="376">Andorra (+376)</option>
@@ -797,10 +797,10 @@
 
             <div class="col-md-9 form-floating">
                 <input type="text" placeholder="Enter mobile number" id="mobile_number"
-                       name="mobile_number"
+
                        class="form-control col-md-3 @error('mobile_number') is-invalid @enderror"
                            value="{{ $physicianReference ? $physicianReference->mobile_number : old('mobile_number') }}"
-                           required>
+                           >
                     <label for="mobile_number">Mobile Number</label>
                     @error('mobile_number')
             <div class="invalid-feedback">{{ $message }}</div>

@@ -202,7 +202,7 @@
         </div>
 
 <div class="col-md-3 form-floating">
-        <select id="insurance_type" name="insurance_type"
+        <select id="insurance_type"
                 class="form-select @error('insurance_type') is-invalid @enderror"
                 >
             <option value="">Select Insurance Type</option>
@@ -217,7 +217,7 @@
             </div>
 
             <div id="otherInsuranceContainer" class="form-floating col-md-3" style="display: none;">
-                <input type="text" placeholder="Other Insurance Type" id="otherInsurance" name="otherInsurance"
+                <input type="text" placeholder="Other Insurance Type" id="otherInsurance"
                        class="form-control
 @error('insurance_type') is-invalid @enderror"
                value="{{ $insurance ? $insurance->otherInsurance : old('otherInsurance') }}">
@@ -228,7 +228,7 @@
             </div>
 
             <div class="col-md-6 form-floating">
-                <input type="text" id="insurance_title" name="insurance_title"
+                <input type="text" id="insurance_title"
                        placeholder="Enter Insurance Title"
                        class="form-control @error('insurance_title') is-invalid @enderror"
                value="{{ $insurance ? $insurance->insurance_title : old('insurance_title') }}"
@@ -240,7 +240,7 @@
             </div>
 
             <div class="col-md-4 form-floating">
-                <input type="text" id="insurance_number" name="insurance_number"
+                <input type="text" id="insurance_number"
                        placeholder="Enter insurance Number"
                        class="form-control @error('insurance_number') is-invalid @enderror"
                value="{{ $insurance ? $insurance->insurance_number : old('insurance_number') }}"
@@ -252,7 +252,7 @@
             </div>
 
             <div class="col-md-4 form-floating">
-                <input type="date" id="insurance_issue_date" name="insurance_issue_date"
+                <input type="date" id="insurance_issue_date"
                        class="form-control @error('insurance_issue_date') is-invalid @enderror"
                value="{{ $insurance ? $insurance->insurance_issue_date : old('insurance_issue_date') }}"
                >
@@ -264,7 +264,7 @@
             </div>
 
             <div class="col-md-4 form-floating">
-                <input type="date" id="insurance_expiry_date" name="insurance_expiry_date"
+                <input type="date" id="insurance_expiry_date"
                        class="form-control @error('insurance_expiry_date') is-invalid @enderror"
                value="{{ $insurance ? $insurance->insurance_expiry_date : old('insurance_expiry_date') }}"
                >
@@ -279,7 +279,7 @@
             <div class="form-group">
                 <label for="insurance_files" class="form-label">insurance Files:</label>
                 <input class="form-control @error('insurance_files') is-invalid @enderror" type="file"
-               name="insurance_files[]"
+
                id="insurance_files" multiple/>
 
         @error('insurance_files')

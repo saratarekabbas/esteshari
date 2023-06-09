@@ -1,11 +1,6 @@
 @extends('layouts.physician_layout')
 
 @section('content')
-    @if (Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
-    @endif
     <div class="container">
         <h2 class="form-title">Physician Registration Form</h2>
         @if ($section == 1)
@@ -49,26 +44,23 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
             <li class="page-item {{ $section == 1 ? 'disabled' : '' }}">
                 <a class="page-link" href="/physician/registration/{{ $section - 1 }}" tabindex="-1">Previous</a>
             </li>
             <li class="page-item"><a class="page-link" href="/physician/registration/1">1</a></li>
             <li class="page-item"><a class="page-link" href="/physician/registration/2">2</a></li>
-            @ -40,8 +40,8 @@
+            <li class="page-item"><a class="page-link" href="/physician/registration/3">3</a></li>
+            <li class="page-item"><a class="page-link" href="/physician/registration/4">4</a></li>
+            <li class="page-item"><a class="page-link" href="/physician/registration/5">5</a></li>
             <li class="page-item"><a class="page-link" href="/physician/registration/6">6</a></li>
             <li class="page-item"><a class="page-link" href="/physician/registration/7">7</a></li>
             <li class="page-item"><a class="page-link" href="/physician/registration/8">8</a></li>
             <li class="page-item">
-                <a class="page-link" href="#">Next</a>
             <li class="page-item {{ $section == 8 ? 'disabled' : '' }}">
                 <a class="page-link" href="/physician/registration/{{ $section + 1 }}">Next</a>
             </li>
         </ul>
     </nav>
-
-
-
 
 @endsection
 

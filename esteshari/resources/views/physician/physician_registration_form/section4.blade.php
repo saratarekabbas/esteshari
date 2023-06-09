@@ -213,9 +213,9 @@
         </div>
 
 <div class="col-md-3 form-floating">
-        <select id="certification_type" name="certification_type"
+        <select id="certification_type"
                 class="form-select @error('certification_type') is-invalid @enderror"
-                required>
+                >
             <option value="">Select Certification Type</option>
             <option value="Specialty Board Certification">Specialty Board Certification</option>
             <option value="Sub-specialty Board Certification">Sub-specialty Board Certification</option>
@@ -232,7 +232,7 @@
                 </div>
 
                 <div id="otherCertificationContainer" class="form-floating col-md-3" style="display: none;">
-                    <input type="text" placeholder="Other Certification Type" id="otherCertification" name="otherCertification"
+                    <input type="text" placeholder="Other Certification Type" id="otherCertification"
                            class="form-control
 @error('certification_type') is-invalid @enderror"
                value="{{ $boardCertification ? $boardCertification->otherCertification : old('otherCertification') }}">
@@ -244,11 +244,11 @@
 
 
                 <div class="col-md-6 form-floating">
-                    <input type="text" id="certification_title" name="certification_title"
+                    <input type="text" id="certification_title"
                            placeholder="Enter Certification Title"
                            class="form-control @error('certification_title') is-invalid @enderror"
                value="{{ $boardCertification ? $boardCertification->certification_title : old('certification_title') }}"
-               required>
+               >
         <label for="degree_title">Certification Title</label>
         @error('certification_title')
                 <div class="invalid-feedback">{{ $message }}</div>
@@ -256,11 +256,11 @@
                 </div>
 
                 <div class="col-md-4 form-floating">
-                    <input type="text" id="certification_issuing_board" name="certification_issuing_board"
+                    <input type="text" id="certification_issuing_board"
                            placeholder="Enter Issuing Board Name"
                            class="form-control @error('certification_issuing_board') is-invalid @enderror"
                value="{{ $boardCertification ? $boardCertification->certification_issuing_board : old('certification_issuing_board') }}"
-               required>
+               >
         <label for="degree_title">Issuing Board</label>
         @error('certification_issuing_board')
                 <div class="invalid-feedback">{{ $message }}</div>
@@ -268,10 +268,10 @@
                 </div>
 
                 <div class="col-md-4 form-floating">
-                    <input type="date" id="certification_issue_date" name="certification_issue_date"
+                    <input type="date" id="certification_issue_date"
                            class="form-control @error('certification_issue_date') is-invalid @enderror"
                value="{{ $boardCertification ? $boardCertification->certification_issue_date : old('certification_issue_date') }}"
-               required>
+               >
 
         <label for="certification_issue_date">Issue Date</label>
         @error('certification_issue_date')
@@ -280,7 +280,7 @@
                 </div>
 
                 <div class="col-md-4 form-floating">
-                    <input type="date" id="certification_expiry_date" name="certification_expiry_date"
+                    <input type="date" id="certification_expiry_date"
                            class="form-control @error('certification_expiry_date') is-invalid @enderror"
                value="{{ $boardCertification ? $boardCertification->certification_expiry_date : old('certification_expiry_date') }}"
         >
@@ -292,7 +292,7 @@
                 </div>
 
                 <div class="col-md-4 form-floating">
-                    <input type="text" id="certification_credential_id" name="certification_credential_id"
+                    <input type="text" id="certification_credential_id"
                            placeholder="Enter Credential ID"
                            class="form-control @error('certification_credential_id') is-invalid @enderror"
                value="{{ $boardCertification ? $boardCertification->certification_credential_id : old('certification_credential_id') }}"
@@ -304,7 +304,7 @@
                 </div>
 
                 <div class="col-md-8 form-floating">
-                    <input type="text" id="certification_credential_url" name="certification_credential_url"
+                    <input type="text" id="certification_credential_url"
                            placeholder="Enter Credential URL"
                            class="form-control @error('certification_credential_url') is-invalid @enderror"
                value="{{ $boardCertification ? $boardCertification->certification_credential_url : old('certification_credential_url') }}"
@@ -318,7 +318,7 @@
                 <div class="form-group">
                     <label for="certification_files" class="form-label">Certification Files:</label>
                     <input class="form-control @error('certification_files') is-invalid @enderror" type="file"
-               name="certification_files[]"
+
                id="certification_files" multiple/>
 
         @error('certification_files')
