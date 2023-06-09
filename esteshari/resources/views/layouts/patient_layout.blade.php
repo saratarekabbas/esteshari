@@ -38,20 +38,17 @@
     <div class="col-lg-10 col-md-9">
         <ul>
             <li class="dropdown">
-                <button href="#">Search Physician</button>
-                {{--                <div class="dropdown-content">--}}
-                {{--                    <a href="#">Upcoming Appointments</a>--}}
-                {{--                    <a href="#">Cancelled Appointments</a>--}}
-                {{--                    <a href="#">Appointments History</a>--}}
-                {{--                </div>--}}
+                <button href="">Search Physician</button>
+                                <div class="dropdown-content">
+                                    <a href="{{route('patient.physicians_list.view')}}">View Physicians List</a>
+                                </div>
             </li>
             <li class="dropdown">
-                <button href="#">My Profile</button>
-                {{--                <div class="dropdown-content">--}}
-                {{--                    <a href="#">Upcoming Appointments</a>--}}
-                {{--                    <a href="#">Cancelled Appointments</a>--}}
-                {{--                    <a href="#">Appointments History</a>--}}
-                {{--                </div>--}}
+                <button href="">My Profile</button>
+                                <div class="dropdown-content">
+                                    <a href="#">View My Profile</a>
+                                    <a href="#">Manage My Profile</a>
+                                </div>
             </li>
             <li class="dropdown">
                 <button href="">My Appointments</button>

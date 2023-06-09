@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PhysicianRegistrationApplicationsManagementController;
 use App\Http\Controllers\PhysicianRegistrationFormController;
 use App\Http\Controllers\PhysicianScheduleController;
+use App\Http\Controllers\PhysiciansListController;
 use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,9 @@ Route::group(['middleware' => ['auth', 'role:patient']], function () {
     Route::get('/patient/dashboard', function () {
         return view('patient.dashboard');
     })->name('patient.dashboard');
+
+    Route::get('/patient/physicians_list/view', [PhysiciansListController::class, 'index'])->name('patient.physicians_list.view');
+
 });
 
 
@@ -57,8 +61,6 @@ Route::group(['middleware' => ['auth', 'role:system_admin']], function () {
     Route::get('/administrator/all_physician_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'indexAll'])->name('administrator.registration.indexAll');
 
     Route::get('/administrator/all_physicians', [PhysicianRegistrationApplicationsManagementController::class, 'indexAllPhysicians'])->name('administrator.indexAllPhysicians');
-
-
 });
 
 // Routes for the physician process

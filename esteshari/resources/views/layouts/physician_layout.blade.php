@@ -65,20 +65,22 @@
                     <a href="#">View Patients List</a>
                 </div>
             </li>
-            {{--            <li class="dropdown">--}}
-            {{--                <button href="#">Finances</button>--}}
-            {{--                <div class="dropdown-content">--}}
-            {{--                    <a href="#">View Revenue</a>--}}{{--ANALYTICAL IF POSSIBLE; This week, all time, etc // GROSS INCOME--}}
-            {{--                    <a href="#">Manage My Rate</a>--}}{{--Manage Banking Details; Manage Session Costs; Add discount--}}
-            {{--                </div>--}}
-            {{--            </li>--}}
-            {{--            <li class="dropdown">--}}
-            {{--                <button href="#">Reports</button>--}}
-            {{--                <div class="dropdown-content">--}}
-            {{--                    <a href="#">Patient Medical History Report</a>--}}
-            {{--                    <a href="#">Patient Pre-Session Questionnaire</a>--}}
-            {{--                </div>--}}
-            {{--            </li>--}}
+                        <li class="dropdown">
+                            <button href="#">Finances</button>
+                            <div class="dropdown-content">
+                                <a href="#">View Revenue</a>
+{{--                                ANALYTICAL IF POSSIBLE; This week, all time, etc // GROSS INCOME--}}
+                                <a href="#">Manage My Financial Information</a>
+{{--                                Manage Banking Details; Manage Session Costs; Add discount--}}
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <button href="#">Reports</button>
+                            <div class="dropdown-content">
+                                <a href="#">Patient Medical History Report</a>
+                                <a href="#">Patient Pre-Session Questionnaire</a>
+                            </div>
+                        </li>
             <li class="dropdown" style="float:right">
                 <div class="dropdown-button" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                      aria-haspopup="true" aria-expanded="false">
