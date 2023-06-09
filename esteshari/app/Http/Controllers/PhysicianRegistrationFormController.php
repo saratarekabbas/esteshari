@@ -181,74 +181,6 @@ class PhysicianRegistrationFormController extends Controller
         $personalInformation->save();
     }
 
-//    public function section2(Request $request)
-//    {
-//        // Section 2: Educational Qualifications
-//        $validatedData = $request->validate([
-//            // Qualification
-//            'qualifications.*.degree_level' => 'required|string',
-//            'qualifications.*.degree_title' => 'required|string',
-//            'qualifications.*.institute' => 'required|string',
-//            'qualifications.*.institute_location' => 'required|string',
-//            'qualifications.*.year_of_graduation' => 'required|date',
-//            'qualifications.*.medical_degree_files' => ['sometimes', 'required', 'array', 'max:10'],
-//            'qualifications.*.medical_degree_files.*' => 'file',
-//            // Honor
-//            'qualifications.*.honors.*.award_type' => 'nullable|string',
-//            'qualifications.*.honors.*.award_title' => 'nullable|string',
-//            'qualifications.*.honors.*.date_of_award' => 'nullable|date',
-//            'qualifications.*.honors.*.award_description' => 'nullable|string',
-//        ]);
-//
-//        $user = Auth::user();
-//
-//        foreach ($request->input('educationalQualification') as $qualificationData) {
-//            $educationalQualification = new EducationalQualification();
-//            $educationalQualification->user()->associate($user);
-//
-//            if ($qualificationData['degree_level'] === 'Other') {
-//                $educationalQualification->degree_level = $qualificationData['otherDegree'];
-//            } else {
-//                $educationalQualification->degree_level = $qualificationData['degree_level'];
-//            }
-//
-//            $educationalQualification->degree_title = $qualificationData['degree_title'];
-//            $educationalQualification->institute = $qualificationData['institute'];
-//            $educationalQualification->institute_location = $qualificationData['institute_location'];
-//            $educationalQualification->year_of_graduation = $qualificationData['year_of_graduation'];
-//
-//            $existingMedicalDegreeFiles = [];
-//
-//            if (isset($qualificationData['medical_degree_files'])) {
-//                foreach ($qualificationData['medical_degree_files'] as $medicalDegreeFilesFile) {
-//                    $medicalDegreeFilePath = $medicalDegreeFilesFile->store('files', 'public');
-//                    $existingMedicalDegreeFiles[] = $medicalDegreeFilePath;
-//                }
-//            }
-//
-//            $educationalQualification->medical_degree_files = json_encode($existingMedicalDegreeFiles);
-//
-//            $educationalQualification->save();
-//
-//            // Save honors for the qualification
-//            if (isset($qualificationData['honors'])) {
-//                foreach ($qualificationData['honors'] as $honorData) {
-//                    $honor = new HonorAward();
-//                    $honor->educationalQualification()->associate($educationalQualification);
-//                    if ($qualificationData['award_type'] === 'Other') {
-//                        $educationalQualification->award_type = $honorData['otherAwardType'];
-//                    } else {
-//                        $educationalQualification->award_type = $honorData['award_type'];
-//                    }
-//                    $honor->award_title = $honorData['award_title'];
-//                    $honor->date_of_award = $honorData['date_of_award'];
-//                    $honor->award_description = $honorData['award_description'];
-//                    $honor->save();
-//                }
-//            }
-//        }
-//    }
-
 
     public function section2(Request $request)
     {
@@ -331,62 +263,55 @@ class PhysicianRegistrationFormController extends Controller
 
     public function section3(Request $request)
     {
-//        Section 3: Work Experience
+        // Section 3: Work Experience
         $validatedData = $request->validate([
-            'job_title' => 'required|string',
-            'employer_name' => 'required|string',
-            'employment_type' => 'required|string',
-            'start_date_of_employment' => 'required|date',
-            'end_date_of_employment' => 'nullable|date|after:start_date_of_employment',
-            'current_role' => 'required|int',
-            'job_location_city' => 'required|string',
-            'job_location_country' => 'required|string',
-            'location_type' => 'required|string',
-            'job_description' => 'nullable|string',
-            'job_experience_files' => 'array|max:10',
-            'job_experience_files.*' => 'file',
+            'work_experiences' => 'required|array',
+            'work_experiences.*.job_title' => 'required|string',
+            'work_experiences.*.employer_name' => 'required|string',
+            'work_experiences.*.employment_type' => 'required|string',
+            'work_experiences.*.start_date_of_employment' => 'required|date',
+            'work_experiences.*.end_date_of_employment' => 'nullable|date|after:start_date_of_employment',
+            'work_experiences.*.current_role' => 'required|int',
+            'work_experiences.*.job_location_city' => 'required|string',
+            'work_experiences.*.job_location_country' => 'required|string',
+            'work_experiences.*.location_type' => 'required|string',
+            'work_experiences.*.job_description' => 'nullable|string',
+//            'work_experiences.*.job_experience_files' => 'array|max:10',
+//            'work_experiences.*.job_experience_files.*' => 'file',
         ]);
 
         $user = Auth::user();
 
-        $workExperience = $user->workExperience;
+        foreach ($request->input('work_experiences') as $experienceData) {
+            $workExperience = $user->workExperience()->create([
+                'job_title' => $experienceData['job_title'],
+                'employer_name' => $experienceData['employer_name'],
+                'employment_type' => $experienceData['employment_type'],
+                'start_date_of_employment' => $experienceData['start_date_of_employment'],
+                'end_date_of_employment' => $experienceData['end_date_of_employment'],
+                'current_role' => $experienceData['current_role'] ? 1 : 0,
+                'job_location_city' => $experienceData['job_location_city'],
+                'job_location_country' => $experienceData['job_location_country'],
+                'location_type' => $experienceData['location_type'],
+                'job_description' => $experienceData['job_description'],
+            ]);
 
-        if (!$workExperience) {
-            $workExperience = new WorkExperience();
-            $workExperience->user()->associate($user);
+//            $existingJobExperienceFiles = json_decode($workExperience->job_experience_files, true) ?? [];
+//            $jobExperienceFiles = $experienceData['job_experience_files'];
+
+//            if ($jobExperienceFiles) {
+//                foreach ($jobExperienceFiles as $jobExperienceFile) {
+//                    $jobExperienceFilePath = $jobExperienceFile->store('files', 'public');
+//                    if (!in_array($jobExperienceFilePath, $existingJobExperienceFiles)) {
+//                        $existingJobExperienceFiles[] = $jobExperienceFilePath;
+//                    }
+//                }
+//            }
+//
+//            $workExperience->job_experience_files = json_encode($existingJobExperienceFiles);
+            $workExperience->job_experience_files = NULL;
+            $workExperience->save();
         }
-
-        $workExperience->job_title = $request->input('job_title');
-        $workExperience->employer_name = $request->input('employer_name');
-        $workExperience->employment_type = $request->input('employment_type');
-        $workExperience->start_date_of_employment = $request->input('start_date_of_employment');
-        $workExperience->end_date_of_employment = $request->input('end_date_of_employment');
-        $workExperience->current_role = $request->input('current_role') ? 1 : 0;
-        $workExperience->job_location_city = $request->input('job_location_city');
-        $workExperience->job_location_country = $request->input('job_location_country');
-        $workExperience->location_type = $request->input('location_type');
-        $workExperience->job_description = $request->input('job_description');
-
-
-        $existingJobExperienceFiles = json_decode($workExperience->job_experience_files, true) ?? [];
-        $jobExperienceFiles = $request->file('job_experience_files');
-
-// Check if no existing files and no old files exist
-
-        if ($jobExperienceFiles) {
-            foreach ($jobExperienceFiles as $jobExperienceFile) {
-                $jobExperienceFilePath = $jobExperienceFile->store('files', 'public');
-                if (!in_array($jobExperienceFilePath, $existingJobExperienceFiles)) {
-                    $existingJobExperienceFiles[] = $jobExperienceFilePath;
-                }
-            }
-        } else {
-            $existingJobExperienceFiles = $existingJobExperienceFiles ?? [];
-        }
-
-        $workExperience->job_experience_files = json_encode($existingJobExperienceFiles);
-
-        $workExperience->save();
     }
 
     public function section4(Request $request)
