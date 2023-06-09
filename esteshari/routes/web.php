@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth', 'role:patient']], function () {
     })->name('patient.dashboard');
 
     Route::get('/patient/physicians_list/view', [PhysiciansListController::class, 'index'])->name('patient.physicians_list.view');
+    Route::post('/patient/physicians_list/view/', [PhysiciansListController::class, 'book'])->name('patient.physicians_list.book');
+//    Route::get('/patient/session_booking/{id}', [PhysiciansListController::class, 'payment'])->name('patient.session_booking.book_session');
 
 });
 
