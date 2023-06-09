@@ -17,10 +17,25 @@ class PhysiciansListController extends Controller
         return view('patient.physicians_list.physicians_list_view', compact('physicians'));
     }
 
+
     public function book(Request $request)
     {
-        $physician = User::where('id', '=', $request->id)->first();
-        $availableSlots = PhysicianSchedule::where('user_id', '=', $request->id)->get();
-        return view('patient.session_booking.book_session', compact('physician', 'availableSlots'));
+        $physician = User::where('id', $request->id)->first();
+        $slots = PhysicianSchedule::where('user_id', $request->id)->get();
+        $dates = calculateDates(date('Y-m-d'), 1);
+        $currentDate = date('Y-m-d');
+
+        return view('patient.session_booking.book_session', compact('physician', 'slots', 'dates', 'currentDate'));
+
     }
+}
+
+function calculateDates($currentDate, $direction)
+{
+    $dates = [];
+    for ($i = 0; $i < 4; $i++) {
+        $date = date('Y-m-d', strtotime($currentDate . " " . ($i * $direction) . " day"));
+        $dates[] = $date;
+    }
+    return $dates;
 }
