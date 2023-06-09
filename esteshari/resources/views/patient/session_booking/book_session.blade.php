@@ -149,13 +149,20 @@
                                                     @foreach ($slots as $slot)
                                                         @if ($slot->slot_date == $currentDate)
                                                             @if ($slot->status == "booked")
-                                                                <div class="col-3 booked_slot_items text-muted">
+                                                                <div type="button"
+                                                                     class="col-3 booked_slot_items text-muted"
+                                                                     data-bs-toggle="modal"
+                                                                     data-bs-target="#confirmSlotModal"
+                                                                     data-slot-id="{{ $slot->id }}">
                                                                     {{ substr($slot->slot_time, 0, 5) }}
                                                                 </div>
                                                             @elseif ($slot->status == "available")
-                                                                <a class="col available_slot_items">
+                                                                <div type="button" class="col available_slot_items"
+                                                                     data-bs-toggle="modal"
+                                                                     data-bs-target="#confirmSlotModal"
+                                                                     data-slot-id="{{ $slot->id }}">
                                                                     {{ substr($slot->slot_time, 0, 5) }}
-                                                                </a>
+                                                                </div>
                                                             @endif
                                                         @endif
                                                     @endforeach
@@ -214,7 +221,47 @@
 
                                 // Initial update of dates
                                 updateDates();
+
+
+                                // Add event listener to the available slot items
+                                const availableSlotItems = document.querySelectorAll('.available_slot_items');
+                                availableSlotItems.forEach((item) => {
+                                    item.addEventListener('click', function () {
+                                        const slotId = this.dataset.slotId; // Get the slot ID from the data attribute
+                                        document.getElementById('selectSlotId').value = slotId; // Set the slot ID in the hidden input field
+                                    });
+                                });
+
                             </script>
+
+                            <div id="confirmSlotModal" class="modal fade" tabindex="-1" role="dialog"
+                                 aria-labelledby="confirmSlotModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="confirmSlotModalLabel">Confirm Slot</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to select this slot?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Cancel
+                                            </button>
+                                            <form id="selectSlotForm" method="POST"
+                                                  action="{{ route('patient.session_booking', ['id' => ':id']) }}"
+                                            >
+                                                @csrf
+                                                <input type="hidden" name="id" id="selectSlotId">
+                                                <button type="submit" class="btn btn-primary">Select</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>

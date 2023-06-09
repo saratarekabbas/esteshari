@@ -28,6 +28,13 @@ class PhysiciansListController extends Controller
         return view('patient.session_booking.book_session', compact('physician', 'slots', 'dates', 'currentDate'));
 
     }
+
+    public function payment(Request $request)
+    {
+        $session = PhysicianSchedule::where('id', $request->id)->first();
+        return view('patient.session_booking.session_payment', compact('session'));
+
+    }
 }
 
 function calculateDates($currentDate, $direction)
