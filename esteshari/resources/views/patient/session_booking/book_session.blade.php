@@ -125,35 +125,36 @@
                                 <thead>
                                 <tr>
                                     <td style="text-align: center; vertical-align: middle;">
-                                        <i class="fa fa-angle-left fa-2x" style="color:#a8a5a5;" aria-hidden="true"></i>
+                                        <i class="fa fa-angle-left fa-2x" style="color:#4a4a4d;" aria-hidden="true"></i>
                                     </td>
                                     @foreach ($dates as $date)
-                                        <td style="text-align: center;{{ $date == $currentDate ? ' color: #dc6464; border-bottom: 1px solid #dc6464;' : ''}}">
+                                        <td style="text-align: center;{{ $date == $currentDate ? 'cursor: pointer; color: #dc6464; border-bottom: 1px solid #dc6464;' : ''}}">
                                             {{ $date }}
                                         </td>
                                     @endforeach
                                     <td style="text-align: center; vertical-align: middle;">
-                                        <i class="fa fa-angle-right fa-2x" style="color:#4a4a4d;" aria-hidden="true"></i>
+                                        <i class="fa fa-angle-right fa-2x" style="color:#4a4a4d;"
+                                           aria-hidden="true"></i>
                                     </td>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td colspan="6" style="text-align: center; vertical-align: middle;">
-                                        <div class="d-flex justify-content-center">
-                                            <div class="row row-cols-1 row-cols-md-4 g-3">
+                                        <div class="container justify-content-center">
+                                            <div class="row row-cols-md-4 g-3">
                                                 @if ($slots->isEmpty())
-                                                    <div class="col">No available slots</div>
+                                                    <div class="col-3">No available slots</div>
                                                 @else
                                                     @foreach ($slots as $slot)
                                                         @if ($slot->slot_date == $currentDate)
                                                             @if ($slot->status == "booked")
-                                                                <div class="col booked_slot_items text-muted">
-                                                                    {{ $slot->slot_time }}
+                                                                <div class="col-3 booked_slot_items text-muted">
+                                                                    {{ substr($slot->slot_time, 0, 5) }}
                                                                 </div>
                                                             @elseif ($slot->status == "available")
                                                                 <a class="col available_slot_items">
-                                                                    {{ $slot->slot_time }}
+                                                                    {{ substr($slot->slot_time, 0, 5) }}
                                                                 </a>
                                                             @endif
                                                         @endif
@@ -183,7 +184,7 @@
 
                                 // Function to format the date as "Day Month Date"
                                 function formatDate(date) {
-                                    const options = { weekday: 'short', month: 'short', day: 'numeric' };
+                                    const options = {weekday: 'short', month: 'short', day: 'numeric'};
                                     return date.toLocaleDateString(undefined, options);
                                 }
 
@@ -199,13 +200,13 @@
                                 }
 
                                 // Add event listeners to the previous and next buttons
-                                document.querySelector('.fa-angle-left').addEventListener('click', function() {
+                                document.querySelector('.fa-angle-left').addEventListener('click', function () {
                                     currentDate.setDate(currentDate.getDate() - 1);
                                     updateDates();
                                     // Add code here to update the available slots for the new current date
                                 });
 
-                                document.querySelector('.fa-angle-right').addEventListener('click', function() {
+                                document.querySelector('.fa-angle-right').addEventListener('click', function () {
                                     currentDate.setDate(currentDate.getDate() + 1);
                                     updateDates();
                                     // Add code here to update the available slots for the new current date
