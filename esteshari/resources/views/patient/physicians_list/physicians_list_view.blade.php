@@ -20,6 +20,17 @@
                 </tr>
             @else
                 @foreach($physicians as $physician)
+                    @php
+                        $slots = $physician->physicianSchedule()->where('status', 'available')->get();
+                    @endphp
+                    @php
+                        $slot = $physician->physicianSchedule()
+                            ->where('status', 'available')
+                            ->whereDate('slot_date', '>=', date('Y-m-d'))
+                            ->orderBy('slot_date')
+                            ->orderBy('slot_time')
+                            ->first();
+                    @endphp
                     <form action="{{ route('patient.physicians_list.book') }}" method="POST">
                         @csrf
                         <input type="hidden" name="id" value="{{ $physician->id }}">
@@ -28,7 +39,8 @@
                                 <img src="{{asset('assets/profile_dr_4.jpg')}}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">Dr {{ $physician->name }}</h5>
-                                    <p class="card-text">Obstetrician & Gynocologist, Fertility & Reproductive Medicine
+                                    <p class="card-text">Obstetrician & Gynocologist, Fertility & Reproductive
+                                        Medicine
                                         Specialist</p>
                                     <p class="card-text" style="font-weight: lighter; font-size: small">Dr. Navdeep
                                         Singh
@@ -38,6 +50,12 @@
                                         Centre.
                                         Previously worked at the General Hos...
                                         <a href="#" class="card-link">See More</a></p>
+                                    @if($slot)
+                                        <p class="card-text text-muted">Available next  {{ date('l, jS F Y', strtotime($slot->slot_date)) }}, {{substr($slot->slot_time, 0, 5) }}</p>
+                                    @else
+                                        <p class="card-text text-muted">No Available Sessions</p>
+
+                                    @endif
 
                                     <h3 class="mb-0 font-weight-semibold"><s>$250.99</s><strong
                                             class="ms-2 text-danger">$50.99</strong></h3>
@@ -54,6 +72,8 @@
                                     <div class="d-grid gap-2">
                                         <button class="btn btn-primary" type="submit">Book Session</button>
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>
