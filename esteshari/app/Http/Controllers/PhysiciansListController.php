@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PatientSessionBookedEmail;
+use App\Mail\PhysicianSessionBookedEmail;
 use App\Models\PhysicianSchedule;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class PhysiciansListController extends Controller
 {
@@ -41,10 +45,14 @@ class PhysiciansListController extends Controller
     {
         $session = PhysicianSchedule::where('id', $request->id)->first();
         $physician = User::where('id', $session->user_id)->first();
+        $patient = Auth::user();
 
         PhysicianSchedule::where('id', '=', $session->id)->update([
             'status' => "booked"
         ]);
+
+        Mail::to($physician->email)->send(new PhysicianSessionBookedEmail($physician->email, $physician->name, 'Dr.', $patient->name, 'Ms.', substr($session->slot_time, 0, 5), $session->slot_date));
+        Mail::to($patient->email)->send(new PatientSessionBookedEmail($patient->email, $patient->name, 'Ms.', $physician->name, 'Dr.', substr($session->slot_time, 0, 5), $session->slot_date));
 
         return view('patient.session_booking.booking_confirm', compact('session', 'physician'));
 
