@@ -58,8 +58,17 @@ class PhysiciansListController extends Controller
         return redirect()->route('patient.upcoming_appointments')->with('success', 'Your booking has been confirmed');
     }
 
+    public function upcomingAppointments()
+    {
+        $patient = Auth::user();
+
+        $appointments = PhysicianSchedule::where('patient_id', $patient->id)->with('user')->orderBy('slot_date')
+            ->orderBy('slot_time')
+            ->get();
 
 
+        return view('patient.appointments.upcoming_appointments', compact('appointments'));
+    }
 }
 
 function calculateDates($currentDate, $direction)
