@@ -18,7 +18,7 @@
                                 </a></h5>
                             <p class="card-text">{{ date('l, jS F Y', strtotime($appointment->slot_date)) }}, {{ substr($appointment->slot_time, 0, 5) }}.</p>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="button" class="btn btn-outline-primary">Join Meeting</button>
+                                <a href="{{$appointment->meeting_link}}" target="_blank" type="button" class="btn btn-outline-primary">Join Meeting</a>
                             </div>
                         </div>
                     </div>

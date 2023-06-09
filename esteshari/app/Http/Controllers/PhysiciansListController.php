@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Api\ZoomApi;
 use App\Mail\PatientSessionBookedEmail;
 use App\Mail\PhysicianSessionBookedEmail;
 use App\Models\PhysicianSchedule;
@@ -9,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class PhysiciansListController extends Controller
 {
@@ -47,9 +49,29 @@ class PhysiciansListController extends Controller
         $physician = User::where('id', $session->user_id)->first();
         $patient = Auth::user();
 
+
+        $zoomApi = new ZoomApi(env('ZOOM_API_KEY'), env('ZOOM_API_SECRET'));
+
+        $meetingUrl = $zoomApi->createMeeting([
+            'topic' => 'Video Conference Meeting',
+            'type' => 2, //scheduled meeting
+            'start_time' => $session->slot_date . ' ' . $session->slot_time,
+            'duration' => 60,
+            'timezone' => 'UTC',
+            'password' => Str::random(10),
+            'agenda' => 'This is a video conference meeting between' . $patient->name . ' and Dr. ' . $physician->name,
+            'settings' => [
+                'join_before_host' => true,
+                'mute_upon_entry' => false,
+                'auto_recording' => 'none',
+                'registrants_email_notification' => true,
+            ],
+        ]);
+
         PhysicianSchedule::where('id', '=', $session->id)->update([
             'status' => "booked",
-            'patient_id' => $patient->id
+            'patient_id' => $patient->id,
+            'meeting_link' => $meetingUrl,
         ]);
 
         Mail::to($physician->email)->send(new PhysicianSessionBookedEmail($physician->email, $physician->name, 'Dr.', $patient->name, 'Ms.', substr($session->slot_time, 0, 5), $session->slot_date));
@@ -65,8 +87,6 @@ class PhysiciansListController extends Controller
         $appointments = PhysicianSchedule::where('patient_id', $patient->id)->with('user')->orderBy('slot_date')
             ->orderBy('slot_time')
             ->get();
-
-
         return view('patient.appointments.upcoming_appointments', compact('appointments'));
     }
 }
