@@ -8,7 +8,10 @@
     @endif
     <div class="container">
         <h3 class="form-title">Payment for Session with Dr. {{$physician->name}} on {{$session->slot_date}}, {{ substr($session->slot_time, 0, 5) }}</h3>
-        <section>
+        <form method="post" action="{{ route('patient.booking_confirm') }}">
+            @csrf
+            <input type="hidden" name="id" value="{{$session->id}}">
+            <input type="hidden" name="user_id" value="{{$physician->id}}">
             <div class="row">
                 <div class="col-md-8 mb-4">
                     <div class="card mb-4">
@@ -16,7 +19,7 @@
                             <h5 class="mb-0">Biling details</h5>
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form >
                                 <!-- 2 column grid layout with text inputs for the first and last names -->
                                 <div class="row mb-4">
                                     <div class="col">
@@ -162,6 +165,6 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </form>
     </div>
 @endsection

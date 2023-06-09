@@ -39,7 +39,9 @@ class PhysiciansListController extends Controller
 
     public function makePayment(Request $request)
     {
-//        return view('patient.session_booking.session_payment', compact('session'));
+        $session = PhysicianSchedule::where('id', $request->id)->first();
+        $physician = User::where('id', $session->user_id)->first();;
+        return view('patient.session_booking.booking_confirm', compact('session', 'physician'));
 
     }
 

@@ -252,7 +252,7 @@
                                                 Cancel
                                             </button>
                                             <form id="selectSlotForm" method="POST"
-                                                  action="{{ route('patient.session_booking', ['id' => ':id']) }}"
+                                                  action="{{ route('patient.session_booking') }}"
                                             >
                                                 @csrf
                                                 <input type="hidden" name="id" id="selectSlotId">
