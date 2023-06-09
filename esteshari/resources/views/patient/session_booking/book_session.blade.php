@@ -118,18 +118,25 @@
 
                         <div class="card-body">
                             <h5 class="card-title" style="margin-left: 8px">Choose Date & Time</h5>
-                            <p class="card-text text-muted" style="margin-left: 8px">Choose date and time from available slots
+                            <p class="card-text text-muted" style="margin-left: 8px">Choose date and time from available
+                                slots
                             </p>
 
                             <table class="table table-borderless">
                                 <thead>
                                 <tr>
-                                    <td style="text-align: center; vertical-align: middle;"><i class="fa fa-angle-left fa-2x" style="color:#a8a5a5;" aria-hidden="true"></i>
+                                    <td style="text-align: center; vertical-align: middle;"><i
+                                            class="fa fa-angle-left fa-2x" style="color:#a8a5a5;"
+                                            aria-hidden="true"></i>
                                     <td style="text-align: center;">Mon <br> Jun 12</td>
-                                    <td style="text-align: center; color: #dc6464; border-bottom: 1px solid #dc6464">Mon <br> Jun 12</td>
+                                    <td style="text-align: center; color: #dc6464; border-bottom: 1px solid #dc6464">Mon
+                                        <br> Jun 12
+                                    </td>
                                     <td style="text-align: center;">Mon <br> Jun 12</td>
                                     <td style="text-align: center;">Mon <br> Jun 12</td>
-                                    <td style="text-align: center; vertical-align: middle;"><i class="fa fa-angle-right fa-2x" style="color:#4a4a4d;" aria-hidden="true"></i>
+                                    <td style="text-align: center; vertical-align: middle;"><i
+                                            class="fa fa-angle-right fa-2x" style="color:#4a4a4d;"
+                                            aria-hidden="true"></i>
                                     </td>
                                 </tr>
 
@@ -139,24 +146,17 @@
                                     <td colspan="6" style="text-align: center; vertical-align: middle;">
                                         <div class="d-flex justify-content-center">
                                             <div class="row row-cols-1 row-cols-md-4 g-3">
-                                                <a class="col available_slot_items" >
-                                                    sdsds33
-                                                </a>
-                                                <div class="col available_slot_items">
-                                                    sdsds
-                                                </div>
-                                                <div class="col available_slot_items">
-                                                    sdsds
-                                                </div>
-                                                <div class="col available_slot_items">
-                                                    sdsds
-                                                </div>
-                                                <div class="col available_slot_items">
-                                                    sdsds
-                                                </div>
-                                                <div class="col available_slot_items">
-                                                    sdsds
-                                                </div>
+                                                @foreach($availableSlots as $slot)
+                                                    @if($slot->status == "booked")
+                                                        <a class="col booked_slot_items text-muted">
+                                                            {{$slot->slot_time}}
+                                                        </a>
+                                                    @elseif($slot->status == "available")
+                                                        <div class="col available_slot_items">
+                                                            {{$slot->slot_time}}
+                                                        </div>
+                                                    @endif
+                                                @endforeach
                                             </div>
                                         </div>
                                     </td>

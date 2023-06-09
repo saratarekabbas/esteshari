@@ -168,6 +168,12 @@ li button {
     border-radius: 10px;
 }
 
+
+/*End of Physician Registration Form*/
+
+/*Physicians Book Session*/
+
+
 .available_slot_items{
     border: 1px solid #ccc;
     border-radius: 15px;
@@ -176,11 +182,18 @@ li button {
     color: #1a1e21;
 }
 
+.booked_slot_items{
+    border: 1px solid #ccc;
+    background-color: #8b8f91;
+    border-radius: 15px;
+    text-decoration: none;
+}
+
+
 .available_slot_items:hover{
     color: black;
     border: 1px solid black;
 
 }
 
-/*End of Physician Registration Form*/
-
+/*End of Physicians Book Session*/

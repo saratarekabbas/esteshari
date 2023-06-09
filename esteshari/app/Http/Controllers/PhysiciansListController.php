@@ -20,7 +20,7 @@ class PhysiciansListController extends Controller
     public function book(Request $request)
     {
         $physician = User::where('id', '=', $request->id)->first();
-        $availableSlots = PhysicianSchedule::where('id', '=', $request->id)->get();
+        $availableSlots = PhysicianSchedule::where('user_id', '=', $request->id)->get();
         return view('patient.session_booking.book_session', compact('physician', 'availableSlots'));
     }
 }
