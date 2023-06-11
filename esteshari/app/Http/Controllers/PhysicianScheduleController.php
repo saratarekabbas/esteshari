@@ -13,7 +13,9 @@ use Illuminate\Http\Request;
 class PhysicianScheduleController extends Controller
 {
     public function index(){
-        $slots = PhysicianSchedule::all();
+        $physician = Auth::user();
+
+        $slots = PhysicianSchedule::where('user_id', $physician->id)->get();
 
         $events = [];
 
@@ -29,6 +31,9 @@ class PhysicianScheduleController extends Controller
             ];
 
             if ($slot->status == 'booked') {
+                $event['color'] = 'blue';
+
+            }else if ($slot->status == 'completed') {
                 $event['color'] = 'green';
 
             }else{
