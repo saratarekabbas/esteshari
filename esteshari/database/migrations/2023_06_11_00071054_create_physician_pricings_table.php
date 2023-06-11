@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('physician_pricings', function (Blueprint $table) {
             $table->id();
-            $table->double('cost')->default('0.00');
-            $table->double('discountedCost')->nullable();
+            $table->decimal('cost', 10,2)->default('0.00');
+            $table->decimal('discountedCost', 10,2)->nullable();
             $table->string('currency')->default('MYR');
             $table->timestamps();
         });

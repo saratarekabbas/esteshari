@@ -23,19 +23,24 @@ class PhysicianPricingController extends Controller
             'currency' => 'required|string',
         ]);
 
+        $cost = number_format($request->input('cost'), 2);
+        $discountedCost = $request->input('discountedCost')
+            ? number_format($request->input('discountedCost'), 2)
+            : null;
+
         $user = Auth::user();
 
         $exisitngPricing = PhysicianPricing::where('user_id', $user->id)->first();
 
         if ($exisitngPricing) {
-            $exisitngPricing->cost = $request->input('cost');
-            $exisitngPricing->discountedCost = $request->input('discountedCost');
+            $exisitngPricing->cost = $cost;
+            $exisitngPricing->discountedCost = $discountedCost;
             $exisitngPricing->currency = $request->input('currency');
             $exisitngPricing->save();
         } else {
             $pricing = new PhysicianPricing();
-            $pricing->cost = $request->input('cost');
-            $pricing->discountedCost = $request->input('discountedCost');
+            $pricing->cost = $cost;
+            $pricing->discountedCost = $discountedCost;
             $pricing->currency = $request->input('currency');
             $pricing->user()->associate($user);
             $pricing->save();

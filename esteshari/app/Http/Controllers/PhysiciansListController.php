@@ -27,7 +27,7 @@ class PhysiciansListController extends Controller
     {
         $physicians = User::where('role', 'physician')
             ->where('status', 'approved')
-            ->with('personalInformation')
+            ->with('personalInformation')->with('physicianPricing')
             ->get();
         return view('patient.physicians_list.physicians_list_view', compact('physicians'));
     }
@@ -47,9 +47,8 @@ class PhysiciansListController extends Controller
     public function payment(Request $request)
     {
         $session = PhysicianSchedule::where('id', $request->id)->first();
-        $physician = User::where('id', $session->user_id)->first();;
+        $physician = User::where('id', $session->user_id)->with('physicianPricing')->first();
         return view('patient.session_booking.session_payment', compact('session', 'physician'));
-
     }
 
     public function makePayment(Request $request)
