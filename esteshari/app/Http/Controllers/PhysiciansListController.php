@@ -14,6 +14,15 @@ use Illuminate\Support\Str;
 
 class PhysiciansListController extends Controller
 {
+    public function dashboard()
+    {
+        $patient = Auth::user();
+        $appointments = PhysicianSchedule::where('patient_id', $patient->id)->where('status','booked')->with('user')->orderBy('slot_date')
+            ->orderBy('slot_time')
+            ->get();
+        return view('patient.dashboard', compact('appointments'));
+    }
+
     public function index()
     {
         $physicians = User::where('role', 'physician')

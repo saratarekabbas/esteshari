@@ -35,10 +35,7 @@ Route::get('/callback/{service}', [SocialController::class, 'callback']);
 
 // Routes for the patient
 Route::group(['middleware' => ['auth', 'role:patient']], function () {
-    Route::get('/patient/dashboard', function () {
-        return view('patient.dashboard');
-    })->name('patient.dashboard');
-
+    Route::get('/patient/dashboard', [PhysiciansListController::class, 'dashboard'])->name('patient.dashboard');
     Route::get('/patient/physicians_list/view', [PhysiciansListController::class, 'index'])->name('patient.physicians_list.view');
     Route::post('/patient/physicians_list/view/', [PhysiciansListController::class, 'book'])->name('patient.physicians_list.book');
     Route::post('/patient/session_booking/', [PhysiciansListController::class, 'payment'])->name('patient.session_booking');

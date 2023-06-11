@@ -145,6 +145,7 @@ class PhysicianScheduleController extends Controller
         $appointments = PhysicianSchedule::where('user_id', $physician->id)->where('status','booked')->with('patient')->orderBy('slot_date')
             ->orderBy('slot_time')
             ->get();
+
         return view('physician.appointments.upcoming_appointments', compact('appointments'));
     }
 
