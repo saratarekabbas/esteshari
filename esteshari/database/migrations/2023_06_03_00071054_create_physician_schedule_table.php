@@ -16,7 +16,9 @@ return new class extends Migration
             $table->date('slot_date');
             $table->time('slot_time');
             $table->string('status')->default('available');
-            $table->string('meeting_link', 500)->nullable(); // Add the 'meeting_link' column
+            $table->string('currency')->default('MYR');
+            $table->string('meeting_link', 500)->nullable();
+            $table->decimal('price', 10,2)->nullable();
             $table->timestamps();
         });
     }

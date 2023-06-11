@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Api\ZoomApi;
 use App\Mail\PatientSessionBookedEmail;
 use App\Mail\PhysicianSessionBookedEmail;
+use App\Models\PhysicianPricing;
 use App\Models\PhysicianSchedule;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class PhysiciansListController extends Controller
     public function dashboard()
     {
         $patient = Auth::user();
-        $appointments = PhysicianSchedule::where('patient_id', $patient->id)->where('status','booked')->with('user')->orderBy('slot_date')
+        $appointments = PhysicianSchedule::where('patient_id', $patient->id)->where('status', 'booked')->with('user')->orderBy('slot_date')
             ->orderBy('slot_time')
             ->get();
         return view('patient.dashboard', compact('appointments'));
@@ -56,8 +57,12 @@ class PhysiciansListController extends Controller
         $session = PhysicianSchedule::where('id', $request->id)->first();
         $physician = User::where('id', $session->user_id)->first();
         $patient = Auth::user();
-
-
+        $pricing = PhysicianPricing::where('user_id', $physician->id)->first();
+        if ($pricing->discountedCost) {
+            $price = $pricing->discountedCost;
+        } else {
+            $price = $pricing->cost;
+        }
         $zoomApi = new ZoomApi(env('ZOOM_API_KEY'), env('ZOOM_API_SECRET'));
 
         $meetingUrl = $zoomApi->createMeeting([
@@ -80,6 +85,8 @@ class PhysiciansListController extends Controller
             'status' => "booked",
             'patient_id' => $patient->id,
             'meeting_link' => $meetingUrl,
+            'price' => $price,
+            'currency' => $pricing->currency
         ]);
 
         Mail::to($physician->email)->send(new PhysicianSessionBookedEmail($physician->email, $physician->name, 'Dr.', $patient->name, 'Ms.', substr($session->slot_time, 0, 5), $session->slot_date));
@@ -91,7 +98,7 @@ class PhysiciansListController extends Controller
     public function upcomingAppointments()
     {
         $patient = Auth::user();
-        $appointments = PhysicianSchedule::where('patient_id', $patient->id)->where('status','booked')->with('user')->orderBy('slot_date')
+        $appointments = PhysicianSchedule::where('patient_id', $patient->id)->where('status', 'booked')->with('user')->orderBy('slot_date')
             ->orderBy('slot_time')
             ->get();
         return view('patient.appointments.upcoming_appointments', compact('appointments'));

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PhysicianPricing;
+use App\Models\PhysicianSchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,4 +48,17 @@ class PhysicianPricingController extends Controller
         }
         return redirect()->back()->with('success', 'Your session pricing has been updated successfully.');
     }
+
+    public function revenueIndex()
+    {
+        $physician = Auth::user();
+        $schedules = PhysicianSchedule::where('user_id', $physician->id)
+            ->where('status', '!=', 'available')->with('patient')
+            ->orderBy('slot_date')
+            ->orderBy('slot_time')
+            ->get();
+
+        return view('physician.finances.revenue_view', compact('schedules'));
+    }
+
 }

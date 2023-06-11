@@ -85,6 +85,8 @@ Route::middleware(['auth', 'role:physician', 'physician.status'])->group(functio
 
     Route::get('/physician/finances/session_pricing', [PhysicianPricingController::class, 'index'])->name('physician.session_pricing.view');
     Route::post('/physician/finances/session_pricing', [PhysicianPricingController::class, 'update'])->name('physician.session_pricing.update');
+
+    Route::get('/physician/revenue/view', [PhysicianPricingController::class, 'revenueIndex'])->name('physician.revenue.view');
 });
 
 
