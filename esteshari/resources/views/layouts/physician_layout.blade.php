@@ -66,10 +66,9 @@
                         <li class="dropdown">
                             <button href="#">Finances</button>
                             <div class="dropdown-content">
+                                <a href="{{route('physician.session_pricing.view')}}">Session Pricing</a>
                                 <a href="#">View Revenue</a>
-{{--                                ANALYTICAL IF POSSIBLE; This week, all time, etc // GROSS INCOME--}}
                                 <a href="#">Manage My Financial Information</a>
-{{--                                Manage Banking Details; Manage Session Costs; Add discount--}}
                             </div>
                         </li>
                         <li class="dropdown">

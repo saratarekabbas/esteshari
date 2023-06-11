@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\General\GeneralController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PhysicianPricingController;
 use App\Http\Controllers\PhysicianRegistrationApplicationsManagementController;
 use App\Http\Controllers\PhysicianRegistrationFormController;
 use App\Http\Controllers\PhysicianScheduleController;
@@ -82,25 +83,27 @@ Route::middleware(['auth', 'role:physician', 'physician.status'])->group(functio
     Route::get('/physician/appointments/appointments_history', [PhysicianScheduleController::class, 'appointmentsHistory'])->name('physician.appointments_history');
     Route::get('/physician/appointments/upcoming_appointment', [PhysicianScheduleController::class, 'upcomingAppointments'])->name('physician.upcoming_appointments');
 
+    Route::get('/physician/finances/session_pricing', [PhysicianPricingController::class, 'index'])->name('physician.session_pricing.view');
+    Route::post('/physician/finances/session_pricing', [PhysicianPricingController::class, 'update'])->name('physician.session_pricing.update');
 });
 
 
-Route::get('/create-meeting', function () {
-    $zoomApi = new ZoomApi(env('ZOOM_API_KEY'), env('ZOOM_API_SECRET'));
-    $meetingUrl = $zoomApi->createMeeting([
-        'topic' => 'New Meeting',
-        'type' => 2,
-        'start_time' => now()->addMinutes(10)->toIso8601String(),
-        'duration' => 60,
-        'timezone' => 'UTC',
-        'password' => 'password',
-        'agenda' => 'Agenda for the meeting',
-        'settings' => [
-            'join_before_host' => true,
-            'mute_upon_entry' => false,
-            'auto_recording' => 'none',
-            'registrants_email_notification' => true,
-        ],
-    ]);
-    return redirect($meetingUrl);
-});
+//Route::get('/create-meeting', function () {
+//    $zoomApi = new ZoomApi(env('ZOOM_API_KEY'), env('ZOOM_API_SECRET'));
+//    $meetingUrl = $zoomApi->createMeeting([
+//        'topic' => 'New Meeting',
+//        'type' => 2,
+//        'start_time' => now()->addMinutes(10)->toIso8601String(),
+//        'duration' => 60,
+//        'timezone' => 'UTC',
+//        'password' => 'password',
+//        'agenda' => 'Agenda for the meeting',
+//        'settings' => [
+//            'join_before_host' => true,
+//            'mute_upon_entry' => false,
+//            'auto_recording' => 'none',
+//            'registrants_email_notification' => true,
+//        ],
+//    ]);
+//    return redirect($meetingUrl);
+//});
