@@ -132,6 +132,30 @@ class PhysicianScheduleController extends Controller
         return redirect()->route('physician.schedule.view')->with('success', 'Slot has been deleted successfully');
     }
 
+    public function upcomingAppointments()
+    {
+        $physician = Auth::user();
+
+//        GHALEBAN HAN7OT WITH PORTFOLIO KAMAN
+        $appointments = PhysicianSchedule::where('user_id', $physician->id)->where('status','booked')->with('patient')->orderBy('slot_date')
+            ->orderBy('slot_time')
+            ->get();
+        return view('physician.appointments.upcoming_appointments', compact('appointments'));
+    }
+
+    public function appointmentsHistory()
+    {
+        $physician = Auth::user();
+
+//        GHALEBAN HAN7OT WITH PORTFOLIO KAMAN
+
+        $appointments = PhysicianSchedule::where('user_id', $physician->id)->with('patient')->orderBy('slot_date')
+            ->orderBy('slot_time')
+            ->get();
+        return view('physician.appointments.appointments_history', compact('appointments'));
+    }
+
+
 
 //    public function indexManage(){
 //        return view('physician.physician_schedule.schedule_manage');

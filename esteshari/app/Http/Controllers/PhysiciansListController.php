@@ -83,11 +83,19 @@ class PhysiciansListController extends Controller
     public function upcomingAppointments()
     {
         $patient = Auth::user();
-
-        $appointments = PhysicianSchedule::where('patient_id', $patient->id)->with('user')->orderBy('slot_date')
+        $appointments = PhysicianSchedule::where('patient_id', $patient->id)->where('status','booked')->with('user')->orderBy('slot_date')
             ->orderBy('slot_time')
             ->get();
         return view('patient.appointments.upcoming_appointments', compact('appointments'));
+    }
+
+    public function appointmentsHistory()
+    {
+        $patient = Auth::user();
+        $appointments = PhysicianSchedule::where('patient_id', $patient->id)->with('user')->orderBy('slot_date')
+            ->orderBy('slot_time')
+            ->get();
+        return view('patient.appointments.appointments_history', compact('appointments'));
     }
 }
 

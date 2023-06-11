@@ -44,7 +44,9 @@ Route::group(['middleware' => ['auth', 'role:patient']], function () {
     Route::post('/patient/session_booking/', [PhysiciansListController::class, 'payment'])->name('patient.session_booking');
     Route::post('/patient/session_booking_confirm/', [PhysiciansListController::class, 'makePayment'])->name('patient.booking_confirm');
 
+    Route::get('/patient/appointments/appointments_history', [PhysiciansListController::class, 'appointmentsHistory'])->name('patient.appointments_history');
     Route::get('/patient/appointments/upcoming_appointment', [PhysiciansListController::class, 'upcomingAppointments'])->name('patient.upcoming_appointments');
+
 });
 
 
@@ -79,6 +81,10 @@ Route::middleware(['auth', 'role:physician', 'physician.status'])->group(functio
     Route::put('/physician/schedule/{id}', [PhysicianScheduleController::class, 'update'])->name('physician.schedule.update');
     Route::post('/physician/schedule/store', [PhysicianScheduleController::class, 'store'])->name('physician.schedule.store');
     Route::delete('/physician/schedule/{id}', [PhysicianScheduleController::class, 'destroy'])->name('physician.schedule.destroy');
+
+    Route::get('/physician/appointments/appointments_history', [PhysicianScheduleController::class, 'appointmentsHistory'])->name('physician.appointments_history');
+    Route::get('/physician/appointments/upcoming_appointment', [PhysicianScheduleController::class, 'upcomingAppointments'])->name('physician.upcoming_appointments');
+
 });
 
 

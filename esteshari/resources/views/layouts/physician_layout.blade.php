@@ -53,10 +53,8 @@
             <li class="dropdown">
                 <button href="">Appointments</button>
                 <div class="dropdown-content">
-                    <a href="#">Pending Appointments</a>
-                    <a href="#">Upcoming Appointments</a>
-                    <a href="#">Cancelled Appointments</a>
-                    <a href="#">Appointments History</a>
+                    <a href="{{route('physician.upcoming_appointments')}}">Upcoming Appointments</a>
+                    <a href="{{route('physician.appointments_history')}}">Appointments History</a>
                 </div>
             </li>
             <li class="dropdown">

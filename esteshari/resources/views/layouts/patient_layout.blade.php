@@ -54,7 +54,7 @@
                 <button href="">My Appointments</button>
                 <div class="dropdown-content">
                     <a href="{{route('patient.upcoming_appointments')}}">Upcoming Appointments</a>
-                    <a href="#">Appointments History</a>
+                    <a href="{{route('patient.appointments_history')}}">Appointments History</a>
                 </div>
             </li>
 
