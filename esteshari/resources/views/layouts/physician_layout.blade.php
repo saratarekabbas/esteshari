@@ -67,8 +67,9 @@
                             <button href="#">Finances</button>
                             <div class="dropdown-content">
                                 <a href="{{route('physician.session_pricing.view')}}">Session Pricing</a>
-                                <a href="#">Manage My Financial Information</a>
                                 <a href="{{route('physician.revenue.view')}}">Financial Revenue</a>
+                                <a href="{{route('physician.financial_information.view')}}">Manage My Financial Information</a>
+
                             </div>
                         </li>
                         <li class="dropdown">

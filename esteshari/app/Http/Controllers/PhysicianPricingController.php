@@ -61,4 +61,13 @@ class PhysicianPricingController extends Controller
         return view('physician.finances.revenue_view', compact('schedules'));
     }
 
+    public function financialInfoIndex()
+    {
+        return view('physician.finances.financial_information');
+    }
+
+    public function financialInfoAdd(Request $request)
+    {
+    }
+
 }
