@@ -58,7 +58,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <a href="#" class="btn btn-primary">Update Schedule</a>
+                <a href="{{route('physician.schedule.view')}}" class="btn btn-primary">Update Schedule</a>
             </div>
         </div>
     </div>

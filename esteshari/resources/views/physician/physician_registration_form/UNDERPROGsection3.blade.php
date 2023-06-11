@@ -16,32 +16,33 @@
     </div>
 
     <div class="col-md-4 form-floating">
-        <input type="text" id="job_title" name="job_title"
+        <input type="text" id="job_title" name="work_experiences[0][job_title]"
                placeholder="Enter Job Title"
-               class="form-control @error('job_title') is-invalid @enderror"
-               value="{{ $workExperience ? $workExperience->job_title : old('job_title') }}"
+               class="form-control @error('work_experiences.0.job_title') is-invalid @enderror"
+               value="{{ $workExperience ? $workExperience->job_title : old('work_experiences.0.job_title') }}"
                required>
         <label for="degree_title">Job Title</label>
-        @error('job_title')
+        @error('work_experiences.0.job_title')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
 
+
     <div class="col-md-4 form-floating">
-        <input type="text" id="employer_name" name="employer_name"
+        <input type="text" id="employer_name" name="work_experiences[0][employer_name]"
                placeholder="Enter Employer Name"
-               class="form-control  @error('employer_name') is-invalid @enderror"
-               value="{{ $workExperience ? $workExperience->employer_name : old('employer_name') }}"
+               class="form-control  @error('work_experiences.0.employer_name') is-invalid @enderror"
+               value="{{ $workExperience ? $workExperience->employer_name : old('work_experiences.0.employer_name') }}"
                required>
         <label for="institute">Employer Name</label>
-        @error('employer_name')
+        @error('work_experiences.0.employer_name')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
 
     <div class="col-md-4 form-floating">
-        <select id="employment_type" name="employment_type"
-                class="form-select @error('employment_type') is-invalid @enderror" required>
+        <select id="employment_type" name="work_experiences[0][employment_type]"
+                class="form-select @error('work_experiences.0.employment_type') is-invalid @enderror" required>
             <option value="">Select Employment Type</option>
             <option value="Full-time">Full-time</option>
             <option value="Part-time">Part-time</option>
@@ -57,57 +58,74 @@
             <option value="Seasonal">Seasonal</option>
         </select>
         <label for="employment_type">Employment Type</label>
-        @error('employment_type')
+        @error('work_experiences.0.employment_type')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
 
     <div class="col-md-6 form-floating">
-        <input type="date" id="start_date_of_employment" name="start_date_of_employment"
-               class="form-control @error('start_date_of_employment') is-invalid @enderror"
-               value="{{ $workExperience ? $workExperience->start_date_of_employment : old('start_date_of_employment') }}"
+        <input type="date" id="start_date_of_employment" name="work_experiences[0][start_date_of_employment]"
+               class="form-control @error('work_experiences.0.start_date_of_employment') is-invalid @enderror"
+               value="{{ $workExperience ? $workExperience->start_date_of_employment : old('work_experiences.0.start_date_of_employment') }}"
                required>
 
         <label for="year_of_graduation">Start Date of Employment</label>
-        @error('start_date_of_employment')
+        @error('work_experiences.0.start_date_of_employment')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
 
     <div class="col-md-6 form-floating">
-        <input type="date" id="end_date_of_employment" name="end_date_of_employment"
-               class="form-control @error('end_date_of_employment') is-invalid @enderror"
-               value="{{ $workExperience ? $workExperience->end_date_of_employment : old('end_date_of_employment') }}"
+        <input type="date" id="end_date_of_employment" name="work_experiences[0][end_date_of_employment]"
+               class="form-control @error('work_experiences.0.end_date_of_employment') is-invalid @enderror"
+               value="{{ $workExperience ? $workExperience->end_date_of_employment : old('work_experiences.0.end_date_of_employment') }}"
                required>
         <label for="end_date_of_employment">End Date of Employment</label>
-        @error('end_date_of_employment')
+        @error('work_experiences.0.end_date_of_employment')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="current_role" name="current_role"
-                   onchange="handleCheckboxChange()">
-            <label class="form-check-label" for="current_role">I am currently working in this role</label>
-            <input type="hidden" id="current_role" name="current_role"
-                   value="{{ $workExperience && $workExperience->current_role ? 1 : 0 }}">
 
+
+        {{--        <div class="form-check">--}}
+        {{--            <input type="checkbox" class="form-check-input" id="current_role" name="current_role"--}}
+        {{--                   onchange="handleCheckboxChange()">--}}
+        {{--            <label class="form-check-label" for="current_role">I am currently working in this role</label>--}}
+        {{--            <input type="hidden" id="current_role" name="current_role"--}}
+        {{--                   value="{{ $workExperience && $workExperience->current_role ? 1 : 0 }}">--}}
+
+        {{--        </div>--}}
+
+
+        <div class="form-group">
+            <div class="form-check">
+                <input type="hidden" name="work_experiences[0][current_role]" value="0">
+                <input type="checkbox" class="form-check-input" id="current_role"
+                       name="work_experiences[0][current_role]" value="1"
+                       {{ $workExperience && $workExperience->current_role ? 'checked' : '' }} onchange="handleCheckboxChange()">
+                <label class="form-check-label" for="current_role">I am currently working in this role</label>
+            </div>
+            @error('work_experiences.0.current_role')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
+
     </div>
 
     <div class="col-md-4 form-floating">
-        <input type="text" id="job_location_city" name="job_location_city"
+        <input type="text" id="job_location_city" name="work_experiences[0][job_location_city]"
                placeholder="Enter Job Location - City"
-               class="form-control  @error('job_location_city') is-invalid @enderror"
-               value="{{ $workExperience ? $workExperience->job_location_city : old('job_location_city') }}"
+               class="form-control  @error('work_experiences.0.job_location_city') is-invalid @enderror"
+               value="{{ $workExperience ? $workExperience->job_location_city : old('work_experiences.0.job_location_city') }}"
                required>
         <label for="institute">Job Location - City</label>
-        @error('job_location_city')
+        @error('work_experiences.0.job_location_city')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
 
     <div class="col-md-4 form-floating">
-        <select id="job_location_country" name="job_location_country"
-                class="form-select @error('job_location_country') is-invalid @enderror" required>
+        <select id="job_location_country" name="work_experiences[0][job_location_country]"
+                class="form-select @error('work_experiences.0.job_location_country') is-invalid @enderror" required>
             <option value="">Select Job Location</option>
             <option value="Afghanistan">Afghanistan</option>
             <option value="Aland Islands">Aland Islands</option>
@@ -370,21 +388,21 @@
             <option value="Zimbabwe">Zimbabwe</option>
         </select>
         <label for="job_location_country">Job Location - Country</label>
-        @error('job_location_country')
+        @error('work_experiences.0.job_location_country')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
 
     <div class="col-md-4 form-floating">
-        <select id="location_type" name="location_type"
-                class="form-select @error('location_type') is-invalid @enderror" required>
+        <select id="location_type" name="work_experiences[0][location_type]"
+                class="form-select @error('work_experiences.0.location_type') is-invalid @enderror" required>
             <option value="">Select Job Location</option>
             <option value="On-site">On-site</option>
             <option value="Hybrid">Hybrid</option>
             <option value="Remote">Remote</option>
         </select>
         <label for="institute_location">Location Type</label>
-        @error('location_type')
+        @error('work_experiences.0.location_type')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
@@ -392,42 +410,25 @@
 
     <div class="col-12 col-md-12">
         <div class="form-floating">
-                        <textarea rows="3" type="text" id="job_description" name="job_description"
-                                  class="form-control @error('job_description') is-invalid @enderror">{{ $workExperience ? $workExperience->job_description : old('job_description') }}</textarea>
+                        <textarea rows="3" type="text" id="job_description" name="work_experiences[0][job_description]"
+                                  class="form-control @error('work_experiences.0.job_description') is-invalid @enderror">{{ $workExperience ? $workExperience->job_description : old('job_description') }}</textarea>
             <label for="job_description">Job Description</label>
-            @error('job_description')
+            @error('work_experiences.0.job_description')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="job_experience_files" class="form-label">Job Experience Files:</label>
-        <input class="form-control @error('job_experience_files') is-invalid @enderror" type="file"
-               name="job_experience_files[]"
-               id="job_experience_files" multiple/>
+    {{--    <div class="form-group">--}}
+    {{--        <label for="job_experience_files" class="form-label">Job Experience Files:</label>--}}
+    {{--        <input class="form-control @error('work_experiences.0.job_experience_files') is-invalid @enderror" type="file"--}}
+    {{--               name="work_experiences[0][job_experience_files][]"--}}
+    {{--               id="job_experience_files" multiple/>--}}
+    {{--        @error('work_experiences.0.job_experience_files')--}}
+    {{--        <div class="invalid-feedback">{{ $message }}</div>--}}
+    {{--        @enderror--}}
+    {{--    </div>--}}
 
-        @error('job_experience_files')
-        <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-        @if ($workExperience)
-            <div class="mt-2">
-                <strong>Previously uploaded files:</strong>
-                @foreach (json_decode($workExperience->job_experience_files) as $file)
-                    <div>
-                        <a href="{{ asset('storage/'. $file) }}" target="_blank">View File: {{ $file }}</a>
-                    </div>
-                @endforeach
-            </div>
-        @elseif (old('job_experience_files'))
-            <div class="mt-2">
-                <strong>Previously uploaded files:</strong>
-                @foreach (old('job_experience_files') as $file)
-                    <div>{{ $file }}</div>
-                @endforeach
-            </div>
-        @endif
-    </div>
 
     <div class="text-center mt-4">
         <button type="button" id="addExperienceBtn" class="btn btn-primary">Add Another Work Experience</button>
@@ -461,26 +462,27 @@
 <script>
     // -------------------------------------------------
     // START OF old value management for lists
-    document.getElementById('employment_type').value = "{{ $workExperience ? $workExperience->employment_type : old('employment_type') }}";
-    document.getElementById('job_location_country').value = "{{ $workExperience ? $workExperience->job_location_country : old('job_location_country') }}";
-    document.getElementById('location_type').value = "{{ $workExperience ? $workExperience->location_type : old('location_type') }}";
+    document.getElementById('employment_type').value = "{{ $workExperience ? $workExperience->employment_type : old('work_experiences.0.employment_type') }}";
+    document.getElementById('job_location_country').value = "{{ $workExperience ? $workExperience->job_location_country : old('work_experiences.0.job_location_country') }}";
+    document.getElementById('location_type').value = "{{ $workExperience ? $workExperience->location_type : old('work_experiences.0.location_type') }}";
     // END OF old value management for lists
 
     // -------------------------------------------------
 
     // Start of Checkbox Management
+
     function handleCheckboxChange() {
         var checkbox = document.getElementById('current_role');
         var endDateInput = document.getElementById('end_date_of_employment');
-        var currentRoleInput = document.getElementById('current_role');
+        var currentRoleInput = document.querySelector('input[name="work_experiences[0][current_role]"]');
 
         if (checkbox.checked) {
             endDateInput.value = ''
+            currentRoleInput.value = '1';
             endDateInput.disabled = true;
-            currentRoleInput.value = 1;
         } else {
             endDateInput.disabled = false;
-            currentRoleInput.value = 0;
+            currentRoleInput.value = '0';
         }
     }
 
@@ -489,46 +491,47 @@
     // -------------------------------------------------
     //Start of New Section Adding
 
-    let experienceCount = 1;
 
-    const addExperienceBtn = document.getElementById('addExperienceBtn');
+    document.addEventListener("DOMContentLoaded", function () {
+        let workExperienceIndex = 1;
 
-    addExperienceBtn.addEventListener('click', function () {
-        experienceCount++;
+        document.getElementById("addExperienceBtn").addEventListener("click", function () {
+            var newWorkExperience = document.createElement("div");
+            newWorkExperience.innerHTML = `
+  <hr class="hr hr-blurry"/>
 
-        newExperienceSection = `
-   <hr class="hr hr-blurry"/>
-            <div class="col-md-12">
-            <h5 class="form-subtitle">Experience ${experienceCount}:</h5>
-        </div>
+    <div class="col-md-12">
+        <h5 class="form-subtitle">Experience ${workExperienceIndex}:</h5>
+    </div>
 
- <div class="col-md-4 form-floating">
-        <input type="text" id="job_title"
+    <div class="col-md-4 form-floating">
+        <input type="text" id="job_title" name="work_experiences[0][job_title]"
                placeholder="Enter Job Title"
-               class="form-control @error('job_title') is-invalid @enderror"
-               value="{{ $workExperience ? $workExperience->job_title : old('job_title') }}"
-               >
+               class="form-control @error('work_experiences.0.job_title') is-invalid @enderror"
+               value="{{ $workExperience ? $workExperience->job_title : old('work_experiences.0.job_title') }}"
+               required>
         <label for="degree_title">Job Title</label>
-        @error('job_title')
-        <div class="invalid-feedback">{{ $message }}</div>
+        @error('work_experiences.0.job_title')
+            <div class="invalid-feedback">{{ $message }}</div>
         @enderror
-        </div>
+            </div>
 
-        <div class="col-md-4 form-floating">
-            <input type="text" id="employer_name"
-                   placeholder="Enter Employer Name"
-                   class="form-control  @error('employer_name') is-invalid @enderror"
-               value="{{ $workExperience ? $workExperience->employer_name : old('employer_name') }}"
-               >
+
+            <div class="col-md-4 form-floating">
+                <input type="text" id="employer_name" name="work_experiences[0][employer_name]"
+                       placeholder="Enter Employer Name"
+                       class="form-control  @error('work_experiences.0.employer_name') is-invalid @enderror"
+               value="{{ $workExperience ? $workExperience->employer_name : old('work_experiences.0.employer_name') }}"
+               required>
         <label for="institute">Employer Name</label>
-        @error('employer_name')
-        <div class="invalid-feedback">{{ $message }}</div>
+        @error('work_experiences.0.employer_name')
+            <div class="invalid-feedback">{{ $message }}</div>
         @enderror
-        </div>
+            </div>
 
-        <div class="col-md-4 form-floating">
-            <select id="employment_type"
-                    class="form-select @error('employment_type') is-invalid @enderror" >
+            <div class="col-md-4 form-floating">
+                <select id="employment_type" name="work_experiences[0][employment_type]"
+                        class="form-select @error('work_experiences.0.employment_type') is-invalid @enderror" required>
             <option value="">Select Employment Type</option>
             <option value="Full-time">Full-time</option>
             <option value="Part-time">Part-time</option>
@@ -544,57 +547,74 @@
             <option value="Seasonal">Seasonal</option>
         </select>
         <label for="employment_type">Employment Type</label>
-        @error('employment_type')
-        <div class="invalid-feedback">{{ $message }}</div>
+        @error('work_experiences.0.employment_type')
+            <div class="invalid-feedback">{{ $message }}</div>
         @enderror
-        </div>
+            </div>
 
-        <div class="col-md-6 form-floating">
-            <input type="date" id="start_date_of_employment"
-                   class="form-control @error('start_date_of_employment') is-invalid @enderror"
-               value="{{ $workExperience ? $workExperience->start_date_of_employment : old('start_date_of_employment') }}"
-               >
+            <div class="col-md-6 form-floating">
+                <input type="date" id="start_date_of_employment" name="work_experiences[0][start_date_of_employment]"
+                       class="form-control @error('work_experiences.0.start_date_of_employment') is-invalid @enderror"
+               value="{{ $workExperience ? $workExperience->start_date_of_employment : old('work_experiences.0.start_date_of_employment') }}"
+               required>
 
         <label for="year_of_graduation">Start Date of Employment</label>
-        @error('start_date_of_employment')
-        <div class="invalid-feedback">{{ $message }}</div>
+        @error('work_experiences.0.start_date_of_employment')
+            <div class="invalid-feedback">{{ $message }}</div>
         @enderror
-        </div>
+            </div>
 
-        <div class="col-md-6 form-floating">
-            <input type="date" id="end_date_of_employment"
-                   class="form-control @error('end_date_of_employment') is-invalid @enderror"
-               value="{{ $workExperience ? $workExperience->end_date_of_employment : old('end_date_of_employment') }}"
-               >
+            <div class="col-md-6 form-floating">
+                <input type="date" id="end_date_of_employment" name="work_experiences[0][end_date_of_employment]"
+                       class="form-control @error('work_experiences.0.end_date_of_employment') is-invalid @enderror"
+               value="{{ $workExperience ? $workExperience->end_date_of_employment : old('work_experiences.0.end_date_of_employment') }}"
+               required>
         <label for="end_date_of_employment">End Date of Employment</label>
-        @error('end_date_of_employment')
-        <div class="invalid-feedback">{{ $message }}</div>
+        @error('work_experiences.0.end_date_of_employment')
+            <div class="invalid-feedback">{{ $message }}</div>
         @enderror
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="current_role
-                   onchange="handleCheckboxChange()">
-            <label class="form-check-label" for="current_role">I am currently working in this role</label>
-            <input type="hidden" id="current_role"
-                   value="{{ $workExperience && $workExperience->current_role ? 1 : 0 }}">
 
-        </div>
-    </div>
 
-    <div class="col-md-4 form-floating">
-        <input type="text" id="job_location_city"
-               placeholder="Enter Job Location - City"
-               class="form-control  @error('job_location_city') is-invalid @enderror"
-               value="{{ $workExperience ? $workExperience->job_location_city : old('job_location_city') }}"
-               >
-        <label for="institute">Job Location - City</label>
-        @error('job_location_city')
-        <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
+            {{--        <div class="form-check">--}}
+            {{--            <input type="checkbox" class="form-check-input" id="current_role" name="current_role"--}}
+            {{--                   onchange="handleCheckboxChange()">--}}
+            {{--            <label class="form-check-label" for="current_role">I am currently working in this role</label>--}}
+            {{--            <input type="hidden" id="current_role" name="current_role"--}}
+            {{--                   value="{{ $workExperience && $workExperience->current_role ? 1 : 0 }}">--}}
+
+            {{--        </div>--}}
+
+
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="hidden" name="work_experiences[0][current_role]" value="0">
+                    <input type="checkbox" class="form-check-input" id="current_role"
+                           name="work_experiences[0][current_role]" value="1"
+{{ $workExperience && $workExperience->current_role ? 'checked' : '' }} onchange="handleCheckboxChange()">
+                <label class="form-check-label" for="current_role">I am currently working in this role</label>
+            </div>
+            @error('work_experiences.0.current_role')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+            </div>
+
         </div>
 
         <div class="col-md-4 form-floating">
-            <select id="job_location_country"
-                    class="form-select @error('job_location_country') is-invalid @enderror" >
+            <input type="text" id="job_location_city" name="work_experiences[0][job_location_city]"
+                   placeholder="Enter Job Location - City"
+                   class="form-control  @error('work_experiences.0.job_location_city') is-invalid @enderror"
+               value="{{ $workExperience ? $workExperience->job_location_city : old('work_experiences.0.job_location_city') }}"
+               required>
+        <label for="institute">Job Location - City</label>
+        @error('work_experiences.0.job_location_city')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+            </div>
+
+            <div class="col-md-4 form-floating">
+                <select id="job_location_country" name="work_experiences[0][job_location_country]"
+                        class="form-select @error('work_experiences.0.job_location_country') is-invalid @enderror" required>
             <option value="">Select Job Location</option>
             <option value="Afghanistan">Afghanistan</option>
             <option value="Aland Islands">Aland Islands</option>
@@ -857,69 +877,40 @@
             <option value="Zimbabwe">Zimbabwe</option>
         </select>
         <label for="job_location_country">Job Location - Country</label>
-        @error('job_location_country')
-        <div class="invalid-feedback">{{ $message }}</div>
+        @error('work_experiences.0.job_location_country')
+            <div class="invalid-feedback">{{ $message }}</div>
         @enderror
-        </div>
+            </div>
 
-        <div class="col-md-4 form-floating">
-            <select id="location_type"
-                    class="form-select @error('location_type') is-invalid @enderror" >
+            <div class="col-md-4 form-floating">
+                <select id="location_type" name="work_experiences[0][location_type]"
+                        class="form-select @error('work_experiences.0.location_type') is-invalid @enderror" required>
             <option value="">Select Job Location</option>
             <option value="On-site">On-site</option>
             <option value="Hybrid">Hybrid</option>
             <option value="Remote">Remote</option>
         </select>
         <label for="institute_location">Location Type</label>
-        @error('location_type')
-        <div class="invalid-feedback">{{ $message }}</div>
+        @error('work_experiences.0.location_type')
+            <div class="invalid-feedback">{{ $message }}</div>
         @enderror
-        </div>
+            </div>
 
 
-        <div class="col-12 col-md-12">
-            <div class="form-floating">
-                            <textarea rows="3" type="text" id="job_description"
-                                      class="form-control @error('job_description') is-invalid @enderror">{{ $workExperience ? $workExperience->job_description : old('job_description') }}</textarea>
+            <div class="col-12 col-md-12">
+                <div class="form-floating">
+                                <textarea rows="3" type="text" id="job_description" name="work_experiences[0][job_description]"
+                                          class="form-control @error('work_experiences.0.job_description') is-invalid @enderror">{{ $workExperience ? $workExperience->job_description : old('job_description') }}</textarea>
             <label for="job_description">Job Description</label>
-            @error('job_description')
-        <div class="invalid-feedback">{{ $message }}</div>
+            @error('work_experiences.0.job_description')
+            <div class="invalid-feedback">{{ $message }}</div>
             @enderror
-        </div>
-    </div>
+            </div>
+        </div>`;
+            workExperienceIndex++;
 
-    <div class="form-group">
-        <label for="job_experience_files" class="form-label">Job Experience Files:</label>
-        <input class="form-control @error('job_experience_files') is-invalid @enderror" type="file"
-
-               id="job_experience_files" multiple/>
-
-        @error('job_experience_files')
-        <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-        @if ($workExperience)
-        <div class="mt-2">
-            <strong>Previously uploaded files:</strong>
-@foreach (json_decode($workExperience->job_experience_files) as $file)
-        <div>
-            <a href="{{ asset('storage/'. $file) }}" target="_blank">View File: {{ $file }}</a>
-                    </div>
-                @endforeach
-        </div>
-@elseif (old('job_experience_files'))
-        <div class="mt-2">
-            <strong>Previously uploaded files:</strong>
-@foreach (old('job_experience_files') as $file)
-        <div>{{ $file }}</div>
-                @endforeach
-        </div>
-@endif
-        </div>
-
-`;
-        const buttonDiv = addExperienceBtn.parentNode;
-        buttonDiv.insertAdjacentHTML('beforebegin', newExperienceSection);
+            this.parentNode.insertBefore(newWorkExperience, this);
+        });
     });
-
 
 </script>
