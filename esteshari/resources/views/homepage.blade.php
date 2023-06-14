@@ -67,10 +67,6 @@
             </div>
         </div>
     </section>
-    <!-- Portfolio-->
-    <div id="portfolio">
-        THIS IS PORTFOLIO SECTION
-    </div>
     <!-- Call to action-->
     <section class="page-section bg-dark text-white" id="contact">
         <div class="container px-4 px-lg-5 text-center">

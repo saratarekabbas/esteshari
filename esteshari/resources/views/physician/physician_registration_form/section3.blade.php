@@ -407,26 +407,26 @@
                name="job_experience_files[]"
                id="job_experience_files" multiple/>
 
-        @error('job_experience_files')
-        <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-        @if ($workExperience)
-            <div class="mt-2">
-                <strong>Previously uploaded files:</strong>
-                @foreach (json_decode($workExperience->job_experience_files) as $file)
-                    <div>
-                        <a href="{{ asset('storage/'. $file) }}" target="_blank">View File: {{ $file }}</a>
-                    </div>
-                @endforeach
-            </div>
-        @elseif (old('job_experience_files'))
-            <div class="mt-2">
-                <strong>Previously uploaded files:</strong>
-                @foreach (old('job_experience_files') as $file)
-                    <div>{{ $file }}</div>
-                @endforeach
-            </div>
-        @endif
+{{--        @error('job_experience_files')--}}
+{{--        <div class="invalid-feedback">{{ $message }}</div>--}}
+{{--        @enderror--}}
+{{--        @if ($workExperience)--}}
+{{--            <div class="mt-2">--}}
+{{--                <strong>Previously uploaded files:</strong>--}}
+{{--                @foreach (json_decode($workExperience->job_experience_files) as $file)--}}
+{{--                    <div>--}}
+{{--                        <a href="{{ asset('storage/'. $file) }}" target="_blank">View File: {{ $file }}</a>--}}
+{{--                    </div>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        @elseif (old('job_experience_files'))--}}
+{{--            <div class="mt-2">--}}
+{{--                <strong>Previously uploaded files:</strong>--}}
+{{--                @foreach (old('job_experience_files') as $file)--}}
+{{--                    <div>{{ $file }}</div>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        @endif--}}
     </div>
 
     <div class="text-center mt-4">
@@ -897,23 +897,7 @@
         @error('job_experience_files')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
-        @if ($workExperience)
-        <div class="mt-2">
-            <strong>Previously uploaded files:</strong>
-@foreach (json_decode($workExperience->job_experience_files) as $file)
-        <div>
-            <a href="{{ asset('storage/'. $file) }}" target="_blank">View File: {{ $file }}</a>
-                    </div>
-                @endforeach
-        </div>
-@elseif (old('job_experience_files'))
-        <div class="mt-2">
-            <strong>Previously uploaded files:</strong>
-@foreach (old('job_experience_files') as $file)
-        <div>{{ $file }}</div>
-                @endforeach
-        </div>
-@endif
+
         </div>
 
 `;

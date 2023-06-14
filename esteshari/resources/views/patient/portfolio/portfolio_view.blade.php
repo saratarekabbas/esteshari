@@ -1,4 +1,4 @@
-@extends('layouts.physician_layout')
+@extends('layouts.patient_layout')
 
 @section('content')
     @if (Session::has('success'))
@@ -7,7 +7,7 @@
         </div>
     @endif
     <div class="container">
-        <h2 class="form-title">Physician Portfolio Form</h2>
+        <h2 class="form-title">My Portfolio</h2>
 
     </div>
 @endsection

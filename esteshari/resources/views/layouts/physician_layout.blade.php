@@ -40,8 +40,8 @@
             <li class="dropdown">
                 <button href="">Portfolio</button>
                 <div class="dropdown-content">
-                    <a href="#">View Portfolio</a>
-                    <a href="#">Manage Portfolio</a>
+                    <a href="{{route('physician.portfolio.view')}}">View Portfolio</a>
+                    <a href="{{route('physician.portfolio.manage')}}">Manage Portfolio</a>
                 </div>
             </li>
             <li class="dropdown">

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\General\GeneralController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PhysicianPricingController;
 use App\Http\Controllers\PhysicianRegistrationApplicationsManagementController;
@@ -8,9 +7,9 @@ use App\Http\Controllers\PhysicianRegistrationFormController;
 use App\Http\Controllers\PhysicianScheduleController;
 use App\Http\Controllers\PhysiciansListController;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\userPortfolioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Api\ZoomApi;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::get('/', function () {
@@ -45,6 +44,8 @@ Route::group(['middleware' => ['auth', 'role:patient']], function () {
     Route::get('/patient/appointments/appointments_history', [PhysiciansListController::class, 'appointmentsHistory'])->name('patient.appointments_history');
     Route::get('/patient/appointments/upcoming_appointment', [PhysiciansListController::class, 'upcomingAppointments'])->name('patient.upcoming_appointments');
 
+    Route::get('/patient/portfolio/view', [UserPortfolioController::class, 'patientPortfolioIndex'])->name('patient.portfolio.view');
+    Route::get('/patient/portfolio/manage', [UserPortfolioController::class, 'patientPortfolioAdd'])->name('patient.portfolio.manage');
 });
 
 
@@ -89,25 +90,7 @@ Route::middleware(['auth', 'role:physician', 'physician.status'])->group(functio
     Route::get('/physician/revenue/view', [PhysicianPricingController::class, 'revenueIndex'])->name('physician.revenue.view');
     Route::get('/physician/financial_info/view', [PhysicianPricingController::class, 'financialInfoIndex'])->name('physician.financial_information.view');
     Route::get('/physician/financial_info/add', [PhysicianPricingController::class, 'financialInfoAdd'])->name('physician.financial_information.add');
+
+    Route::get('/physician/portfolio/view', [UserPortfolioController::class, 'physicianPortfolioIndex'])->name('physician.portfolio.view');
+    Route::get('/physician/portfolio/manage', [UserPortfolioController::class, 'physicianPortfolioAdd'])->name('physician.portfolio.manage');
 });
-
-
-//Route::get('/create-meeting', function () {
-//    $zoomApi = new ZoomApi(env('ZOOM_API_KEY'), env('ZOOM_API_SECRET'));
-//    $meetingUrl = $zoomApi->createMeeting([
-//        'topic' => 'New Meeting',
-//        'type' => 2,
-//        'start_time' => now()->addMinutes(10)->toIso8601String(),
-//        'duration' => 60,
-//        'timezone' => 'UTC',
-//        'password' => 'password',
-//        'agenda' => 'Agenda for the meeting',
-//        'settings' => [
-//            'join_before_host' => true,
-//            'mute_upon_entry' => false,
-//            'auto_recording' => 'none',
-//            'registrants_email_notification' => true,
-//        ],
-//    ]);
-//    return redirect($meetingUrl);
-//});
