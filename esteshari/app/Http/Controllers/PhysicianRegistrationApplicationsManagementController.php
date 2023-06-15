@@ -117,4 +117,13 @@ class PhysicianRegistrationApplicationsManagementController extends Controller
 
         return view('administrator.all_physicians.all_physicians', compact('allPhysicians'));
     }
+
+    public function indexAllPatients()
+    {
+        $allPatients = User::where('role', 'patient')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('administrator.all_patients.all_patients', compact('allPatients'));
+    }
 }

@@ -45,7 +45,7 @@
             <li class="dropdown">
                 <button href="#">Patients</button>
                 <div class="dropdown-content">
-                    <a href="#">View Patients List</a>
+                    <a href="{{ route('administrator.indexAllPatients')}}">View Patients List</a>
                 </div>
             </li>
 

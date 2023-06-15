@@ -39,16 +39,15 @@
         <ul>
             <li class="dropdown">
                 <button href="">Search Physician</button>
-                                <div class="dropdown-content">
-                                    <a href="{{route('patient.physicians_list.view')}}">View Physicians List</a>
-                                </div>
+                <div class="dropdown-content">
+                    <a href="{{route('patient.physicians_list.view')}}">View Physicians List</a>
+                </div>
             </li>
             <li class="dropdown">
-                <button href="">My Profile</button>
-                                <div class="dropdown-content">
-                                    <a href="#">View My Profile</a>
-                                    <a href="#">Manage My Profile</a>
-                                </div>
+                <button href="">Medical History</button>
+                <div class="dropdown-content">
+                    <a href="#">Manage My Medical History</a>
+                </div>
             </li>
             <li class="dropdown">
                 <button href="">My Appointments</button>
@@ -57,15 +56,6 @@
                     <a href="{{route('patient.appointments_history')}}">Appointments History</a>
                 </div>
             </li>
-
-            <li class="dropdown">
-                <button href="">My Records</button>
-                <div class="dropdown-content">
-                    <a href="">My Medical History</a>
-                    <a href="">My Medical History</a>
-                </div>
-            </li>
-
             <li class="dropdown" style="float:right">
                 <div class="dropdown-button" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                      aria-haspopup="true" aria-expanded="false">

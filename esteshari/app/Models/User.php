@@ -63,7 +63,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function workExperience() //section3
     {
-        return $this->hasMany(WorkExperience::class, 'user_id');
+        return $this->hasOne(WorkExperience::class, 'user_id');
     }
 
     public function boardCertification() //section4

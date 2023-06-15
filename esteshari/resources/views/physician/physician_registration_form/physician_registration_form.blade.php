@@ -22,24 +22,6 @@
         @endif
     </div>
 
-{{--    <nav aria-label="Page navigation example">--}}
-{{--        <ul class="pagination justify-content-center">--}}
-{{--            <li class="page-item {{ $section == 1 ? 'disabled' : '' }}">--}}
-{{--                <a class="page-link" href="{{ route('administrator.registration.view', ['id' => $physician->id, 'section' => $section - 1]) }}" tabindex="-1">Previous</a>--}}
-{{--            </li>--}}
-{{--            <li class="page-item"><a class="page-link" href="{{ route('administrator.registration.view', ['id' => $physician->id, 'section' => 1]) }}">1</a></li>--}}
-{{--            <li class="page-item"><a class="page-link" href="{{ route('administrator.registration.view', ['id' => $physician->id, 'section' => 2]) }}">2</a></li>--}}
-{{--            <li class="page-item"><a class="page-link" href="{{ route('administrator.registration.view', ['id' => $physician->id, 'section' => 3]) }}">3</a></li>--}}
-{{--            <li class="page-item"><a class="page-link" href="{{ route('administrator.registration.view', ['id' => $physician->id, 'section' => 4]) }}">4</a></li>--}}
-{{--            <li class="page-item"><a class="page-link" href="{{ route('administrator.registration.view', ['id' => $physician->id, 'section' => 5]) }}">5</a></li>--}}
-{{--            <li class="page-item"><a class="page-link" href="{{ route('administrator.registration.view', ['id' => $physician->id, 'section' => 6]) }}">6</a></li>--}}
-{{--            <li class="page-item"><a class="page-link" href="{{ route('administrator.registration.view', ['id' => $physician->id, 'section' => 7]) }}">7</a></li>--}}
-{{--            <li class="page-item"><a class="page-link" href="{{ route('administrator.registration.view', ['id' => $physician->id, 'section' => 8]) }}">8</a></li>--}}
-{{--            <li class="page-item {{ $section == 8 ? 'disabled' : '' }}">--}}
-{{--                <a class="page-link" href="{{ route('administrator.registration.view', ['id' => $physician->id, 'section' => $section + 1]) }}">Next</a>--}}
-{{--            </li>--}}
-{{--        </ul>--}}
-{{--    </nav>--}}
 
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">

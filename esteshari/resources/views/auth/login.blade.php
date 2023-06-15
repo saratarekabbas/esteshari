@@ -37,7 +37,8 @@
         </div>
 
         <div class="form-outline mb-4">
-            <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"/>
+            <input type="password" id="password" class="form-control @error('password') is-invalid @enderror"
+                   name="password" required autocomplete="current-password"/>
             <label class="form-label" for="password">{{ __('Password') }}</label>
             @error('password')
             <span class="invalid-feedback" role="alert">
@@ -49,7 +50,8 @@
         <div class="row mb-4">
             <div class="col-md-6 d-flex justify-content-center">
                 <div class="form-check mb-3 mb-md-0">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <input class="form-check-input" type="checkbox" name="remember"
+                           id="remember" {{ old('remember') ? 'checked' : '' }}>
                     <label class="form-check-label" for="remember">{{ __('Remember Me') }}</label>
                 </div>
             </div>

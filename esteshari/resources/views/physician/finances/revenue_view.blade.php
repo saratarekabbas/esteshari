@@ -32,7 +32,7 @@
             <tbody>
             @if($schedules->isEmpty())
                 <tr>
-                    <td rowspan="7">No scheduled or completed sessions with patients to display revenue.</td>
+                    <td colspan="7">No scheduled or completed sessions with patients to display revenue.</td>
                 </tr>
             @else
                 @php($count = 1)
@@ -44,7 +44,7 @@
                         <td>{{ substr($schedule->slot_time, 0, 5) }}</td>
                         <td>{{$schedule->currency}} {{$schedule->price}}</td>
                         {{--                        View a button to fill it up if not completed, otherwise a link to the submitted assessment if it exists--}}
-                        <td><a href="#" style="text-decoration: none">Fill Post-Session Questionnaire</a></td>
+                        <td><a href="#" style="text-decoration: none">Fill Post-Session Form</a></td>
                         {{--                        ONCE THE ASSESSMENT IS COMPLETED THEN RELEASE; OTHERWISE IT IS ON-HOLD--}}
                         {{--                        @if($schedule->status == "booked" && PSA is true)--}}
                         {{--                        <td>On-hold</td>--}}

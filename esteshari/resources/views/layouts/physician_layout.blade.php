@@ -51,34 +51,22 @@
                 </div>
             </li>
             <li class="dropdown">
+                <button href="#">Finances</button>
+                <div class="dropdown-content">
+                    <a href="{{route('physician.session_pricing.view')}}">Session Pricing</a>
+                    <a href="{{route('physician.revenue.view')}}">Financial Revenue</a>
+                    <a href="{{route('physician.financial_information.view')}}">Manage My Financial Information</a>
+
+                </div>
+            </li>
+            <li class="dropdown">
                 <button href="">Appointments</button>
                 <div class="dropdown-content">
                     <a href="{{route('physician.upcoming_appointments')}}">Upcoming Appointments</a>
                     <a href="{{route('physician.appointments_history')}}">Appointments History</a>
                 </div>
             </li>
-            <li class="dropdown">
-                <button href="#">Patients</button>
-                <div class="dropdown-content">
-                    <a href="#">View Patients List</a>
-                </div>
-            </li>
-                        <li class="dropdown">
-                            <button href="#">Finances</button>
-                            <div class="dropdown-content">
-                                <a href="{{route('physician.session_pricing.view')}}">Session Pricing</a>
-                                <a href="{{route('physician.revenue.view')}}">Financial Revenue</a>
-                                <a href="{{route('physician.financial_information.view')}}">Manage My Financial Information</a>
 
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <button href="#">Reports</button>
-                            <div class="dropdown-content">
-                                <a href="#">Patient Medical History Report</a>
-                                <a href="#">Patient Pre-Session Questionnaire</a>
-                            </div>
-                        </li>
             <li class="dropdown" style="float:right">
                 <div class="dropdown-button" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                      aria-haspopup="true" aria-expanded="false">
@@ -107,9 +95,9 @@
                 {{-- Display any errors/success messages --}}
                 @if ($errors->any())
                     @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger">
-                     {{ $error }}
-                    </div>
+                        <div class="alert alert-danger">
+                            {{ $error }}
+                        </div>
                     @endforeach
                 @endif
                 @if (session('success'))

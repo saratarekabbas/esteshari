@@ -51,14 +51,6 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-//            if (Auth::user()->role == 'system_admin') {
-//                return redirect()->intended('admin/dashboard');
-//            } elseif (Auth::user()->role == 'physician') {
-//                return redirect()->intended('/physician/dashboard');
-//            } elseif (Auth::user()->role == 'patient') {
-//                return redirect()->intended('/patient/dashboard');
-//            }
-
             $user = Auth::user();
 
             if ($user->role === 'system_admin') {

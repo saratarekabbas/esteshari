@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth', 'role:system_admin']], function () {
     Route::get('/administrator/all_physician_registration_requests', [PhysicianRegistrationApplicationsManagementController::class, 'indexAll'])->name('administrator.registration.indexAll');
 
     Route::get('/administrator/all_physicians', [PhysicianRegistrationApplicationsManagementController::class, 'indexAllPhysicians'])->name('administrator.indexAllPhysicians');
+    Route::get('/administrator/all_patients', [PhysicianRegistrationApplicationsManagementController::class, 'indexAllPatients'])->name('administrator.indexAllPatients');
 });
 
 // Routes for the physician process
