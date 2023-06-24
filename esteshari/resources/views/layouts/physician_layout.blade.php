@@ -38,32 +38,32 @@
     <div class="col-lg-10 col-md-9">
         <ul>
             <li class="dropdown">
-                <button href="">Portfolio</button>
+                <button href="">{{__('layout.Portfolio')}}</button>
                 <div class="dropdown-content">
-                    <a href="{{route('physician.portfolio.view')}}">View Portfolio</a>
-                    <a href="{{route('physician.portfolio.manage')}}">Manage Portfolio</a>
+                    <a href="{{route('physician.portfolio.view')}}">{{__('layout.ViewPortfolio')}}</a>
+                    <a href="{{route('physician.portfolio.manage')}}">{{__('layout.ManagePortfolio')}}</a>
                 </div>
             </li>
             <li class="dropdown">
-                <button href="">Schedule</button>
+                <button href="">{{__('layout.Schedule')}}</button>
                 <div class="dropdown-content">
-                    <a href="{{route('physician.schedule.view')}}">View Schedule</a>
+                    <a href="{{route('physician.schedule.view')}}">{{__('layout.ViewSchedule')}}</a>
                 </div>
             </li>
             <li class="dropdown">
-                <button href="#">Finances</button>
+                <button href="#">{{__('layout.Finances')}}</button>
                 <div class="dropdown-content">
-                    <a href="{{route('physician.session_pricing.view')}}">Session Pricing</a>
-                    <a href="{{route('physician.revenue.view')}}">Financial Revenue</a>
-                    <a href="{{route('physician.financial_information.view')}}">Manage My Financial Information</a>
+                    <a href="{{route('physician.session_pricing.view')}}">{{__('layout.SessionPricing')}}</a>
+                    <a href="{{route('physician.revenue.view')}}">{{__('layout.FinancialRevenue')}}</a>
+                    <a href="{{route('physician.financial_information.view')}}">{{__('layout.ManageMyFinancialInformation')}}</a>
 
                 </div>
             </li>
             <li class="dropdown">
-                <button href="">Appointments</button>
+                <button href="">{{__('layout.Appointments')}}</button>
                 <div class="dropdown-content">
-                    <a href="{{route('physician.upcoming_appointments')}}">Upcoming Appointments</a>
-                    <a href="{{route('physician.appointments_history')}}">Appointments History</a>
+                    <a href="{{route('physician.upcoming_appointments')}}">{{__('layout.UpcomingAppointments')}}</a>
+                    <a href="{{route('physician.appointments_history')}}">{{__('layout.AppointmentsHistory')}}</a>
                 </div>
             </li>
 
@@ -74,14 +74,28 @@
                 </div>
 
                 <div class="dropdown-menu dropdown-menu-end custom-dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
+                        {{__('layout.English')}}
+                    </a>
+                    <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('ms', null, [], true) }}">
+                        {{__('layout.Malay')}}
+                    </a>
+                    <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('zh', null, [], true) }}">
+                        {{__('layout.Chinese')}}
+                    </a>
+                    <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
+                        {{__('layout.Arabic')}}
+                    </a>
+                    <hr>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
+                        {{__('layout.Logout')}}
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
                 </div>
+
             </li>
 
         </ul>
@@ -118,7 +132,7 @@
 
 <footer class="bg-light text-center text-lg-start">
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2023 Esteshari, All Rights Reserved
+        {{__('homepage.copyrights')}}
     </div>
 </footer>
 

@@ -23,7 +23,7 @@
     {{--    Full Calendar--}}
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-    <title>Physician</title>
+    <title>Patient</title>
 </head>
 <body>
 <div class="row header">
@@ -38,22 +38,22 @@
     <div class="col-lg-10 col-md-9">
         <ul>
             <li class="dropdown">
-                <button href="">Search Physician</button>
+                <button href="">{{__('layout.SearchPhysician')}}</button>
                 <div class="dropdown-content">
-                    <a href="{{route('patient.physicians_list.view')}}">View Physicians List</a>
+                    <a href="{{route('patient.physicians_list.view')}}">{{__('layout.ViewPhysiciansList')}}</a>
                 </div>
             </li>
             <li class="dropdown">
-                <button href="">Medical History</button>
+                <button href="">{{__('layout.MedicalHistory')}}</button>
                 <div class="dropdown-content">
-                    <a href="#">Manage My Medical History</a>
+                    <a href="#">{{__('layout.ManageMyMedicalHistory')}}</a>
                 </div>
             </li>
             <li class="dropdown">
-                <button href="">My Appointments</button>
+                <button href="">{{__('layout.MyAppointments')}}</button>
                 <div class="dropdown-content">
-                    <a href="{{route('patient.upcoming_appointments')}}">Upcoming Appointments</a>
-                    <a href="{{route('patient.appointments_history')}}">Appointments History</a>
+                    <a href="{{route('patient.upcoming_appointments')}}">{{__('layout.UpcomingAppointments')}}</a>
+                    <a href="{{route('patient.appointments_history')}}">{{__('layout.AppointmentsHistory')}}</a>
                 </div>
             </li>
             <li class="dropdown" style="float:right">
@@ -63,14 +63,28 @@
                 </div>
 
                 <div class="dropdown-menu dropdown-menu-end custom-dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
+                        {{__('layout.English')}}
+                    </a>
+                    <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('ms', null, [], true) }}">
+                        {{__('layout.Malay')}}
+                    </a>
+                    <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('zh', null, [], true) }}">
+                        {{__('layout.Chinese')}}
+                    </a>
+                    <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
+                        {{__('layout.Arabic')}}
+                    </a>
+                    <hr>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
+                        {{__('layout.Logout')}}
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
                 </div>
+
             </li>
 
         </ul>
@@ -107,7 +121,7 @@
 
 <footer class="bg-light text-center text-lg-start">
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2023 Esteshari, All Rights Reserved
+        {{__('homepage.copyrights')}}
     </div>
 </footer>
 

@@ -58,16 +58,16 @@
 
                 <div class="dropdown-menu dropdown-menu-end custom-dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
-                        English
+                        {{__('layout.English')}}
                     </a>
                     <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('ms', null, [], true) }}">
-                        Malay
+                        {{__('layout.Malay')}}
                     </a>
-                    <a class="dropdown-item" href="{{ action('LanguageController@changeLanguage', ['lang' => 'zh']) }}">
-                        Chinese
+                    <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('zh', null, [], true) }}">
+                        {{__('layout.Chinese')}}
                     </a>
                     <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
-                        Arabic
+                        {{__('layout.Arabic')}}
                     </a>
                     <hr>
                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -78,9 +78,7 @@
                         @csrf
                     </form>
                 </div>
-
             </li>
-
         </ul>
     </div>
 </div>
@@ -91,7 +89,7 @@
 
 <footer class="bg-light text-center text-lg-start">
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2023 Esteshari, All Rights Reserved
+        {{__('homepage.copyrights')}}
     </div>
 </footer>
 

@@ -3,12 +3,7 @@
 @section('content')
     <div class="col-lg-12" style="padding: 30px">
         <h3 style="padding-bottom: 20px">Welcome, Dr. {{ Auth::user()->name }}</h3>
-        {{--                <div class="col-lg-8">Welcome Appointment schedule</div>--}}
-        {{--                <div class="col-lg-4">schedule update</div>--}}
         <div class="card">
-            {{--                    <div class="card-header">--}}
-            {{--                        Featured--}}
-            {{--                    </div>--}}
             <div class="card-body">
                 <h5 class="card-title">My schedule</h5>
                 <p class="card-text">This is your schedule for this week.</p>

@@ -3,7 +3,7 @@
 
 return [
     //   GENERAL
-    "esteshari" => "Esteshari",
+    "esteshari" => "伊斯特夏里",
 
 
     // HOMEPAGE HEADER
