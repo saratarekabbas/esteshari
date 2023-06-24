@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -9,16 +10,20 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
-    public function register(): void
+    public function boot()
     {
-        //
+        $this->setLocale();
     }
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
+    private function setLocale()
     {
-        //
+        if (session()->has('locale')) {
+            $locale = session('locale');
+        } else {
+            $locale = config('app.locale');
+            session(['locale' => $locale]);
+        }
+
+        app()->setLocale($locale);
     }
 }

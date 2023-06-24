@@ -30,22 +30,23 @@
     <div class="col-lg-10 col-md-9">
         <ul>
             <li class="dropdown">
-                <button href="#">Physician Registration Applications</button>
+                <button href="#">    {{__('layout.PhysicianRegistrationApplications')}}
+                </button>
                 <div class="dropdown-content">
-                    <a href="{{ route('administrator.registration.index')}}">View Pending Requests</a>
-                    <a href="{{ route('administrator.registration.indexAll')}}">View All Physician Registration Applications</a>
+                    <a href="{{ route('administrator.registration.index')}}">{{__('layout.ViewPendingRequests')}}</a>
+                    <a href="{{ route('administrator.registration.indexAll')}}">{{__('layout.ViewAllPhysicianRegistrationApplications')}}</a>
                 </div>
             </li>
             <li class="dropdown">
-                <button href="#">Physicians</button>
+                <button href="#">{{__('layout.Physicians')}}</button>
                 <div class="dropdown-content">
-                    <a href="{{ route('administrator.indexAllPhysicians')}}">View Physicians List</a>
+                    <a href="{{ route('administrator.indexAllPhysicians')}}">{{__('layout.ViewPhysiciansList')}}</a>
                 </div>
             </li>
             <li class="dropdown">
-                <button href="#">Patients</button>
+                <button href="#">{{__('layout.Patients')}}</button>
                 <div class="dropdown-content">
-                    <a href="{{ route('administrator.indexAllPatients')}}">View Patients List</a>
+                    <a href="{{ route('administrator.indexAllPatients')}}">{{__('layout.ViewPatientsList')}}</a>
                 </div>
             </li>
 
@@ -56,14 +57,28 @@
                 </div>
 
                 <div class="dropdown-menu dropdown-menu-end custom-dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
+                        English
+                    </a>
+                    <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('ms', null, [], true) }}">
+                        Malay
+                    </a>
+                    <a class="dropdown-item" href="{{ action('LanguageController@changeLanguage', ['lang' => 'zh']) }}">
+                        Chinese
+                    </a>
+                    <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
+                        Arabic
+                    </a>
+                    <hr>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
+                        {{__('layout.Logout')}}
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
                 </div>
+
             </li>
 
         </ul>
