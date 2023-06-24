@@ -11,8 +11,11 @@ class PatientStatusMiddleware
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
-
-//       UPDATE
+        if ($user && $user->role == 'patient') {
+            if ($user->status == 'registered' && $user->email_verified_at == null && $request->route()->getName() != 'verification.notice') {
+                return redirect()->route('verification.notice');
+            }
+        }
         return $next($request);
     }
 }

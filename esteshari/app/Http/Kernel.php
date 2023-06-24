@@ -58,6 +58,7 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\CheckRole::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'physician.status' => \App\Http\Middleware\PhysicianStatusMiddleware::class,
+        'patient.status' => \App\Http\Middleware\PatientStatusMiddleware::class,
 
     ];
 

@@ -33,7 +33,7 @@ Route::group(['middleware' => ['localeSessionRedirect', 'localizationRedirect', 
 
 
 // Routes for the patient
-        Route::group(['middleware' => ['auth', 'role:patient']], function () {
+        Route::group(['middleware' => ['auth', 'role:patient', 'patient.status']], function () {
             Route::get('/patient/dashboard', [PhysiciansListController::class, 'dashboard'])->name('patient.dashboard');
             Route::get('/patient/physicians_list/view', [PhysiciansListController::class, 'index'])->name('patient.physicians_list.view');
             Route::post('/patient/physicians_list/view/', [PhysiciansListController::class, 'book'])->name('patient.physicians_list.book');
