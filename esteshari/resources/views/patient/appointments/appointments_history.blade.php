@@ -31,12 +31,25 @@
                                         <a href="{{$appointment->meeting_link}}" target="_blank" type="button"
                                            class="btn btn-outline-primary">Join Meeting</a>
                                     </div>
+
+                                @elseif($appointment->status == 'pending')
+                                    <span class="badge bg-danger">Pending</span>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+                                    </div>
                                 @elseif($appointment->status == 'completed')
+                                    <form method="post" action="{{ route('patient.post_session.view')  }}">
+                                        @csrf
+                                        <input type="hidden" name="session_id"
+                                               value="{{$appointment->id}}">
+                                        <input type="hidden" name="physician_id"
+                                               value="{{$appointment->user->id}}">
                                     <span class="badge bg-success">Completed</span>
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                        <a href="#" type="button"
-                                           class="btn btn-outline-success">View Post-Session Assessment</a>
+                                        <button type="submit"
+                                           class="btn btn-outline-success">View Post-Session Assessment</button>
                                     </div>
+                                    </form>
                                 @endif
                             </div>
                         </div>

@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserPortfolio extends Model
+class MedicalHistory extends Model
 {
     use HasFactory;
 
-    protected $table = 'physician_portfolio';
+    protected $table = 'medical_history';
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'patient_id');
     }
 }

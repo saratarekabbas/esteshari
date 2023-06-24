@@ -106,4 +106,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(PhysicianPricing::class, 'user_id');
     }
 
+    public function userPortfolio()
+    {
+        return $this->hasOne(UserPortfolio::class, 'user_id');
+    }
+
+    public function medicalHistory()
+    {
+        return $this->hasOne(MedicalHistory::class, 'patient_id');
+    }
+
 }

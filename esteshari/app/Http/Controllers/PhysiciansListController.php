@@ -112,6 +112,12 @@ class PhysiciansListController extends Controller
             ->get();
         return view('patient.appointments.appointments_history', compact('appointments'));
     }
+
+    public function postSessionView(Request $request){
+        $session = PhysicianSchedule::where('id', $request->session_id)->first();
+        $physician = User::where('id', $request->physician_id)->first();
+        return view('patient.appointments.post-session_view', compact('session', 'physician'));
+    }
 }
 
 function calculateDates($currentDate, $direction)

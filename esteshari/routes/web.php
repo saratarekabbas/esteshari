@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+
 Route::get('/', function () {
     return view('homepage');
 });
@@ -43,6 +44,8 @@ Route::group(['middleware' => ['auth', 'role:patient']], function () {
 
     Route::get('/patient/appointments/appointments_history', [PhysiciansListController::class, 'appointmentsHistory'])->name('patient.appointments_history');
     Route::get('/patient/appointments/upcoming_appointment', [PhysiciansListController::class, 'upcomingAppointments'])->name('patient.upcoming_appointments');
+
+    Route::post('/patient/appointments/post-session_view', [PhysiciansListController::class, 'postSessionView'])->name('patient.post_session.view');
 
     Route::get('/patient/portfolio/view', [UserPortfolioController::class, 'patientPortfolioIndex'])->name('patient.portfolio.view');
     Route::get('/patient/portfolio/manage', [UserPortfolioController::class, 'patientPortfolioAdd'])->name('patient.portfolio.manage');
@@ -84,6 +87,11 @@ Route::middleware(['auth', 'role:physician', 'physician.status'])->group(functio
 
     Route::get('/physician/appointments/appointments_history', [PhysicianScheduleController::class, 'appointmentsHistory'])->name('physician.appointments_history');
     Route::get('/physician/appointments/upcoming_appointment', [PhysicianScheduleController::class, 'upcomingAppointments'])->name('physician.upcoming_appointments');
+
+    Route::post('/physician/appointments/post-session_form', [PhysicianScheduleController::class, 'postSessionFill'])->name('physician.post_session.fill');
+    Route::post('/physician/appointments/post-session_store', [PhysicianScheduleController::class, 'postSessionStore'])->name('physician.post_session.store');
+
+    Route::post('/physician/appointments/post-session_view', [PhysicianScheduleController::class, 'postSessionView'])->name('physician.post_session.view');
 
     Route::get('/physician/finances/session_pricing', [PhysicianPricingController::class, 'index'])->name('physician.session_pricing.view');
     Route::post('/physician/finances/session_pricing', [PhysicianPricingController::class, 'update'])->name('physician.session_pricing.update');

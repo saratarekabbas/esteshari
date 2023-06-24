@@ -10,8 +10,8 @@
             {{--                        Featured--}}
             {{--                    </div>--}}
             <div class="card-body">
-                <h5 class="card-title">My schedule for this week</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <h5 class="card-title">My schedule</h5>
+                <p class="card-text">This is your schedule for this week.</p>
                 <table class="table table-borderless">
                     <thead>
                     <tr>

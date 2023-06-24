@@ -18,13 +18,17 @@
         "mcamara/laravel-localization": "^1.8"
     },
     "require-dev": {
+        "andyabih/laravel-to-uml": "^1.0",
+        "beyondcode/laravel-er-diagram-generator": "^2.0",
         "fakerphp/faker": "^1.9.1",
+        "kevincobain2000/laravel-erd": "^1.6",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
         "laravel/ui": "^4.2",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.0",
+        "rakutentech/laravel-request-docs": "^2.18",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {

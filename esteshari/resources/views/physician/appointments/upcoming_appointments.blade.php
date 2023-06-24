@@ -17,7 +17,7 @@
                 <div class="card mb-3">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="{{asset('assets/profile_dr_2.jpg')}}" class="card-img img-fluid rounded-start"
+                            <img src="{{asset('assets/patient.webp')}}" class="card-img img-fluid rounded-start"
                                  style="object-fit: cover; max-height: 150px">
                         </div>
                         <div class="col-md-8">

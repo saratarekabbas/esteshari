@@ -45,63 +45,49 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">About Doctor</h5>
-                                <p class="card-text" style="font-weight: lighter">Dr. Navdeep
-                                    Singh
-                                    Pannu is a
+                                <p class="card-text" style="font-weight: lighter">Dr. {{$physician->name}} is a
                                     Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
                                     Fertility
                                     Centre.
                                     Previously worked at the General Hos...
                                     <a href="#" class="card-link">See More</a></p>
                                 <h5 class="card-title">About Dr. {{$physician->name}}</h5>
-                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. Navdeep
-                                    Singh
-                                    Pannu is a
+                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. {{$physician->name}} is a
                                     Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
                                     Fertility
                                     Centre.
                                     Previously worked at the General Hos...
                                     <a href="#" class="card-link">See More</a></p>
                                 <h5 class="card-title">About Dr. {{$physician->name}}</h5>
-                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. Navdeep
-                                    Singh
-                                    Pannu is a
+                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. {{$physician->name}} is a
                                     Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
                                     Fertility
                                     Centre.
                                     Previously worked at the General Hos...
                                     <a href="#" class="card-link">See More</a></p>
                                 <h5 class="card-title">About Dr. {{$physician->name}}</h5>
-                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. Navdeep
-                                    Singh
-                                    Pannu is a
+                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. {{$physician->name}} is a
                                     Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
                                     Fertility
                                     Centre.
                                     Previously worked at the General Hos...
                                     <a href="#" class="card-link">See More</a></p>
                                 <h5 class="card-title">About Dr. {{$physician->name}}</h5>
-                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. Navdeep
-                                    Singh
-                                    Pannu is a
+                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. {{$physician->name}} is a
                                     Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
                                     Fertility
                                     Centre.
                                     Previously worked at the General Hos...
                                     <a href="#" class="card-link">See More</a></p>
                                 <h5 class="card-title">About Dr. {{$physician->name}}</h5>
-                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. Navdeep
-                                    Singh
-                                    Pannu is a
+                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. {{$physician->name}} is a
                                     Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
                                     Fertility
                                     Centre.
                                     Previously worked at the General Hos...
                                     <a href="#" class="card-link">See More</a></p>
                                 <h5 class="card-title">About Dr. {{$physician->name}}</h5>
-                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. Navdeep
-                                    Singh
-                                    Pannu is a
+                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. {{$physician->name}} is a
                                     Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
                                     Fertility
                                     Centre.
@@ -251,9 +237,7 @@
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                 Cancel
                                             </button>
-                                            <form id="selectSlotForm" method="POST"
-                                                  action="{{ route('patient.session_booking') }}"
-                                            >
+                                            <form id="selectSlotForm" method="POST" action="{{ route('patient.session_booking') }}">
                                                 @csrf
                                                 <input type="hidden" name="id" id="selectSlotId">
                                                 <button type="submit" class="btn btn-primary">Select</button>

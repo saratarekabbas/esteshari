@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PhysicianSchedule;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\MessageBag;
@@ -163,10 +164,25 @@ class PhysicianScheduleController extends Controller
 
 
 
-//    public function indexManage(){
-//        return view('physician.physician_schedule.schedule_manage');
-//
-//    }
+    public function postSessionFill(Request $request){
+        $session = PhysicianSchedule::where('id', $request->session_id)->first();
+        $patient = User::where('id', $request->patient_id)->first();
+        return view('physician.appointments.post-session_form', compact('patient', 'session'));
+    }
+
+    public function postSessionStore(Request $request){
+        $session = PhysicianSchedule::where('id', $request->session_id)->first();
+
+        $session->status = 'completed';
+        $session->save();
+
+        return redirect()->route('physician.appointments_history')->with('success', 'Post-session assessment has been submitted successfully.');
+    }
+
+    public function postSessionView(Request $request){
+        $patient = User::where('id', $request->patient_id)->first();
+        return view('physician.appointments.post-session_view', compact('patient'));
+    }
 
     private function getValidSlotTimes()
     {

@@ -9,7 +9,12 @@
     <div class="container">
         <h2 class="form-title">Physicians List</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+            <div class="col-md-12">
+                <div class="input-group mb-3">
+                    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                    <button class="btn btn-primary" type="button">Filter</button>
+                </div>
+            </div>
             @if ($physicians->isEmpty())
                 <tr>
                     <td colspan="5">
