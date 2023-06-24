@@ -28,17 +28,8 @@ Route::group(['middleware' => ['localeSessionRedirect', 'localizationRedirect', 
         Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
 
 //This is for redirecting to services (e.g., facebook)
-        Route::get('/redirect/{service}', [SocialController::class, 'redirect']);
-        Route::get('/callback/{service}', [SocialController::class, 'callback']);
-
-//Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
-//    Route::get('index', [GeneralController::class, 'getIndex']);
-//
-//    Route::group(['prefix' => 'offers'], function () {
-//        Route::get('create', [OfferController::class, 'create']);
-//        Route::post('store', [OfferController::class, 'store'])->name('offers.store');
-//    });
-//});
+        Route::get('/redirect/{service}', [SocialController::class, 'redirect'])->name('social.redirect');
+        Route::get('/callback/{service}', [SocialController::class, 'callback'])->name('social.callback');
 
 
 // Routes for the patient

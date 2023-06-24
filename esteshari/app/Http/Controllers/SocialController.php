@@ -16,5 +16,6 @@ class SocialController extends Controller
     public function callback($service)
     {
         $user = Socialite::driver($service)->user();
+
     }
 }

@@ -5,9 +5,9 @@
         @csrf
         <div class="text-center mb-3">
             <p>Sign up with:</p>
-            <button type="button" class="btn btn-link btn-floating mx-1">
+            <a href="{{ route('social.redirect', 'facebook') }}" type="button" class="btn btn-link btn-floating mx-1">
                 <i class="fab fa-facebook-f"></i>
-            </button>
+            </a>
 
             <button type="button" class="btn btn-link btn-floating mx-1">
                 <i class="fab fa-google"></i>
