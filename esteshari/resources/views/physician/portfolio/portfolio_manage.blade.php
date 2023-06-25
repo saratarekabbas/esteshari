@@ -20,7 +20,7 @@
             <div class="col-lg-4 ">
                 <div class="card mb-4" style="height: 300px">
                     <div class="card-body text-center mt-3">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
                              alt="avatar"
                              class="rounded-circle img-fluid" style="width: 150px;">
                         <div class="d-flex justify-content-center mb-2 mt-4">

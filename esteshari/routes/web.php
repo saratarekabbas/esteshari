@@ -8,7 +8,7 @@ use App\Http\Controllers\PhysicianRegistrationFormController;
 use App\Http\Controllers\PhysicianScheduleController;
 use App\Http\Controllers\PhysiciansListController;
 use App\Http\Controllers\SocialController;
-use App\Http\Controllers\userPortfolioController;
+use App\Http\Controllers\PhysicianPortfolioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -45,8 +45,8 @@ Route::group(['middleware' => ['localeSessionRedirect', 'localizationRedirect', 
 
             Route::post('/patient/appointments/post-session_view', [PhysiciansListController::class, 'postSessionView'])->name('patient.post_session.view');
 
-            Route::get('/patient/portfolio/view', [UserPortfolioController::class, 'patientPortfolioIndex'])->name('patient.portfolio.view');
-            Route::get('/patient/portfolio/manage', [UserPortfolioController::class, 'patientPortfolioAdd'])->name('patient.portfolio.manage');
+            Route::get('/patient/portfolio/view', [PhysicianPortfolioController::class, 'patientPortfolioIndex'])->name('patient.portfolio.view');
+            Route::get('/patient/portfolio/manage', [PhysicianPortfolioController::class, 'patientPortfolioAdd'])->name('patient.portfolio.manage');
         });
 
 
@@ -98,8 +98,8 @@ Route::group(['middleware' => ['localeSessionRedirect', 'localizationRedirect', 
             Route::get('/physician/financial_info/view', [PhysicianPricingController::class, 'financialInfoIndex'])->name('physician.financial_information.view');
             Route::get('/physician/financial_info/add', [PhysicianPricingController::class, 'financialInfoAdd'])->name('physician.financial_information.add');
 
-            Route::get('/physician/portfolio/view', [UserPortfolioController::class, 'physicianPortfolioIndex'])->name('physician.portfolio.view');
-            Route::get('/physician/portfolio/manage', [UserPortfolioController::class, 'physicianPortfolioAdd'])->name('physician.portfolio.manage');
+            Route::get('/physician/portfolio/view', [PhysicianPortfolioController::class, 'physicianPortfolioIndex'])->name('physician.portfolio.view');
+            Route::get('/physician/portfolio/manage', [PhysicianPortfolioController::class, 'physicianPortfolioAdd'])->name('physician.portfolio.manage');
         });
     });
 });
