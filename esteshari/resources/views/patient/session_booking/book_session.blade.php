@@ -26,7 +26,7 @@
                                             Medicine
                                             Specialist</p>
                                         <p class="card-text">English, Bahasa Malaysia</p>
-                                        <p class="card-text">15 Years Experience</p>
+                                        <p class="card-text">17 Years Experience</p>
                                         <div>
                                             <i class="fa fa-star star" style="color: #f1b701"></i>
                                             <i class="fa fa-star star" style="color: #f1b701"></i>
@@ -44,55 +44,23 @@
                     <div class="col-md-12">
                         <div class="card mb-3">
                             <div class="card-body">
+                                <form action="{{route('patient.portfolio.view') }}" method="POST" id="portfolio">
                                 <h5 class="card-title">About Doctor</h5>
                                 <p class="card-text" style="font-weight: lighter">Dr. {{$physician->name}} is a
                                     Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
                                     Fertility
                                     Centre.
-                                    Previously worked at the General Hos...
-                                    <a href="#" class="card-link">See More</a></p>
-                                <h5 class="card-title">About Dr. {{$physician->name}}</h5>
-                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. {{$physician->name}} is a
-                                    Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
-                                    Fertility
-                                    Centre.
-                                    Previously worked at the General Hos...
-                                    <a href="#" class="card-link">See More</a></p>
-                                <h5 class="card-title">About Dr. {{$physician->name}}</h5>
-                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. {{$physician->name}} is a
-                                    Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
-                                    Fertility
-                                    Centre.
-                                    Previously worked at the General Hos...
-                                    <a href="#" class="card-link">See More</a></p>
-                                <h5 class="card-title">About Dr. {{$physician->name}}</h5>
-                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. {{$physician->name}} is a
-                                    Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
-                                    Fertility
-                                    Centre.
-                                    Previously worked at the General Hos...
-                                    <a href="#" class="card-link">See More</a></p>
-                                <h5 class="card-title">About Dr. {{$physician->name}}</h5>
-                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. {{$physician->name}} is a
-                                    Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
-                                    Fertility
-                                    Centre.
-                                    Previously worked at the General Hos...
-                                    <a href="#" class="card-link">See More</a></p>
-                                <h5 class="card-title">About Dr. {{$physician->name}}</h5>
-                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. {{$physician->name}} is a
-                                    Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
-                                    Fertility
-                                    Centre.
-                                    Previously worked at the General Hos...
-                                    <a href="#" class="card-link">See More</a></p>
-                                <h5 class="card-title">About Dr. {{$physician->name}}</h5>
-                                <p class="card-text" style="font-weight: lighter; font-size: small">Dr. {{$physician->name}} is a
-                                    Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
-                                    Fertility
-                                    Centre.
-                                    Previously worked at the General Hos...
-                                    <a href="#" class="card-link">See More</a></p>
+                                    Throughout my professional journey, I have successfully performed a
+                                    wide range of surgical procedures, demonstrating proficiency in
+                                    various surgical techniques and technologies. My expertise spans
+                                    across areas such as general surgery, specialized surgical
+                                    procedures, and minimally invasive...
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $physician->id }}">
+                                    <a onclick="document.getElementById('portfolio').submit();" class="card-link" style="cursor: pointer">See More</a>
+
+
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -106,7 +74,6 @@
                             <p class="card-text text-muted" style="margin-left: 8px">Choose date and time from available
                                 slots
                             </p>
-
                             <table class="table table-borderless">
                                 <thead>
                                 <tr>

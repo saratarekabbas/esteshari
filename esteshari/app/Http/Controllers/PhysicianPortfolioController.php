@@ -25,13 +25,20 @@ class PhysicianPortfolioController extends Controller
     {
         return view('physician.portfolio.portfolio_manage');
     }
+//    ///////////////////
 
-    public function patientPortfolioIndex()
+    public function patientPortfolioIndex(Request $request) //physician view
+    {
+        $physician = User::where('id', $request->id)->with('personalInformation')->with('workExperience')->first();
+        return view('patient.portfolio.portfolio_view', compact('physician'));
+    }
+
+    public function patientMedicalHistoryIndex()
     {
         return view('patient.portfolio.portfolio_view');
     }
 
-    public function patientPortfolioAdd(Request $request)
+    public function patientMedicalHistoryAdd(Request $request)
     {
         return view('patient.portfolio.portfolio_manage');
     }

@@ -18,7 +18,8 @@
                                  style="background-color: gray; height:200px;">
                                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
                                     <img
-                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+{{--                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"--}}
+                                        src="{{asset('assets/profile_dr_4.jpg')}}"
                                         alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                                         style="width: 150px; z-index: 1">
 
@@ -144,7 +145,6 @@
                                                     Medicine, Universiti teknologi Malaysia, Malaysia (1993-1999)</p>
                                                 <p class="font-italic mb-1"><span style="font-weight: 600">Honors and Awards: </span>National
                                                     merit Award, Dean's Award, and Society Honor</p>
-
                                             @else
                                                 <p class="font-italic mb-1">N/A</p>
                                             @endif

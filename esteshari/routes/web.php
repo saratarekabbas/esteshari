@@ -45,8 +45,11 @@ Route::group(['middleware' => ['localeSessionRedirect', 'localizationRedirect', 
 
             Route::post('/patient/appointments/post-session_view', [PhysiciansListController::class, 'postSessionView'])->name('patient.post_session.view');
 
-            Route::get('/patient/portfolio/view', [PhysicianPortfolioController::class, 'patientPortfolioIndex'])->name('patient.portfolio.view');
-            Route::get('/patient/portfolio/manage', [PhysicianPortfolioController::class, 'patientPortfolioAdd'])->name('patient.portfolio.manage');
+            Route::post('/patient/portfolio/view', [PhysicianPortfolioController::class, 'patientPortfolioIndex'])->name('patient.portfolio.view');
+
+            Route::get('/patient/medical_history/view', [PhysicianPortfolioController::class, 'patientMedicalHistoryIndex'])->name('patient.medical_history.view');
+            Route::get('/patient/medical_history/manage', [PhysicianPortfolioController::class, 'patientMedicalHistoryAdd'])->name('patient.medical_history.manage');
+
         });
 
 
