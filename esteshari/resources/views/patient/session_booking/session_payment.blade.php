@@ -15,47 +15,6 @@
                             @csrf
                             <input type="hidden" name="id" value="{{$session->id}}">
                             <input type="hidden" name="user_id" value="{{$physician->id}}">
-{{--                            <div class="row mb-4">--}}
-{{--                                <div class="col">--}}
-{{--                                    <div class="form-outline">--}}
-{{--                                        <input type="text" id="form6Example1" class="form-control"/>--}}
-{{--                                        <label class="form-label" for="form6Example1">First name</label>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col">--}}
-{{--                                    <div class="form-outline">--}}
-{{--                                        <input type="text" id="form6Example2" class="form-control"/>--}}
-{{--                                        <label class="form-label" for="form6Example2">Last name</label>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <!-- Text input -->--}}
-{{--                            <div class="form-outline mb-4">--}}
-{{--                                <input type="text" id="form6Example3" class="form-control"/>--}}
-{{--                                <label class="form-label" for="form6Example3">Company name</label>--}}
-{{--                            </div>--}}
-
-{{--                            <!-- Text input -->--}}
-{{--                            <div class="form-outline mb-4">--}}
-{{--                                <input type="text" id="form6Example4" class="form-control"/>--}}
-{{--                                <label class="form-label" for="form6Example4">Address</label>--}}
-{{--                            </div>--}}
-
-{{--                            <!-- Email input -->--}}
-{{--                            <div class="form-outline mb-4">--}}
-{{--                                <input type="email" id="form6Example5" class="form-control"/>--}}
-{{--                                <label class="form-label" for="form6Example5">Email</label>--}}
-{{--                            </div>--}}
-
-{{--                            <!-- Number input -->--}}
-{{--                            <div class="form-outline mb-4">--}}
-{{--                                <input type="number" id="form6Example6" class="form-control"/>--}}
-{{--                                <label class="form-label" for="form6Example6">Phone</label>--}}
-{{--                            </div>--}}
-
-{{--                            <hr class="my-4"/>--}}
-
 
                             <h5 class="mb-4">Payment</h5>
 
@@ -87,13 +46,13 @@
                             <div class="row mb-4">
                                 <div class="col">
                                     <div class="form-outline">
-                                        <input type="text" id="formNameOnCard" class="form-control"/>
+                                        <input type="text" id="formNameOnCard" required class="form-control"/>
                                         <label class="form-label" for="formNameOnCard">Name on card</label>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-outline">
-                                        <input type="text" id="formCardNumber" class="form-control"/>
+                                        <input type="text" required id="formCardNumber" class="form-control"/>
                                         <label class="form-label" for="formCardNumber">Credit card number</label>
                                     </div>
                                 </div>
@@ -102,13 +61,13 @@
                             <div class="row mb-4">
                                 <div class="col-3">
                                     <div class="form-outline">
-                                        <input type="text" id="formExpiration" class="form-control"/>
+                                        <input type="date" required id="formExpiration" class="form-control"/>
                                         <label class="form-label" for="formExpiration">Expiration</label>
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="form-outline">
-                                        <input type="text" id="formCVV" class="form-control"/>
+                                        <input type="text" required id="formCVV" class="form-control"/>
                                         <label class="form-label" for="formCVV">CVV</label>
                                     </div>
                                 </div>

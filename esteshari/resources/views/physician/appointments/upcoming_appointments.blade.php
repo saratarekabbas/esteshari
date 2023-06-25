@@ -22,15 +22,15 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Video Conference Meeting with <a href="#"
-                                                                                        style="text-decoration: none">
+                                <h5 class="card-title">Video Conference Meeting with <a href="{{route('view.medical_history')}}" style="text-decoration: none">
                                         {{$appointment->patient->name}}
                                     </a></h5>
-                                <p class="card-text">{{ date('l, jS F Y', strtotime($appointment->slot_date)) }}
-                                    , {{ substr($appointment->slot_time, 0, 5) }}.</p>
+                                <p class="card-text">{{ date('l, jS F Y', strtotime($appointment->slot_date)) }}, {{ substr($appointment->slot_time, 0, 5) }}.</p>
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <a href="{{route('view.complaint_form')}}" type="button"
+                                       class="btn btn-outline-primary  ">View Complaint Form</a>
                                     <a href="{{$appointment->meeting_link}}" target="_blank" type="button"
-                                       class="btn btn-outline-primary">Join Meeting</a>
+                                       class="btn btn-primary">Join Meeting</a>
                                 </div>
                             </div>
                         </div>

@@ -37,6 +37,7 @@ Route::group(['middleware' => ['localeSessionRedirect', 'localizationRedirect', 
             Route::get('/patient/dashboard', [PhysiciansListController::class, 'dashboard'])->name('patient.dashboard');
             Route::get('/patient/physicians_list/view', [PhysiciansListController::class, 'index'])->name('patient.physicians_list.view');
             Route::post('/patient/physicians_list/view/', [PhysiciansListController::class, 'book'])->name('patient.physicians_list.book');
+            Route::post('/patient/session_complaint/', [PhysiciansListController::class, 'complaint'])->name('patient.session_complaint');
             Route::post('/patient/session_booking/', [PhysiciansListController::class, 'payment'])->name('patient.session_booking');
             Route::post('/patient/session_booking_confirm/', [PhysiciansListController::class, 'makePayment'])->name('patient.booking_confirm');
 
@@ -48,9 +49,8 @@ Route::group(['middleware' => ['localeSessionRedirect', 'localizationRedirect', 
             Route::post('/patient/portfolio/view', [PhysicianPortfolioController::class, 'patientPortfolioIndex'])->name('patient.portfolio.view');
 
             Route::get('/patient/medical_history/view', [PhysicianPortfolioController::class, 'patientMedicalHistoryIndex'])->name('patient.medical_history.view');
-            Route::get('/patient/medical_history/manage', [PhysicianPortfolioController::class, 'patientMedicalHistoryAdd'])->name('patient.medical_history.manage');
-
-        });
+            Route::get('/patient/medical_history/manage', [PhysicianPortfolioController::class, 'patientMedicalHistoryManage'])->name('patient.medical_history.manage');
+         });
 
 
 // Routes for the system admin
@@ -88,6 +88,14 @@ Route::group(['middleware' => ['localeSessionRedirect', 'localizationRedirect', 
 
             Route::get('/physician/appointments/appointments_history', [PhysicianScheduleController::class, 'appointmentsHistory'])->name('physician.appointments_history');
             Route::get('/physician/appointments/upcoming_appointment', [PhysicianScheduleController::class, 'upcomingAppointments'])->name('physician.upcoming_appointments');
+
+            Route::get('/physician/view_medical_history', function(){
+                return view('physician/appointments/medical_history');
+            })->name('view.medical_history');
+
+            Route::get('/physician/view_complaint_form', function(){
+                return view('physician/appointments/complaint_form');
+            })->name('view.complaint_form');
 
             Route::post('/physician/appointments/post-session_form', [PhysicianScheduleController::class, 'postSessionFill'])->name('physician.post_session.fill');
             Route::post('/physician/appointments/post-session_store', [PhysicianScheduleController::class, 'postSessionStore'])->name('physician.post_session.store');

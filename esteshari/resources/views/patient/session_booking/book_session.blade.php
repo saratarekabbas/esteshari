@@ -22,9 +22,7 @@
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h4 class="card-title">Dr. {{$physician->name}}</h4>
-                                        <p class="card-text">Obstetrician & Gynocologist, Fertility & Reproductive
-                                            Medicine
-                                            Specialist</p>
+                                        <p class="card-text">{{$physician->workExperience->job_title}}</p>
                                         <p class="card-text">English, Bahasa Malaysia</p>
                                         <p class="card-text">17 Years Experience</p>
                                         <div>
@@ -78,15 +76,15 @@
                                 <thead>
                                 <tr>
                                     <td style="text-align: center; vertical-align: middle;">
-                                        <i class="fa fa-angle-left fa-2x" style="color:#4a4a4d;" aria-hidden="true"></i>
+                                        <i class="fa fa-angle-left fa-2x" style="color:#4a4a4d; cursor: pointer" aria-hidden="true"></i>
                                     </td>
                                     @foreach ($dates as $date)
-                                        <td style="text-align: center;{{ $date == $currentDate ? 'cursor: pointer; color: #dc6464; border-bottom: 1px solid #dc6464;' : ''}}">
+                                        <td style="text-align: center;  cursor: pointer;{{ $date == $currentDate ? ' cursor: context-menu; color: #dc6464; border-bottom: 1px solid #dc6464;' : ''}}">
                                             {{ $date }}
                                         </td>
                                     @endforeach
                                     <td style="text-align: center; vertical-align: middle;">
-                                        <i class="fa fa-angle-right fa-2x" style="color:#4a4a4d;"
+                                        <i class="fa fa-angle-right fa-2x" style="color:#4a4a4d; cursor: pointer"
                                            aria-hidden="true"></i>
                                     </td>
                                 </tr>
@@ -95,10 +93,12 @@
                                 <tr>
                                     <td colspan="6" style="text-align: center; vertical-align: middle;">
                                         <div class="container justify-content-center">
-                                            <div class="row row-cols-md-4 g-3">
+
                                                 @if ($slots->isEmpty())
-                                                    <div class="col-3">No available slots</div>
+                                                    <br>
+                                                    No available slots
                                                 @else
+                                                <div class="row row-cols-md-4 g-3">
                                                     @foreach ($slots as $slot)
                                                         @if ($slot->slot_date == $currentDate)
                                                             @if ($slot->status == "booked")
@@ -119,8 +119,9 @@
                                                             @endif
                                                         @endif
                                                     @endforeach
+                                                </div>
                                                 @endif
-                                            </div>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -204,7 +205,7 @@
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                 Cancel
                                             </button>
-                                            <form id="selectSlotForm" method="POST" action="{{ route('patient.session_booking') }}">
+                                            <form id="selectSlotForm" method="POST" action="{{ route('patient.session_complaint') }}">
                                                 @csrf
                                                 <input type="hidden" name="id" id="selectSlotId">
                                                 <button type="submit" class="btn btn-primary">Select</button>

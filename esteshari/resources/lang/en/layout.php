@@ -24,6 +24,7 @@ return [
 //  Patient
     "SearchPhysician" => "Search Physician",
     "MedicalHistory" => "Medical History",
+    "ViewMyMedicalHistory" => "View My Medical History",
     "ManageMyMedicalHistory" => "Manage My Medical History",
     "MyAppointments" => "My Appointments",
 

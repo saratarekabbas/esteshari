@@ -35,11 +35,17 @@ class PhysicianPortfolioController extends Controller
 
     public function patientMedicalHistoryIndex()
     {
-        return view('patient.portfolio.portfolio_view');
+        $user = Auth::user();
+
+        $data = User::where('id', $user->id)->first();
+        return view('patient.medical_history.medical_history_view', compact('data'));
     }
 
-    public function patientMedicalHistoryAdd(Request $request)
+    public function patientMedicalHistoryManage()
     {
-        return view('patient.portfolio.portfolio_manage');
+        $user = Auth::user();
+
+        $data = User::where('id', $user->id)->first();
+        return view('patient.medical_history.medical_history_manage', compact('data'));
     }
 }

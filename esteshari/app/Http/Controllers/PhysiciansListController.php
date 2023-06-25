@@ -45,6 +45,13 @@ class PhysiciansListController extends Controller
 
     }
 
+    public function complaint(Request $request)
+    {
+        $session = PhysicianSchedule::where('id', $request->id)->first();
+        $physician = User::where('id', $session->user_id)->with('physicianPricing')->first();
+        return view('patient.session_booking.complaint_form', compact( 'session','physician'));
+    }
+
     public function payment(Request $request)
     {
         $session = PhysicianSchedule::where('id', $request->id)->first();

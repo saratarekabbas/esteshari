@@ -13,7 +13,6 @@
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col col-lg-12 col-xl-12">
                         <div class="card">
-                            {{--                            Make this a caroussel, else BG color gray--}}
                             <div class="rounded-top text-white d-flex flex-row"
                                  style="background-color: gray; height:200px;">
                                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px; height: 240px">
@@ -46,6 +45,7 @@
                                                     N/A
                                         @endif
                                         @endif
+                                        </p>
 
                                         <p class="small text-muted mb-0 text-end">/session</p>
                                     </div>

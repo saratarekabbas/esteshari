@@ -46,7 +46,8 @@
             <li class="dropdown">
                 <button href="">{{__('layout.MedicalHistory')}}</button>
                 <div class="dropdown-content">
-                    <a href="#">{{__('layout.ManageMyMedicalHistory')}}</a>
+                    <a href="{{route('patient.medical_history.view')}}">{{__('layout.ViewMyMedicalHistory')}}</a>
+                    <a href="{{route('patient.medical_history.manage')}}">{{__('layout.ManageMyMedicalHistory')}}</a>
                 </div>
             </li>
             <li class="dropdown">
