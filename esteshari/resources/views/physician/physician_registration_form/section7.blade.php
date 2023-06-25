@@ -73,12 +73,12 @@
     </div>
 
     <div class="col-md-4 form-floating">
-        <input type="text" id="qualification_title" name="qualification_title"
+        <input type="text" id="qualification_issuing_board" name="qualification_issuing_board"
                placeholder="Enter Language Qualification Issuing Board"
                class="form-control @error('qualification_issuing_board') is-invalid @enderror"
                value="{{ $languageQualification ? $languageQualification->qualification_issuing_board : old('qualification_issuing_board') }}">
         <label for="qualification_title">Language Qualification Issuing Board</label>
-        @error('qualification_title')
+        @error('qualification_issuing_board')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
@@ -137,29 +137,31 @@
         </button>
     </div>
 
-
-    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Save & Proceed
+    <button type="submit" class="btn btn-primary mt-3" >
+        Next
     </button>
+{{--    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">--}}
+{{--        Save & Proceed--}}
+{{--    </button>--}}
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Submit Section 7</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to submit Section 7? Once you submit, all data entered in Section 7 will be
-                    saved and cannot be edited or viewed.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Proceed</button>
-                </div>
-            </div>
-        </div>
-    </div>
+{{--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
+{{--        <div class="modal-dialog">--}}
+{{--            <div class="modal-content">--}}
+{{--                <div class="modal-header">--}}
+{{--                    <h5 class="modal-title" id="exampleModalLabel">Submit Section 7</h5>--}}
+{{--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+{{--                </div>--}}
+{{--                <div class="modal-body">--}}
+{{--                    Are you sure you want to submit Section 7? Once you submit, all data entered in Section 7 will be--}}
+{{--                    saved and cannot be edited or viewed.--}}
+{{--                </div>--}}
+{{--                <div class="modal-footer">--}}
+{{--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>--}}
+{{--                    <button type="submit" class="btn btn-primary">Proceed</button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
     <script>
         // -------------------------------------------------

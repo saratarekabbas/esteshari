@@ -385,7 +385,7 @@ class PhysicianRegistrationFormController extends Controller
         $validatedData = $request->validate([
             'registration_type' => 'required|string',
             'registration_title' => 'required|string',
-            'registration_number' => 'required|int',
+            'registration_number' => 'required|string',
             'registration_issue_date' => 'required|date',
             'registration_expiry_date' => 'date|after:registration_issue_date',
             'registration_files' => 'array|max:10',
@@ -493,7 +493,7 @@ class PhysicianRegistrationFormController extends Controller
         if ($request->input('qualification_type') === 'Other') {
             $languageQualification->qualification_type = $request->input('otherQualification');
         } else {
-            $languageQualification->qualification_type = $request->input('certification_type');
+            $languageQualification->qualification_type = $request->input('qualification_type');
         }
         $languageQualification->qualification_title = $request->input('qualification_title');
         $languageQualification->qualification_issuing_board = $request->input('qualification_issuing_board');
@@ -526,7 +526,7 @@ class PhysicianRegistrationFormController extends Controller
         $validatedData = $request->validate([
             'insurance_type' => 'nullable|string',
             'insurance_title' => 'nullable|string',
-            'insurance_number' => 'nullable|int',
+            'insurance_number' => 'nullable|string',
             'insurance_provider' => 'nullable|string',
             'insurance_issue_date' => 'nullable|date',
             'insurance_expiry_date' => 'nullable|date|after:insurance_issue_date',
@@ -550,7 +550,7 @@ class PhysicianRegistrationFormController extends Controller
         }
         $insurance->insurance_title = $request->input('insurance_title');
         $insurance->insurance_number = $request->input('insurance_number');
-        $insurance->insurance_issue_date = $request->input('insurance_issue_date');
+        $insurance->insurance_provider = $request->input('insurance_provider');
         $insurance->insurance_issue_date = $request->input('insurance_issue_date');
         $insurance->insurance_expiry_date = $request->input('insurance_expiry_date');
 

@@ -34,7 +34,7 @@ class PhysicianRegistrationApplicationsManagementController extends Controller
             ->count();
 
         $rejectedPhysiciansCount = User::where('role', 'physician')
-            ->where('status', 'rejected')
+            ->where('status', 'denied')
             ->count();
 
         $approvedPhysiciansCount = User::where('role', 'physician')

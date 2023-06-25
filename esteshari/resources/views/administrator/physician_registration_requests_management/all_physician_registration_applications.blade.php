@@ -62,7 +62,7 @@
                             <span class="badge bg-primary mb-1">Pending</span>
                         @elseif ($physician->status == 'approved')
                             <span class="badge bg-success mb-1">Approved</span>
-                        @elseif ($physician->status == 'rejected')
+                        @elseif ($physician->status == 'denied')
                             <span class="badge bg-danger mb-1">Rejected</span>
                         @endif
                     </td>
