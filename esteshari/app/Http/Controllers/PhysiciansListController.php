@@ -28,7 +28,7 @@ class PhysiciansListController extends Controller
     {
         $physicians = User::where('role', 'physician')
             ->where('status', 'approved')
-            ->with('personalInformation')->with('physicianPricing')
+            ->with('personalInformation')->with('physicianPricing')->with('workExperience')
             ->get();
         return view('patient.physicians_list.physicians_list_view', compact('physicians'));
     }
