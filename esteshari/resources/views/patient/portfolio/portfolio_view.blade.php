@@ -15,17 +15,15 @@
                         <div class="card">
                             <div class="rounded-top text-white d-flex flex-row"
                                  style="background-color: gray; height:200px;">
-                                <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                                    <img
-                                        src="{{asset('assets/profile_dr_4.jpg')}}"
-                                        alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                                        style="width: 150px; z-index: 1">
-{{--                                    <a href="{{route('physician.portfolio.manage')}}" type="button"--}}
-{{--                                       class="btn btn-outline-dark" data-mdb-ripple-color="dark"--}}
-{{--                                       style="z-index: 1;">--}}
-{{--                                        Edit profile--}}
-{{--                                    </a>--}}
-                                </div>
+                                <div class="rounded-top text-white d-flex flex-row"
+                                     style="background-color: gray; height:200px;">
+                                    <div class="ms-4 mt-5 d-flex flex-column" style="width: 200px; height: 240px">
+                                        <img
+                                            {{--                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"--}}
+                                            src="{{asset('assets/profile_dr_4.jpg')}}"
+                                            alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                                            style="width: 200px; height: 200px; z-index: 1; object-fit: cover">
+                                    </div>
                                 <div class="ms-3" style="margin-top: 130px;">
                                     <h5>{{$physician->name}}
                                         , {{ $physician->personalInformation->designation ?: ''}}</h5>
