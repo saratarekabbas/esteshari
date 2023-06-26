@@ -37,6 +37,9 @@ class PhysicianScheduleController extends Controller
             }else if ($slot->status == 'completed') {
                 $event['color'] = 'green';
 
+            }else if ($slot->status == 'pending') {
+                $event['color'] = 'red';
+
             }else{
                 $event['color'] = 'gray';
             }
@@ -142,8 +145,7 @@ class PhysicianScheduleController extends Controller
     {
         $physician = Auth::user();
 
-//        GHALEBAN HAN7OT WITH PORTFOLIO KAMAN
-        $appointments = PhysicianSchedule::where('user_id', $physician->id)->where('status','booked')->with('patient')->orderBy('slot_date')
+        $appointments = PhysicianSchedule::where('user_id', $physician->id)->where('status','booked')->with('patient')->orderBy('slot_date', 'desc')
             ->orderBy('slot_time')
             ->get();
 
@@ -156,7 +158,7 @@ class PhysicianScheduleController extends Controller
 
 //        GHALEBAN HAN7OT WITH PORTFOLIO KAMAN
 
-        $appointments = PhysicianSchedule::where('user_id', $physician->id)->with('patient')->orderBy('slot_date')
+        $appointments = PhysicianSchedule::where('user_id', $physician->id)->with('patient')->orderBy('slot_date', 'desc')
             ->orderBy('slot_time')
             ->get();
         return view('physician.appointments.appointments_history', compact('appointments'));

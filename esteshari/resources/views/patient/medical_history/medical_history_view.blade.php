@@ -138,10 +138,7 @@
                 <p class="font-italic mb-0"><span style="font-weight: 600">Alcohol Consumption: </span>No</p>
                 <p class="font-italic mb-0"><span style="font-weight: 600">Dietary preferences or restrictions: </span>Vegetarian food.</p>
             </div>
-
         </div>
-
-
     </div>
 @endsection
 

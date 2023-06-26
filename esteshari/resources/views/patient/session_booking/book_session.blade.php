@@ -43,19 +43,20 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                 <form action="{{route('patient.portfolio.view') }}" method="POST" id="portfolio">
-                                <h5 class="card-title">About Doctor</h5>
-                                <p class="card-text" style="font-weight: lighter">Dr. {{$physician->name}} is a
-                                    Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
-                                    Fertility
-                                    Centre.
-                                    Throughout my professional journey, I have successfully performed a
-                                    wide range of surgical procedures, demonstrating proficiency in
-                                    various surgical techniques and technologies. My expertise spans
-                                    across areas such as general surgery, specialized surgical
-                                    procedures, and minimally invasive...
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ $physician->id }}">
-                                    <a onclick="document.getElementById('portfolio').submit();" class="card-link" style="cursor: pointer">See More</a>
+                                    <h5 class="card-title">About Doctor</h5>
+                                    <p class="card-text" style="font-weight: lighter">Dr. {{$physician->name}} is a
+                                        Consultant Obstetrician, Gynaecologist, and Fertility specialist at TMC
+                                        Fertility
+                                        Centre.
+                                        Throughout my professional journey, I have successfully performed a
+                                        wide range of surgical procedures, demonstrating proficiency in
+                                        various surgical techniques and technologies. My expertise spans
+                                        across areas such as general surgery, specialized surgical
+                                        procedures, and minimally invasive...
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $physician->id }}">
+                                        <a onclick="document.getElementById('portfolio').submit();" class="card-link"
+                                           style="cursor: pointer">See More</a>
 
 
                                 </form>
@@ -76,7 +77,8 @@
                                 <thead>
                                 <tr>
                                     <td style="text-align: center; vertical-align: middle;">
-                                        <i class="fa fa-angle-left fa-2x" style="color:#4a4a4d; cursor: pointer" aria-hidden="true"></i>
+                                        <i class="fa fa-angle-left fa-2x" style="color:#4a4a4d; cursor: pointer"
+                                           aria-hidden="true"></i>
                                     </td>
                                     @foreach ($dates as $date)
                                         <td style="text-align: center;  cursor: pointer;{{ $date == $currentDate ? ' cursor: context-menu; color: #dc6464; border-bottom: 1px solid #dc6464;' : ''}}">
@@ -93,12 +95,13 @@
                                 <tr>
                                     <td colspan="6" style="text-align: center; vertical-align: middle;">
                                         <div class="container justify-content-center">
+                                            <div class="row row-cols-md-4 g-3">
+                                            @if ($slots->isEmpty())
+                                                <br>
+                                                No available slots
+                                            @else
+{{--                                                <div class="row row-cols-md-4 g-3">--}}
 
-                                                @if ($slots->isEmpty())
-                                                    <br>
-                                                    No available slots
-                                                @else
-                                                <div class="row row-cols-md-4 g-3">
                                                     @foreach ($slots as $slot)
                                                         @if ($slot->slot_date == $currentDate)
                                                             @if ($slot->status == "booked")
@@ -119,10 +122,11 @@
                                                             @endif
                                                         @endif
                                                     @endforeach
-                                                </div>
-                                                @endif
-
+{{--                                                </div>--}}
+                                            @endif
+                                            </div>
                                         </div>
+
                                     </td>
                                 </tr>
                                 </tbody>
@@ -205,7 +209,8 @@
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                 Cancel
                                             </button>
-                                            <form id="selectSlotForm" method="POST" action="{{ route('patient.session_complaint') }}">
+                                            <form id="selectSlotForm" method="POST"
+                                                  action="{{ route('patient.session_complaint') }}">
                                                 @csrf
                                                 <input type="hidden" name="id" id="selectSlotId">
                                                 <button type="submit" class="btn btn-primary">Select</button>

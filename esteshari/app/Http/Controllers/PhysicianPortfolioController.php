@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PhysicianPortfolioController extends Controller
 {
-    public function physicianPortfolioIndex()
+    public function physicianPortfolioIndex()  //physician portfolio view
     {
         $user = Auth::user();
 
@@ -21,19 +21,19 @@ class PhysicianPortfolioController extends Controller
         return view('physician.portfolio.portfolio_view', compact('physician','pricing'));
     }
 
-    public function physicianPortfolioAdd(Request $request)
+    public function physicianPortfolioAdd(Request $request) //physician portfolio manage
     {
         return view('physician.portfolio.portfolio_manage');
     }
 //    ///////////////////
 
-    public function patientPortfolioIndex(Request $request) //physician view
+    public function patientPortfolioIndex(Request $request) //patient view of physician portfolio
     {
         $physician = User::where('id', $request->id)->with('personalInformation')->with('workExperience')->first();
         return view('patient.portfolio.portfolio_view', compact('physician'));
     }
 
-    public function patientMedicalHistoryIndex()
+    public function patientMedicalHistoryIndex() //patient view their medical history
     {
         $user = Auth::user();
 
@@ -41,7 +41,7 @@ class PhysicianPortfolioController extends Controller
         return view('patient.medical_history.medical_history_view', compact('data'));
     }
 
-    public function patientMedicalHistoryManage()
+    public function patientMedicalHistoryManage() //patient manage their medical history
     {
         $user = Auth::user();
 

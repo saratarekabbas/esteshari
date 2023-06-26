@@ -40,9 +40,7 @@ class PhysiciansListController extends Controller
         $slots = PhysicianSchedule::where('user_id', $request->id)->get();
         $dates = calculateDates(date('Y-m-d'), 1);
         $currentDate = date('Y-m-d');
-
         return view('patient.session_booking.book_session', compact('physician', 'slots', 'dates', 'currentDate'));
-
     }
 
     public function complaint(Request $request)

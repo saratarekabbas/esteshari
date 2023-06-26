@@ -313,8 +313,8 @@
                 <p class="lead fw-normal mb-1">Other</p>
                 <div class="p-4" style="background-color: #f8f9fa;">
                     <div class="form-group row mb-1">
-                        <label for="inputPassword" class="col-sm-3 col-form-label">Smoking or tobacco use</label>
-                        <div class="col-sm-9">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Smoking or tobacco use</label>
+                        <div class="col-sm-10">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                                 <label class="form-check-label" for="inlineRadio1">Yes</label>
@@ -326,8 +326,8 @@
                         </div>
                     </div>
                     <div class="form-group row mb-1">
-                        <label for="inputPassword" class="col-sm-3 col-form-label">Alocohol Consumption</label>
-                        <div class="col-sm-9">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Alocohol Consumption</label>
+                        <div class="col-sm-10">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                                 <label class="form-check-label" for="inlineRadio1">Yes</label>
@@ -342,7 +342,7 @@
                     <div class="form-group row mb-1">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Dietary preferences or restrictions</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" rows="3">vegetarian food.</textarea>
+                            <textarea class="form-control" rows="3">Vegetarian food.</textarea>
                         </div>
                     </div>
                 </div>
@@ -353,7 +353,6 @@
                 <button class="btn btn-secondary" type="button">Cancel</button>
             </div>
         </form>
-
     </div>
 @endsection
 

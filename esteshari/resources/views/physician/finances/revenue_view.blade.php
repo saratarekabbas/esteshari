@@ -43,19 +43,45 @@
                         <td>{{ date('l, jS F Y', strtotime($schedule->slot_date)) }}</td>
                         <td>{{ substr($schedule->slot_time, 0, 5) }}</td>
                         <td>{{$schedule->currency}} {{$schedule->price}}</td>
-                        {{--                        View a button to fill it up if not completed, otherwise a link to the submitted assessment if it exists--}}
-                        <td><a href="#" style="text-decoration: none">Fill Post-Session Form</a></td>
-                        {{--                        ONCE THE ASSESSMENT IS COMPLETED THEN RELEASE; OTHERWISE IT IS ON-HOLD--}}
-                        {{--                        @if($schedule->status == "booked" && PSA is true)--}}
-                        {{--                        <td>On-hold</td>--}}
-                        {{--                            HENA CHECK BA2A KHALAS EL PSA WALA LA2A 3ASHAN YEGHAYAR EL STATUS MEN ON-HOLD L RELEASED--}}
-                        {{--                        @elseif($schedule->status == "booked")--}}
-                        {{--                        <span class="badge bg-primary mb-1">On-hold</span>--}}
-                        {{--                            <span class="badge bg-success mb-1">Released</span>--}}
-                        <td>
-                            <span class="badge bg-primary mb-1">On-hold</span>
-                        </td>
-                        {{--                        @endif--}}
+
+                        @if($schedule->status == 'pending')
+                            <td>
+                                <form method="post" action="{{ route('physician.post_session.fill')  }}">
+                                    @csrf
+                                    <input type="hidden" name="patient_id"
+                                           value="{{$schedule->patient->id}}">
+                                    <input type="hidden" name="session_id" value="{{$schedule->id}}">
+                                    <button class="btn btn-sm btn-outline-white" style="color: blue" type="submit">Fill Post-Session
+                                        Assessment
+                                    </button>
+
+                                </form>
+                            </td>
+                            <td>
+                                <span class="badge bg-primary mb-1">On-hold</span>
+                            </td>
+                        @elseif($schedule->status == 'booked')
+                            <td><button class="btn btn-sm btn-outline-white" style="cursor: context-menu" type="button">N/A
+                                </button></td>
+                            <td>
+                                <span class="badge bg-primary mb-1">On-hold</span>
+                            </td>
+                        @elseif($schedule->status == 'completed')
+                            <td>
+                                <form method="post" action="{{ route('physician.post_session.view')  }}">
+                                    @csrf
+                                    <input type="hidden" name="patient_id"
+                                           value="{{$schedule->patient->id}}">
+                                    <input type="hidden" name="session_id" value="{{$schedule->id}}">
+                                    <button class="btn btn-sm btn-outline-white" style="color: blue" type="submit">View Post-Session
+                                        Assessment
+                                    </button>
+
+                                </form>
+                            <td>
+                                                            <span class="badge bg-success mb-1">Released</span>
+                            </td>
+                        @endif
                     </tr>
                     @php($count++)
                 @endforeach
