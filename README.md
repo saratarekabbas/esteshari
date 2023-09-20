@@ -78,3 +78,5 @@ To explore the detailed user interface of the Esteshari Telemedical System (ETS)
 
 
 *Note: This README provides an overview of the Esteshari Telemedical System. For detailed documentation and instructions, please refer to the project's documentation.
+
+*System Demo: https://youtu.be/zk9nv0rfa6Y?si=AqiE3ZpRhiKAAG8L
