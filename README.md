@@ -77,6 +77,7 @@ The Esteshari Telemedical System represents a groundbreaking initiative in the r
 To explore the detailed user interface of the Esteshari Telemedical System (ETS), please refer to the [User Interface PDF](./System%20Interface.pdf) document.
 
 To watch the system demo, please play the youtube video below:
+
 [![ETS Demo Video](https://img.youtube.com/vi/zk9nv0rfa6Y/0.jpg)](https://www.youtube.com/watch?v=zk9nv0rfa6Y)
 
 *Note: This README provides an overview of the Esteshari Telemedical System. For detailed documentation and instructions, please refer to the project's documentation.
