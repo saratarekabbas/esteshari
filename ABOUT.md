@@ -82,4 +82,4 @@ To watch the system demo, please play the youtube video below:
 
 [![ETS Demo Video](https://img.youtube.com/vi/zk9nv0rfa6Y/0.jpg)](https://www.youtube.com/watch?v=zk9nv0rfa6Y)
 
-*Note: This README provides an overview of the Esteshari Telemedical System. For detailed documentation and instructions, please refer to the project's documentation.
+*Note: This ABOUT provides an overview of the Esteshari Telemedical System. For detailed documentation and instructions, please request the project's documentation [email: abbassaratarek@gmail.com].
